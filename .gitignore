@@ -1,4 +1,9 @@
 .DS_Store
+*.bcf
+*.nav
+*.xml
+*.snm
+*.toc
 *.swp
 *.bbl
 *.blg
