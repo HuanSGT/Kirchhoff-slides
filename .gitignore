@@ -1,0 +1,10 @@
+.DS_Store
+*.swp
+*.bbl
+*.blg
+*.aux
+*.out
+*.synctex.gz
+*.log
+*.pdf
+!/references/*.pdf
