@@ -29,6 +29,8 @@
 \setbeamertemplate{note page}[plain]
 
 \addtobeamertemplate{frametitle}{\vspace*{-5pt}}{\vspace*{0pt}}
+\setbeamertemplate{section in toc shaded}[default][70]
+\setbeamertemplate{subsection in toc shaded}[default][70]
 
 \renewcommand*{\thefootnote}{[\arabic{footnote}]}
 
@@ -109,6 +111,26 @@
 			\end{itemize}
 	\end{itemize}
 }
+
+\frame{\frametitle{Outline} \tableofcontents}
+
+\section{Kirchhoff index as a centrality measure}
+
+\subsection{Background of centrality measures and related works}
+
+\frame{\frametitle{Outline} \tableofcontents[currentsection]}
+
+\subsection{Graph Laplacians, Effective resistances, and Kirchhoff index}
+\subsection{Advantages of Kirchhoff index as a centrality measure}
+
+\section{Nearly linear time algorithms}
+
+\frame{\frametitle{Outline} \tableofcontents[currentsection]}
+			
+\subsection{Schur complements, Cholesky factorization, and fast Laplacian solvers}
+\subsection{Johnson-Lindenstrauss lemma and Hutchinson's trace estimation}
+\subsection{Offline divide and conquer}
+\subsection{Sherman-Morrison and Woodbury formulas}
 
 \frame{
 	\frametitle{Clustering by the Laplacian $L = D - A$\footnote[frame]{Ulrike Luxburg (2007). A tutorial on spectral clustering. Statistics and Computing,
