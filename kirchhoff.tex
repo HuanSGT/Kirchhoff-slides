@@ -224,6 +224,8 @@
 
 \newcommand{\kh}[1]{\left(#1\right)}
 
+\newcommand{\bsk}{\backslash_\theta}
+
 \definecolor{Gray}{gray}{0.95}
 \definecolor{LightCyan}{rgb}{0.88,1,1}
 
@@ -233,7 +235,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title[Kirchhoff Centrality: Nearly Linear Time Algorithms]{Kirchhoff Index as a Measure of Edge Centrality in Weighted Networks: Nearly Linear Time Algorithms}
+\title[Kirchhoff Centrality: Nearly Linear Time Algorithms]{Kirchhoff Index As a Measure of Edge Centrality in Weighted Networks: Nearly Linear Time Algorithms}
 
 \author{\quad\\Huan Li\inst{1,2} \and Zhongzhi Zhang\inst{1,2}}
 
@@ -298,7 +300,7 @@
 
 %\frame{\frametitle{Outline} \tableofcontents}
 
-\section{Kirchhoff Index as a Centrality Measure}
+\section{Kirchhoff Index As a Centrality Measure}
 
 \subsection{Background on centrality measures and related works}
 
@@ -318,7 +320,7 @@
 		\end{figure}
 		}
 	\item Modeling real-world systems by graphs
-	\small
+	\footnotesize
 	\begin{table}
 		\centering
 		%\caption[Caption for LOF]{Some classic real networks.\protect\footnotemark}
@@ -433,28 +435,82 @@
 			%\normalsize
 		\item Connection to commute times in random walks
 			\begin{itemize}
-				\item \small The commute time \scriptsize$\kappa(s,t)$\, \small between
-					\scriptsize$s,t$ \,\small is the expected time of a random walk to go from
-					\scriptsize$s \to t \to s$\small, and it is known that
+				\item \small The commute time \footnotesize$\kappa(s,t)$\small\ between
+					\footnotesize$s,t$\,\small\ is the expected time of a random walk to go from
+					\footnotesize$s \to t \to s$\small, and it is known that
 					\vspace{-12pt}
-					\scriptsize
+					\footnotesize
 					\[
 						\kappa(s,t) = \mathrm{vol}(G) \er(s,t),
-						\vspace{-14pt}
+						\vspace{-16pt}
 					\]
 					\small
-					where \scriptsize$\mathrm{vol}(G)$ \small is the sum of degrees over all vertices
-				\item Thus, \scriptsize$\er(s,t)$ \,\small takes into account all paths between \scriptsize$s,t$
+					where \footnotesize$\mathrm{vol}(G)$\small\ is the sum of degrees over all vertices
+				\item Thus, \footnotesize$\er(s,t)$\small\ takes into account all paths between \footnotesize$s,t$
 			\end{itemize}
 	\end{itemize}
 }
 
 \frame{
 	\frametitle{Kirchhoff Index}
+	\begin{itemize}
+		\item The \textbf{Kirchhoff index} \small$\mathcal{K}(G)$\normalsize\ of a graph \small$G$\normalsize\ 
+			is defined as the sum of effective resistances over all vertex pairs, i.e.
+			\small
+			\vspace{-5pt}
+			\[
+				\mathcal{K}(G) = \sum\limits_{u,v} \er(u,v)
+				\vspace{-5pt}
+			\]
+			\normalsize
+		\item Kirchhoff index takes into account all paths in the graph
+		\item Kirchhoff index measures the overall connectivity of the graph
+		\item Kirchhoff index also measures
+			\begin{itemize}
+				\item The mean cost of search in a complex network
+				\item Robustness of first-order consensus algorithm in noisy networks
+				\item The global utility of social recommender systems
+			\end{itemize}
+	\end{itemize}
 }
 
 \frame{
 	\frametitle{Kirchhoff Centrality}
+	\begin{itemize}
+		\item Rayleigh's Monotonicity Law
+			\begin{itemize}
+				\item \footnotesize$\mathcal{K}(G)$\small\ increases when edge conductance is decreased
+					%(i.e. edge resistance increased)
+				\item Thus, edge deactivation makes the graph less connected
+			\end{itemize}
+		\item An edge \small$e$\normalsize 's importance is reflected in the increase of Kirchhoff index when $e$ is deactivated
+			\begin{itemize}
+				\item Resembling the power grid situation
+			\end{itemize}
+		\item Kirchhoff centrality
+			\footnotesize
+			\begin{table}
+				\centering
+				%\caption[Caption for LOF]{Some classic real networks.\protect\footnotemark}
+				%\caption{Some classic real networks.}
+				\begin{tabular}{c|c}
+					\hline
+					\scriptsize$\theta$\footnotesize-Kirchhoff edge centrality \scriptsize$\mathcal{C}_\theta(e)$
+					&
+						\scriptsize$\mathcal{C}_\theta(e) \defeq \mathcal{K}(G\bsk e)$ \\
+					\hline
+					\scriptsize$\theta$\footnotesize-Kirchhoff edge centrality \scriptsize$\mathcal{C}_\theta^\Delta(e)$
+					&
+						\scriptsize$\mathcal{C}_\theta^\Delta(e) \defeq \mathcal{K}(G\bsk e) - \mathcal{K}(G)$ \\
+					\hline
+					\scriptsize$\theta$\footnotesize-Kirchhoff vertex centrality \scriptsize$\mathcal{C}_\theta^\Delta(v)$
+					&
+						\scriptsize$\mathcal{C}_\theta^\Delta(v) \defeq \mathcal{K}\kh{G\bsk N(v)} - \mathcal{K}\kh{G}$ \\
+					\hline
+				\end{tabular}
+		  \end{table}
+		  \normalsize
+	\end{itemize}
 }
 
 \frame<0 | handout:0>{
@@ -539,7 +595,7 @@
 			%\begin{table}
 	\centering
 	\hspace{-15pt}
-	\small
+	\footnotesize
 	\begin{tabular}{|c|c|c|}
 		\hline
 		\rowcolor{Gray}
@@ -557,14 +613,14 @@
 		\hline
 	\end{tabular}
 	%\end{table}
-	\,
+	\quad
 	\begin{subfigure}[H]{0.6\textwidth}
 		\includegraphics[width=1.2\textwidth]{deviation.eps}
 	\end{subfigure}
 	}
 	\vspace{5pt}
 	\end{figure}
-	\small
+%	\small
 	\[
 		\text{Relative standard deviation} \,\,\defeq \quad \frac{\text{Standard deviation}}{\text{Average}}
 	\]
@@ -596,7 +652,7 @@
 \subsection{Sherman-Morrison and Woodbury formulas}
 
 \frame{
-	\frametitle{Offline Divide and Conquer (离线分治): OI version}
+	\frametitle{Offline Div-conquer (离线分治): OI version}
 	\vspace{-5pt}
 	\begin{figure}
 		\makebox[\linewidth][c]{
@@ -622,7 +678,7 @@
 		\end{subfigure}
 		\begin{subfigure}[H]{0.58\textwidth}
 			\vspace{14pt}
-			\includegraphics[width=1\textwidth]{cf_short}
+			\includegraphics[width=1\textwidth]{cf100551}
 			%\vspace{0.1pt}
 			\label{exp2}
 			\caption{Maintaining \#CC under updates in \scriptsize$\tilde{O}(m)$}
