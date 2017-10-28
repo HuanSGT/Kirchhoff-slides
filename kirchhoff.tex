@@ -18,6 +18,7 @@
 \usepackage{pgfpages}
 \usepackage{amsmath}
 \usepackage{bbm}
+\usepackage{bm}
 \usepackage{dsfont}
 \usepackage{xeCJK}
 \usepackage[backend=biber]{biblatex}
@@ -297,7 +298,7 @@
 
 %\frame{\frametitle{Outline} \tableofcontents}
 
-\section{Kirchhoff index as a centrality measure}
+\section{Kirchhoff Index as a Centrality Measure}
 
 \subsection{Background on centrality measures and related works}
 
@@ -308,29 +309,59 @@
 
 \frame{
 	\frametitle{Graphs and Networks}
+	\begin{itemize}
+		\item A graph \small$G = (V,E)$\normalsize\ with 5 vertices and 9 edges 
+		{
+		\begin{figure}
+		\hspace{-20pt}
+		\includegraphics[width=0.45\textwidth]{graph.pdf}
+		\end{figure}
+		}
+	\item Modeling real-world systems by graphs
+	\small
+	\begin{table}
+		\centering
+		%\caption[Caption for LOF]{Some classic real networks.\protect\footnotemark}
+		%\caption{Some classic real networks.}
+		\begin{tabular}{c|c|c}
+			\hline
+			\rowcolor{Gray}
+			Real-world networks & Vertices & Edges \\
+			\hline
+			Social networks & People & Friendship/Interactions \\
+			\hline
+			The World Wide Web & Web pages & Web links \\
+			\hline
+			Power grid & Stations & Transmission lines \\
+			\hline
+		\end{tabular}
+  \end{table}
+  \end{itemize}
+  \normalsize
 }
 
 \frame{
 	\frametitle{Centrality in Networks}
+	Indicators of \textbf{centrality} identify the most important vertices/edges, e.g.
 	\begin{itemize}
-		\item In graphs and networks, indicators of \textbf{centrality} identify the most important vertices/edges
-		\item Centrality is often used for detecting
-			\begin{itemize}
-				\item Influential persons in a social network
+		%\item Centrality is often used for detecting
+		%	\begin{itemize}
+				\item Identify influential persons in a social network
 					\begin{itemize}
-						\item Independent cascade model
+						\item Independent cascade model: measuring the importance of a person by its ability of information
+							spreading
 					\end{itemize}
 				%\item How well used a road is in a transportation network
-				\item Important web pages
+				\item Identify important web pages
 					\begin{itemize}
-						\item Google's PageRank algorithm: identifying important web pages by stationary distribution of random walk
+						\item Google's PageRank algorithm: identifying important web pages by stationary distributions of random walks
 					\end{itemize}
-				\item Important transmission lines in a power grid
+				\item Identify important transmission lines in a power grid
 					\begin{itemize}
 						\item Northeast blackout of 2003: failure of a few transmission lines in Cleveland causing
 							a widespread power outage in North America
 					\end{itemize}
-			\end{itemize}
+		%	\end{itemize}
 	\end{itemize}
 }
 
@@ -344,13 +375,13 @@
 				\centering
 				%\caption[Caption for LOF]{Some classic real networks.\protect\footnotemark}
 				%\caption{Some classic real networks.}
-				\begin{tabular}{c|c|c}
+				\begin{tabular}{c|c}
 					\hline
 					\rowcolor{Gray}
 					Edge centrality name & Definition for an edge \scriptsize $e\in E$ \footnotesize \\
 					\hline
 					Betweenness \scriptsize $\mathcal{B}(e)$ \footnotesize &
-						Fraction of shortest path passing through \scriptsize $e$ \footnotesize \\
+						Fraction of shortest paths passing through \scriptsize $e$ \footnotesize \\
 					\hline
 					Spanning edge centrality \scriptsize $\mathcal{S}(e)$ \footnotesize &
 						Fraction of spanning trees containing \scriptsize $e$ \footnotesize \\
@@ -367,7 +398,7 @@
 		  		\item Betweenness: only considering shortest paths
 		  		\item Spanning edge centrality: lacking structure information
 		  			\begin{itemize}
-		  				\item A tree can be either a path or a star
+		  				\item A path and a star are both trees, while their structures differ
 		  			\end{itemize}
 				\item Current-flow centrality: hard to compute
 		  	\end{itemize}
@@ -379,7 +410,178 @@
 	\end{itemize}
 }
 
-\section{Nearly linear time algorithms}
+\frame{
+	\frametitle{Effective Resistances}
+	{
+	\vspace{-10pt}
+	\begin{wrapfigure}{L}{0.4\textwidth}
+		\includegraphics[width=0.4\textwidth]{resistances}
+	\end{wrapfigure}
+	\quad \\[1pt]
+	\small
+	\[ \er(s,t) = \frac{1}{\frac{1}{2} + \frac{1}{4}} = \frac{4}{3}\ \Omega \]
+	\normalsize
+	\quad \\[5pt]
+	}
+	\quad \\[2.5pt]
+	\begin{itemize}
+		\item The \textbf{effective resistance} \small$\er(s,t)$ \normalsize between \small$s,t$\, \normalsize is the \textit{electric resistance} between them in the whole electric network%. By Ohm's Law,
+			%\small
+			%\[
+			%	\hspace{-10pt} \er(s,t) = \frac{\vv(s) - \vv(t)}{\ii(s,t)}
+			%\]
+			%\normalsize
+		\item Connection to commute times in random walks
+			\begin{itemize}
+				\item \small The commute time \scriptsize$\kappa(s,t)$\, \small between
+					\scriptsize$s,t$ \,\small is the expected time of a random walk to go from
+					\scriptsize$s \to t \to s$\small, and it is known that
+					\vspace{-12pt}
+					\scriptsize
+					\[
+						\kappa(s,t) = \mathrm{vol}(G) \er(s,t),
+						\vspace{-14pt}
+					\]
+					\small
+					where \scriptsize$\mathrm{vol}(G)$ \small is the sum of degrees over all vertices
+				\item Thus, \scriptsize$\er(s,t)$ \,\small takes into account all paths between \scriptsize$s,t$
+			\end{itemize}
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Kirchhoff Index}
+}
+
+\frame{
+	\frametitle{Kirchhoff Centrality}
+}
+
+\frame<0 | handout:0>{
+	\frametitle{Comparison With Other Measures}
+	\framesubtitle{Examples}
+	{
+	\vspace{-10pt}
+	\begin{wrapfigure}{L}{0.4\textwidth}
+		\hspace{10pt}
+		\includegraphics[width=0.4\textwidth]{s_1.eps}
+	\end{wrapfigure}
+	\quad \\[1pt]
+	\small
+	\[
+		x
+	\]
+	\normalsize
+	\quad \\[5pt]
+	}
+	\quad \\[20pt]
+	{
+	%\vspace{-10pt}
+	\begin{wrapfigure}{L}{0.6\textwidth}
+		\hspace{-20pt}
+		\includegraphics[width=0.6\textwidth]{r_1.eps}
+	\end{wrapfigure}
+	\quad \\[1pt]
+	\small
+	\[
+		x
+	\]
+	\normalsize
+	\quad \\[5pt]
+	}
+}
+
+\frame{
+	\frametitle{Comparison With Other Measures}
+	\framesubtitle{Examples}
+	\begin{figure}
+		\vspace{10pt}
+		\makebox[\linewidth][c]{
+		\begin{subfigure}[H]{0.4\textwidth}
+			\includegraphics[width=1\textwidth]{s_1.eps}
+			%\caption{The first 3 eigenvalues of $B$}
+		\end{subfigure}
+		\quad\quad\,
+		\begin{subfigure}[H]{0.6\textwidth}
+			\vspace{10pt}
+			\includegraphics[width=1\textwidth]{r_1.eps}
+		\end{subfigure}
+		}
+		\vspace{2pt}
+		%\caption{The accuracy of spectral clustering based on different matrices}
+	\end{figure}
+	\begin{itemize}
+		\item Betweenness cannot distinguish between \small$e_1$\normalsize\ and \small$e_2$\normalsize
+				\small
+				\vspace{-15pt}
+				\begin{align*}
+					&\mathcal{B}(e_1) = \mathcal{B}(e_2) = 18 \\[0.001cm]
+					&\mathcal{C}_{0.1}(e_1) = 132.65,\ \mathcal{C}_{0.1}(e_2) = 112.34
+				\end{align*}
+				\vspace{-30pt}
+		\item Spanning edge centrality cannot distinguish between \small$e_3$\normalsize\ and \small$e_4$\normalsize
+				\small
+				\vspace{-15pt}
+				\begin{align*}
+					&\mathcal{S}(e_3) = \mathcal{S}(e_4) = 1 \\[0.001cm]
+					&\mathcal{C}_{0.1}(e_3) = 467.33,\ \mathcal{C}_{0.1}(e_4) = 197.33
+				\end{align*}
+				\vspace{-15pt}
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Comparison With Other Measures}
+	\framesubtitle{Experiments}
+	\begin{figure}
+		\vspace{10pt}
+		\makebox[\linewidth][c]{
+			%\begin{table}
+	\centering
+	\hspace{-15pt}
+	\small
+	\begin{tabular}{|c|c|c|}
+		\hline
+		\rowcolor{Gray}
+		Network name & $\sizeof{V}$ & $\sizeof{E}$ \\
+		\hline
+		Karate & 34 & 78 \\
+		\hline
+		Lesmis & 77 & 254 \\
+		\hline
+		Adjnoun & 112 & 425 \\
+		\hline
+		Dolphins & 62 & 159 \\
+		\hline
+		Celegansneural & 297 & 2148 \\
+		\hline
+	\end{tabular}
+	%\end{table}
+	\,
+	\begin{subfigure}[H]{0.6\textwidth}
+		\includegraphics[width=1.2\textwidth]{deviation.eps}
+	\end{subfigure}
+	}
+	\end{figure}
+	%}
+	{
+	\begin{wrapfigure}{L}{0.55\textwidth}
+		\hspace{-30pt}
+		\includegraphics[width=0.7\textwidth]{deviation.eps}
+		\hspace{-30pt}
+	\end{wrapfigure}
+	\quad \\[20pt]
+	\small 
+	\begin{align*}
+		&\text{relative standard deviation}\\
+			\defeq \quad &\frac{\text{standard deviation}}{\text{average}}
+	\end{align*}
+	\normalsize
+	\quad \\[5pt]
+	}
+}
+
+\section{Nearly Linear Time Algorithms}
 
 \frame{\frametitle{Outline} \tableofcontents[currentsection]}
 			
