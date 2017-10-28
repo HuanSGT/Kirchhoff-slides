@@ -304,13 +304,13 @@
 
 \frame{\frametitle{Outline} \tableofcontents[currentsection]}
 
-\subsection{Electric resistances and Kirchhoff index}
+\subsection{Effective resistances and Kirchhoff index}
 \subsection{Kirchhoff index as a centrality measure and its advantages}
 
 \frame{
 	\frametitle{Graphs and Networks}
 	\begin{itemize}
-		\item A graph \small$G = (V,E)$\normalsize\ with 5 vertices and 9 edges 
+		\item A graph \small$G = (V,E)$\normalsize\ with 6 vertices and 9 edges 
 		{
 		\begin{figure}
 		\hspace{-20pt}
@@ -395,7 +395,7 @@
 		  
 		  \item Weakness
 		  	\begin{itemize}
-		  		\item Betweenness: only considering shortest paths
+		  		\item Betweenness: only considering shortest paths, ignoring even slightly longer paths
 		  		\item Spanning edge centrality: lacking structure information
 		  			\begin{itemize}
 		  				\item A path and a star are both trees, while their structures differ
@@ -594,6 +594,45 @@
 \subsection{Johnson-Lindenstrauss lemma and Hutchinson's trace estimation}
 \subsection{Offline divide and conquer}
 \subsection{Sherman-Morrison and Woodbury formulas}
+
+\frame{
+	\frametitle{Offline Divide and Conquer (离线分治): OI version}
+	\vspace{-5pt}
+	\begin{figure}
+		\makebox[\linewidth][c]{
+		\begin{subfigure}[H]{0.58\textwidth}
+			\includegraphics[width=1\textwidth]{cdq2}
+			\label{exp1}
+			\caption{Dynamic programming by div-conquer}
+		\end{subfigure}
+		\begin{subfigure}[H]{0.5\textwidth}
+			\vspace{24pt}
+			\includegraphics[width=1\textwidth]{master12}
+			\label{exp2}
+			\caption{Dynamic connectivity by div-conquer}
+		\end{subfigure}
+		}
+		\\[-2pt]
+		\makebox[\linewidth][c]{
+		\begin{subfigure}[H]{0.58\textwidth}
+			\includegraphics[width=1\textwidth]{sgu_short}
+%			\vspace{-25pt}
+			\label{exp1}
+			\caption{Maintaining MST under updates in \scriptsize$\tilde{O}(m)$}
+		\end{subfigure}
+		\begin{subfigure}[H]{0.58\textwidth}
+			\vspace{14pt}
+			\includegraphics[width=1\textwidth]{cf_short}
+			%\vspace{0.1pt}
+			\label{exp2}
+			\caption{Maintaining \#CC under updates in \scriptsize$\tilde{O}(m)$}
+		\end{subfigure}
+		}
+		%\caption{The spectrum of $A$ (left) and $B$ (right)}
+	\end{figure}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \frame{
 	\frametitle{Clustering by the Laplacian $L = D - A$\footnote[frame]{Ulrike Luxburg (2007). A tutorial on spectral clustering. Statistics and Computing,
