@@ -657,7 +657,7 @@
 
 \frame{
 	\frametitle{Graph Laplacians}	
-	\insfig[0.6]{lapl}
+	\insfig[0.45]{lapl}
 	\scriptsize
 	%\begin{table}
 	%	\centering
@@ -676,7 +676,7 @@
 				0 & 1 & 2 \\
 				1 & 0 & 3 \\
 				2 & 3 & 0
-			\end{pmatrix}\\
+			\end{pmatrix}\\[5pt]
 			&= \sum\limits_{e\in E}w(e) \bb_{e}\bb_{e}^T =
 			\begin{pmatrix}
 				1 & -1 & 0 \\
@@ -705,7 +705,63 @@
 }
 
 \frame{
-	\frametitle{Pseudoinverse of Laplacians}
+	\frametitle{Turning Kirchhoff Index into Trace of Pseudoinverse}
+	\quad\\[8pt]
+	\begin{itemize}
+		\item
+		\footnotesize $\LL = \sum\nolimits_{i=1}^{n} \lambda_i \vv_i \vv_i^T$,\ \,
+		\footnotesize $\LL^\dag = \sum\nolimits_{i=2}^{n} \frac{1}{\lambda_i} \vv_i \vv_i^T$\small\ \, where\\[3pt]
+			\begin{itemize}
+				\item \scriptsize$0 = \lambda_1 \leq \lambda_2 \leq\ldots\leq \lambda_n$\,\footnotesize\ 
+					are eigenvalues of \scriptsize$\LL$
+				\item \scriptsize$\one = \vv_1, \vv_2, \ldots, \vv_n$\,\footnotesize\ are the orthonormal eigenvectors
+			\end{itemize}\vspace{2pt}
+		\item \footnotesize $\er(u,v) = \bb_{u,v}^T \LL^\dag \bb_{u,v}$\vspace{7pt}
+		\item \footnotesize $\mathcal{K}(G) = n\,\trace{\LL^\dag}$%\vspace{5pt}
+			\scriptsize
+			\begin{align*}
+				\mathcal{K}(G) &= \sum\limits_{u,v} \er(u,v) = \sum\limits_{u,v} \bb_{u,v}^T \LL^\dag \bb_{u,v} \\
+				&= \sum\limits_{u,v} \trace{\LL^\dag \bb_{u,v} \bb_{u,v}^T}
+				= \trace{\LL^\dag \sum\limits_{u,v} \bb_{u,v} \bb_{u,v}^T} \\[5pt]
+				&= \trace{\LL^\dag \LL_{K_n}} = \trace{\LL^\dag \kh{n\II - \one\one^T}} = n\trace{\LL^\dag}
+			\end{align*}
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Gaussian Elimination and LU Factorization}
+}
+
+\frame{
+	\frametitle{Cholesky Factorization for Laplacians}
+}
+
+\frame{
+	\frametitle{Clique Structure of Schur Complements}
+}
+
+\frame{
+	\frametitle{Multiplicative Approximation}
+}
+
+\frame{
+	\frametitle{Sparsification of Schur Complements}
+}
+
+\frame{
+	\frametitle{Solving \large$\LL\xx = \bb$}
+}
+
+\frame{
+	\frametitle{Estimating Trace of an Implicit Matrix}
+}
+
+\frame{
+	\frametitle{Estimating Trace by JL}
+}
+
+\frame{
+	\frametitle{Approximating \large$\trace{\LL^\dag}$\Large\ in Nearly Linear Time}
 }
 
 \frame{
@@ -715,7 +771,7 @@
 		\makebox[\linewidth][c]{
 		\begin{subfigure}[H]{0.58\textwidth}
 			\includegraphics[width=1\textwidth]{cdq2}
-			\label{exp1}
+			\label{exp1}	
 			\caption{Dynamic programming by div-conquer}
 		\end{subfigure}
 		\begin{subfigure}[H]{0.5\textwidth}
@@ -743,6 +799,10 @@
 		}
 		%\caption{The spectrum of $A$ (left) and $B$ (right)}
 	\end{figure}
+}
+
+\frame{
+	\frametitle{Algorithms That Use Div-conquer}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
