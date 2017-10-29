@@ -227,7 +227,10 @@
 \newcommand{\bsk}{\backslash_\theta}
 
 \definecolor{Gray}{gray}{0.95}
-\definecolor{LightCyan}{rgb}{0.88,1,1}
+\definecolor{LightCyan}{rgb}{0.9,1,1}
+
+\newcolumntype{a}{>{\columncolor{LightCyan}}c}
+\newcolumntype{b}{>{\columncolor{Gray}}c}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -350,7 +353,7 @@
 		%	\begin{itemize}
 				\item Identify influential persons in a social network
 					\begin{itemize}
-						\item Independent cascade model: measuring the importance of a person by its ability of information
+						\item Independent cascade model: measuring the importance of a person by its ability in information
 							spreading
 					\end{itemize}
 				%\item How well used a road is in a transportation network
@@ -465,7 +468,7 @@
 			\normalsize
 		\item Kirchhoff index takes into account all paths in the graph
 		\item Kirchhoff index measures the overall connectivity of the graph
-		\item Kirchhoff index also measures
+		\item Kirchhoff index has applications to measuring
 			\begin{itemize}
 				\item The mean cost of search in a complex network
 				\item Robustness of first-order consensus algorithm in noisy networks
@@ -485,15 +488,16 @@
 			\end{itemize}
 		\item An edge \small$e$\normalsize 's importance is reflected in the increase of Kirchhoff index when $e$ is deactivated
 			\begin{itemize}
-				\item Resembling the power grid situation
+				\item Resembling the power grid case
 			\end{itemize}
-		\item Kirchhoff centrality
+		\item \small$G\bsk e$\,\normalsize\ denotes multiplying conductance of \,\small$e$\,\normalsize\ by
+			\small$\theta\in (0, 1/2]$\normalsize
 			\footnotesize
 			\begin{table}
 				\centering
 				%\caption[Caption for LOF]{Some classic real networks.\protect\footnotemark}
 				%\caption{Some classic real networks.}
-				\begin{tabular}{c|c}
+				\begin{tabular}{b|c}
 					\hline
 					\scriptsize$\theta$\footnotesize-Kirchhoff edge centrality \scriptsize$\mathcal{C}_\theta(e)$
 					&
@@ -567,22 +571,22 @@
 		%\caption{The accuracy of spectral clustering based on different matrices}
 	\end{figure}
 	\begin{itemize}
-		\item Betweenness cannot distinguish between \small$e_1$\normalsize\ and \small$e_2$\normalsize
-				\small
-				\vspace{-15pt}
+		\item \small Betweenness cannot distinguish between \footnotesize$e_1$\small\ and \footnotesize$e_2$\small
+				\footnotesize
+				\vspace{-10pt}
 				\begin{align*}
 					&\mathcal{B}(e_1) = \mathcal{B}(e_2) = 18 \\[0.001cm]
 					&\mathcal{C}_{0.1}(e_1) = 132.65,\ \mathcal{C}_{0.1}(e_2) = 112.34
 				\end{align*}
-				\vspace{-30pt}
-		\item Spanning edge centrality cannot distinguish between \small$e_3$\normalsize\ and \small$e_4$\normalsize
-				\small
-				\vspace{-15pt}
+				\vspace{-25pt}
+		\item \small Spanning edge centrality cannot distinguish between \footnotesize$e_3$\small\ and \footnotesize$e_4$\small
+				\footnotesize
+				\vspace{-10pt}
 				\begin{align*}
 					&\mathcal{S}(e_3) = \mathcal{S}(e_4) = 1 \\[0.001cm]
 					&\mathcal{C}_{0.1}(e_3) = 467.33,\ \mathcal{C}_{0.1}(e_4) = 197.33
 				\end{align*}
-				\vspace{-15pt}
+				%\vspace{-15pt}
 	\end{itemize}
 }
 
@@ -650,6 +654,59 @@
 \subsection{Johnson-Lindenstrauss lemma and Hutchinson's trace estimation}
 \subsection{Offline divide and conquer}
 \subsection{Sherman-Morrison and Woodbury formulas}
+
+\frame{
+	\frametitle{Graph Laplacians}	
+	\insfig[0.6]{lapl}
+	\scriptsize
+	%\begin{table}
+	%	\centering
+	%	\begin{tabular}{c|c}
+	%		\hline
+	\vspace{-12pt}
+			\begin{align*}
+			\LL &= \DD - \AA = 
+			\begin{pmatrix}
+				3 & 0 & 0 \\
+				0 & 4 & 0 \\
+				0 & 0 & 5
+			\end{pmatrix}
+			-
+			\begin{pmatrix}
+				0 & 1 & 2 \\
+				1 & 0 & 3 \\
+				2 & 3 & 0
+			\end{pmatrix}\\
+			&= \sum\limits_{e\in E}w(e) \bb_{e}\bb_{e}^T =
+			\begin{pmatrix}
+				1 & -1 & 0 \\
+				-1 & 1 & 0 \\
+				0 & 0 & 0
+			\end{pmatrix}
+			+
+			\begin{pmatrix}
+				2 & 0 & -2 \\
+				0 & 0 & 0 \\
+				-2 & 0 & 2
+			\end{pmatrix}
+			+
+			\begin{pmatrix}
+				0 & 0 & 0 \\
+				0 & 3 & -3 \\
+				0 & -3 & 3
+			\end{pmatrix}
+			\end{align*}% \\
+			%\hline
+		%\end{tabular}
+	%\end{table}
+	\footnotesize
+	where\, \scriptsize$\bb_{e} = \bb_{u,v} = \ee_u - \ee_v$\,\footnotesize\ 
+	for an edge \scriptsize$e = (u,v) \in E$
+}
+
+\frame{
+	\frametitle{Pseudoinverse of Laplacians}
+}
 
 \frame{
 	\frametitle{Offline Div-conquer (离线分治): OI version}
