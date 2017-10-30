@@ -857,6 +857,7 @@
 		\item Approximating \small$\mathcal{K}(G) = n\trace{\LL^\dag}$
 		\begin{enumerate}
 			\item Compute in \footnotesize$\tilde{O}(m)$\,\small\ time\, \footnotesize$\LL \approx_\eps \matlow \calD \matlow^T$
+				with \footnotesize$\tilde{O}(m)$\,\small\ nonzero entries
 			\item Generate \footnotesize$M = O(\log n/\eps^2)$\,\small\ independent random \footnotesize$\pm 1$ vectors $\zz_1,\ldots,\zz_M$
 			\item Return \footnotesize$\frac{n}{M}\sum\nolimits_{i=1}^M \zz_i^T \matlow^{-T}\calD^\dag \matlow^{-1} \zz_i$\,\small\ as
 				an estimate of \footnotesize$\mathcal{K}(G)$
@@ -883,7 +884,7 @@
 			\caption{Dynamic programming by div-conquer}
 		\end{subfigure}
 		\begin{subfigure}[H]{0.55\textwidth}
-			\vspace{2pt}
+			\vspace{2.5pt}
 			\includegraphics[width=1\textwidth]{xhr}
 			\label{exp2}
 			\caption{Div-conquer in timeline}
