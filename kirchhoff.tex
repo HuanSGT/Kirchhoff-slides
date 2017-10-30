@@ -856,7 +856,7 @@
 		\item Nearly Linear time denotes\, \small $\tilde{O}(m) \defeq O(m\ \mathrm{poly}(\log n))$
 		\item Approximating \small$\mathcal{K}(G) = n\trace{\LL^\dag}$
 		\begin{enumerate}
-			\item Obtain an approximate Cholesky factorization \footnotesize$\LL \approx_\eps \matlow \calD \matlow^T$
+			\item Compute in \footnotesize$\tilde{O}(m)$\,\small\ time\, \footnotesize$\LL \approx_\eps \matlow \calD \matlow^T$
 			\item Generate \footnotesize$M = O(\log n/\eps^2)$\,\small\ independent random \footnotesize$\pm 1$ vectors $\zz_1,\ldots,\zz_M$
 			\item Return \footnotesize$\frac{n}{M}\sum\nolimits_{i=1}^M \zz_i^T \matlow^{-T}\calD^\dag \matlow^{-1} \zz_i$\,\small\ as
 				an estimate of \footnotesize$\mathcal{K}(G)$
@@ -874,19 +874,19 @@
 
 \frame{
 	\frametitle{Offline Div-conquer (离线分治): OI version}
-	\vspace{-5pt}
+	%\vspace{-5pt}
 	\begin{figure}
 		\makebox[\linewidth][c]{
-		\begin{subfigure}[H]{0.58\textwidth}
+		\begin{subfigure}[H]{0.55\textwidth}
 			\includegraphics[width=1\textwidth]{cdq2}
 			\label{exp1}	
 			\caption{Dynamic programming by div-conquer}
 		\end{subfigure}
-		\begin{subfigure}[H]{0.5\textwidth}
-			\vspace{24pt}
-			\includegraphics[width=1\textwidth]{master12}
+		\begin{subfigure}[H]{0.55\textwidth}
+			\vspace{2pt}
+			\includegraphics[width=1\textwidth]{xhr}
 			\label{exp2}
-			\caption{Dynamic connectivity by div-conquer}
+			\caption{Div-conquer in timeline}
 		\end{subfigure}
 		}
 		\\[-2pt]
