@@ -213,6 +213,35 @@
 \newcommand{\diag}{\textsc{diag}}
 \newcommand\LLs{\boldsymbol{\mathit{L}_s}}
 
+\newcommand{\zztil}{\boldsymbol{\mathit{\widetilde{\zz}}}}
+\newcommand{\VVtil}{\boldsymbol{\mathit{\widetilde{V}}}}
+\newcommand{\SStil}{\boldsymbol{\mathit{\widetilde{S}}}}
+\newcommand{\CCtil}{\boldsymbol{\mathit{\widetilde{C}}}}
+\newcommand{\matlowtil}{\boldsymbol{\mathit{\widetilde{\mathcal{L}}}}}
+\newcommand{\calDtil}{\boldsymbol{\mathit{\widetilde{\mathcal{D}}}}}
+\newcommand{\calCtil}{\boldsymbol{\mathit{\widetilde{\mathcal{C}}}}}
+\newcommand{\cctil}{\boldsymbol{\mathit{\widetilde{c}}}}
+
+\newcommand{\SShat}{\boldsymbol{\mathit{\widehat{S}}}}
+\newcommand{\CChat}{\boldsymbol{\mathit{\widehat{C}}}}
+\newcommand{\matlowhat}{\boldsymbol{\mathit{\widehat{\mathcal{L}}}}}
+\newcommand{\calDhat}{\boldsymbol{\mathit{\widehat{\mathcal{D}}}}}
+\newcommand{\calChat}{\boldsymbol{\mathit{\widehat{\mathcal{C}}}}}
+\newcommand{\cchat}{\boldsymbol{\mathit{\widehat{c}}}}
+
+
+
+\newcommand{\calD}{\boldsymbol{\mathit{\mathcal{D}}}}
+\renewcommand{\calC}{\boldsymbol{\mathit{\mathcal{C}}}}
+%\newcommand\LLtil{\boldsymbol{\mathit{\widetilde{L}}}}
+
+\newcommand{\matlow}{\boldsymbol{\mathit{{\mathcal{L}}}}}
+
+%\newcommand{\PP}{\boldsymbol{\mathit{P}}}
+
+\newcommand{\crunm}{c_1}
+\newcommand{\crunn}{c_2}
+
 \newcommand{\todo}[1]{{\bf \color{red} TODO: #1}}
 \newcommand{\rp}[1]{{\bf \color{green} RP: #1}}
 \newcommand{\hl}[1]{{\bf \color{green} HL: #1}}
@@ -353,8 +382,8 @@
 		%	\begin{itemize}
 				\item Identify influential persons in a social network
 					\begin{itemize}
-						\item Independent cascade model: measuring the importance of a person by its ability in information
-							spreading
+						\item Independent cascade model: measuring the importance of a person by its ability in
+							spreading information
 					\end{itemize}
 				%\item How well used a road is in a transportation network
 				\item Identify important web pages
@@ -745,7 +774,7 @@
 }
 
 \frame{
-	\frametitle{Sparsification of Schur Complements}
+	\frametitle{Clique Sampling}
 }
 
 \frame{
@@ -754,14 +783,93 @@
 
 \frame{
 	\frametitle{Estimating Trace of an Implicit Matrix}
+	\begin{block}{Lemma (Hutchinson's Monte-Carlo Trace Estimation)}
+		\scriptsize
+		Let $\AA$ be a $n\times n$ positive semidefinite matrix.
+	Let $\zz_1,\ldots,\zz_M$ be $M$ independent random $\pm 1$ vectors.
+	Let $\eps$ be a scalar such that $0 < \eps \leq 1/2$.
+	For any $M \geq 48\eps^{-2} \ln(2n)$,
+	the following statement holds with probability at least $1 - 1/n$: \vspace{-12pt}
+	\[
+		\frac{1}{M}\sum\limits_{i=1}^M \zz_i^T \AA \zz_i \approx_\eps \trace{\LL^\dag}.
+	\]
+	\end{block}
+	\begin{itemize}
+		\item \small$\expec{}{\zz^T \AA \zz} = \trace{\AA}$\,\normalsize\ 
+			for a random \small$\pm 1$\,\normalsize\ vector \small $\zz$\,\normalsize\ since\vspace{4pt}
+		\begin{itemize}
+			\item \scriptsize$\expec{}{\AA_{[u,v]} \zz_{[u]} \zz_{[v]}} = 0$\,\footnotesize\ for \scriptsize$u\neq v$
+			\vspace{6pt}
+			\item \scriptsize$\expec{}{\AA_{[u,u]} \zz_{[u]}^2} = \AA_{[u,u]}$\,\footnotesize\ for \scriptsize$u = v$
+		\end{itemize}
+		\item \small$\frac{1}{M}\sum\nolimits_{i=1}^M \zz_i^T \AA \zz_i$\,\normalsize\ 
+			should be close to \small$\trace{\AA}$\,\normalsize\ when \small$M$\,\normalsize\ is large
+		%\begin{itemize}
+			\item \small$O(\log n/\eps^2)$\,\normalsize\ samples are enough to get an	\small$\eps$\normalsize-approximation
+		%\end{itemize}
+	\end{itemize}
 }
 
 \frame{
 	\frametitle{Estimating Trace by JL}
+	\vspace{10pt}
+	\begin{block}{Lemma (Johnson-Lindenstrauss)}
+		%\begin{lemma}[Johnson-Lindenstrauss]
+		\scriptsize
+		Given fixed vectors $\vv_1,\vv_2,\cdots,\vv_n \in \mathbb{R}^d$ and $0 < \eps \leq 1/2$, let $k$ be a positive integer such that \vspace{-12pt}
+	\[
+		\vspace{-12pt}
+		%k \geq 24 \eps^{-2} \log n.
+		k \geq 4(\eps^2/2 - \eps^3/3)^{-1}\ln n.
+	\]
+	and $\QQ$ be a $k \times d$ random $\pm 1$ matrix.
+	With probability at least $1 - 2 / n$, \vspace{-12pt}
+	\[
+		%\vspace{-10pt}
+		\forall 1\leq i\leq n, \norm{\vv_i}^2_2 \approx_\epsilon \frac{1}{k} \norm{\QQ \vv_i}_2^2.
+	\]
+	%\end{lemma}
+	\end{block}
+	\begin{itemize}
+		\item \small Proof of number of samples required \vspace{-5pt}
+		\scriptsize %\vspace{-5pt}
+		\begin{align*}
+			\trace{\AA} &= \trace{\AA^{1/2} \AA^{1/2}} = \norm{\AA^{1/2}}_F^2
+			\approx_\eps \norm{\QQ_{O(\log n / \eps^2)\times n}\AA^{1/2}}_F^2 \\
+			&= \trace{\QQ\AA^{1/2}\AA^{1/2}\QQ^T} = \trace{\QQ\AA\QQ^T}
+			= \sum\limits_{i=1}^{O(\log n / \eps^2)} \qq_i^T\AA \qq_i
+		\end{align*}
+		\quad\\[-7.5pt]
+		\small where \scriptsize$\qq_i^T$\,\small\ denotes the $i^{\text{th}}$ row of \scriptsize$\QQ$
+		%\trace{\AA} &= \trace{\AA^{1/2} \AA^{1/2}} \qquad
+			%	\text{\footnotesize since\scriptsize\ $\AA$ \footnotesize is positive semidefinite \scriptsize} \\
+			%	&= \sum\limits_{j=1}^{n} \norm{\aa_j}^2_2 \qquad \text{\footnotesize by letting\scriptsize\ $\aa_1,\ldots,\aa_n$\,\footnotesize\ be columns of\scriptsize\ $\AA^{1/2}$} \\
+			%	&\approx_{\eps} \sum\limits_{j=1}^{n} \norm{\QQ_{k\times n}\aa_j}^2_2 \qquad
+			%		\text{\footnotesize where \scriptsize$k = O(\log n/\eps^2)$} \\
+			%	&=
+	\end{itemize}
 }
 
 \frame{
-	\frametitle{Approximating \large$\trace{\LL^\dag}$\Large\ in Nearly Linear Time}
+	\frametitle{Approximating \large$\mathcal{K}(G)$\,\Large\ in Nearly Linear Time}
+	\begin{itemize}
+		\item Nearly Linear time denotes\, \small $\tilde{O}(m) \defeq O(m\ \mathrm{poly}(\log n))$
+		\item Approximating \small$\mathcal{K}(G) = n\trace{\LL^\dag}$
+		\begin{enumerate}
+			\item Obtain an approximate Cholesky factorization \footnotesize$\LL \approx_\eps \matlow \calD \matlow^T$
+			\item Generate \footnotesize$M = O(\log n/\eps^2)$\,\small\ independent random \footnotesize$\pm 1$ vectors $\zz_1,\ldots,\zz_M$
+			\item Return \footnotesize$\frac{n}{M}\sum\nolimits_{i=1}^M \zz_i^T \matlow^{-T}\calD^\dag \matlow^{-1} \zz_i$\,\small\ as
+				an estimate of \footnotesize$\mathcal{K}(G)$
+		\end{enumerate}
+		\vspace{4pt}
+		\item Estimating\, \small$\mathcal{C}_\theta(e) \defeq \mathcal{K}(G\bsk e)$\,\normalsize\ for all \small$e\in E$
+			\begin{itemize}
+				\item Maintaining \footnotesize$\mathcal{K}(G)$\,\small\ 
+					under \footnotesize$O(m)$\,\small\ edge updates
+				\item All updates are given beforehand
+				\item Processing queries offline
+			\end{itemize}
+	\end{itemize}
 }
 
 \frame{
@@ -803,6 +911,48 @@
 
 \frame{
 	\frametitle{Algorithms That Use Div-conquer}
+	\footnotesize
+	\vspace{20pt}
+	\begin{table}
+		\centering
+		\begin{tabular}{c|c|c}
+			\hline
+			\rowcolor{Gray}
+			Problem & Dense \scriptsize$\kh{m\approx n^2}$\footnotesize & Sparse \scriptsize$\kh{m\approx n}$\footnotesize \\
+			\hline
+			Determinant & \scriptsize$O(n^{2.37})$\footnotesize & \scriptsize$\tilde{O}(n^2)$\footnotesize
+				\footnote[frame]{D. Durfee, J. Peebles, R. Peng, and A. B. Rao. \textbf{FOCS`17}.} \\
+			\hline
+			Rand spanning tree &
+				\begin{tabular}{c}
+					%\hline
+					Exact \scriptsize$\tilde{O}(n^{5/3}m^{1/3})$\footnotesize
+						\footnote[frame]{D. Durfee, R. Kyng, J. Peebles, A. B. Rao, and S. Sachdeva. \textbf{STOC`17}.} \\
+					%\hline
+					%\vspace{-5pt}
+					Approx. \scriptsize$\tilde{O}(n^{2})$\footnotesize\footnotemark[1]
+				\end{tabular}
+				&
+				\scriptsize$\tilde{O}(m^{4/3})$\footnotesize
+					\footnote[frame]{A. Madry, D. Straszak, and J. Tarnawski. \textbf{SODA`15}.} \\
+			\hline
+			%Max matching & \scriptsize$O(n^{2.37})$\footnotesize &
+			%	\scriptsize$\tilde{O}(m^{7/4})$\footnotesize \\
+			%\hline
+			Approx. maxflow & \scriptsize$\tilde{O}(m)$\footnotesize
+				\footnote[frame]{R. Peng. \textbf{SODA`16}.} &
+				\scriptsize$\tilde{O}(m)$\footnotesize\footnotemark[4] \\
+			\hline
+			\scriptsize$\LL\xx = \bb$\footnotesize & \scriptsize$\tilde{O}(m)$\footnotesize
+				\footnote[frame]{M. B. Cohen, R. Kyng, G. L. Miller, J. W. Pachocki, and R. Peng. \textbf{STOC`14}.} &
+				\scriptsize$\tilde{O}(m)$\footnotesize\footnotemark[5] \\
+			\hline
+		\end{tabular}
+	\end{table}
+}
+
+\frame{
+	\frametitle{Properties of Schur Complements}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
