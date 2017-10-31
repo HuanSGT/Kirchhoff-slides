@@ -30,8 +30,8 @@
 \setbeamertemplate{note page}[plain]
 
 \addtobeamertemplate{frametitle}{\vspace*{-5pt}}{\vspace*{0pt}}
-\setbeamertemplate{section in toc shaded}[default][70]
-\setbeamertemplate{subsection in toc shaded}[default][70]
+\setbeamertemplate{section in toc shaded}[default][60]
+\setbeamertemplate{subsection in toc shaded}[default][60]
 
 \renewcommand*{\thefootnote}{[\arabic{footnote}]}
 
@@ -70,6 +70,7 @@
 \newcommand{\E}{\mbox{{\bf E}}}
 
 \def\defeq{\stackrel{\mathrm{def}}{=}}
+\def\spliteq{\stackrel{\mathrm{split}}{=}}
 \def\setof#1{\left\{#1  \right\}}
 \def\sizeof#1{\left|#1  \right|}
 
@@ -104,6 +105,7 @@
 
 
 \newcommand\Ppsi{\boldsymbol{\mathit{\Psi}}}
+\newcommand\ttau{\boldsymbol{\mathit{\tau}}}
 \newcommand\PPsi{\boldsymbol{\mathit{\Psi}}}
 \newcommand\ppsi{\boldsymbol{\mathit{\psi}}}
 \newcommand\pphi{\boldsymbol{\mathit{\phi}}}
@@ -209,8 +211,9 @@
 
 \newcommand{\sym}[1]{\mathrm{sym} (#1)}
 
+\newcommand{\zero}{\mathbf{0}}
 \newcommand{\one}{\mathbf{1}}
-\newcommand{\diag}{\textsc{diag}}
+\newcommand{\diag}{\textsc{Diag}}
 \newcommand\LLs{\boldsymbol{\mathit{L}_s}}
 
 \newcommand{\zztil}{\boldsymbol{\mathit{\widetilde{\zz}}}}
@@ -334,12 +337,9 @@
 
 \section{Kirchhoff Index As a Centrality Measure}
 
-\subsection{Background on centrality measures and related works}
-
 \frame{\frametitle{Outline} \tableofcontents[currentsection]}
 
-\subsection{Effective resistances and Kirchhoff index}
-\subsection{Kirchhoff index as a centrality measure and its advantages}
+\subsection{Background on centrality measures and related works}
 
 \frame{
 	\frametitle{Graphs and Networks}
@@ -444,6 +444,8 @@
 	\end{itemize}
 }
 
+\subsection{Effective resistances and Kirchhoff index}
+
 \frame{
 	\frametitle{Effective Resistances}
 	{
@@ -505,6 +507,8 @@
 			\end{itemize}
 	\end{itemize}
 }
+
+\subsection{Kirchhoff index as a centrality measure and its advantages}
 
 \frame{
 	\frametitle{Kirchhoff Centrality}
@@ -676,13 +680,18 @@
 
 \section{Nearly Linear Time Algorithms}
 
-\frame{\frametitle{Outline} \tableofcontents[currentsection]}
+\subsection{Approximating\, \footnotesize$\mathcal{C}_{\theta}(e) \defeq \mathcal{K}(G\bsk e)$\,\small\ in\,\ 
+	\footnotesize$\tilde{O}(m)$\,\small\ time}
+
+\frame{\frametitle{Outline} \tableofcontents[currentsection,currentsubsection]}
+
+
 			
-\subsection{(Approximate) Schur complements and Cholesky factorization}
+%\subsection{(Approximate) Schur complements and Cholesky factorization}
 %\subsection{Approximate Gaussian elimination for Laplacians}
-\subsection{Johnson-Lindenstrauss lemma and Hutchinson's trace estimation}
-\subsection{Offline divide and conquer}
-\subsection{Sherman-Morrison and Woodbury formulas}
+%\subsection{Johnson-Lindenstrauss lemma and Hutchinson's trace estimation}
+%\subsection{Offline divide and conquer}
+%\subsection{Sherman-Morrison and Woodbury formulas}
 
 \frame{
 	\frametitle{Graph Laplacians}	
@@ -758,15 +767,66 @@
 }
 
 \frame{
-	\frametitle{Gaussian Elimination and LU Factorization}
+	\frametitle{Gaussian Elimination for Laplacians}
+	\vspace{7pt}
+	\small
+	\begin{enumerate}	
+		\item Eliminate vertex \,\footnotesize$v_1$\,\small\ (\footnotesize$1^{\text{st}}$\,\small\ row and \,\footnotesize$1^{\text{st}}$\,\small\ column)\,\ by
+		\footnotesize \vspace{-7pt}
+		\[
+			\vspace{-7pt}
+			\SS^{(1)} \defeq \LL - \frac{1}{\LL_{[1,1]}} \LL_{[:,1]} \LL_{[:,1]}^T\small
+			%\quad \text{\small called the Schur complement w.r.t. \,\footnotesize$v_1$}
+		\]
+		where we have \,\footnotesize$\kh{\frac{1}{\LL_{[1,1]}} \LL_{[:,1]} \LL_{[:,1]}^T}_{[1,j]} = \LL_{[1,j]}$\,\small
+		\item \footnotesize$\SS^{(1)}$\,\small\ is called the \,\textbf{Schur complement}\,\ w.r.t. \,\footnotesize$v_1$\small
+		\vspace{-5pt}
+		\item Eliminate vertices \,\footnotesize$v_1,\ldots,v_{n-1}$\,\small\ by
+			\footnotesize \vspace{-7pt}
+			\[
+				\vspace{-12pt}
+				\alpha_i = 1 / \SS^{(i-1)}_{[i,i]},\quad\cc_i = \SS^{(i-1)}_{[:,i]},\quad
+				\SS^{(i)} = \SS^{(i-1)} - \alpha_i\cc_i\cc_i^T
+			\]
+			\small
+		\item \textbf{Cholesky factorization} \,of \,\footnotesize$\LL=\matlow\calD\matlow^T$\,\small\ 
+			\,\footnotesize$\kh{\Rightarrow \LL^\dag=\matlow^{-T}\calD^\dag\matlow^{-1}}$\small
+			\footnotesize \vspace{-8pt}
+			\[
+				\vspace{-8pt}
+				\LL = \SS^{(n)} + \sum\limits_{i=1}^{n-1} \alpha_i \cc_i\cc_i^T =
+				\sum\limits_{i=1}^{n-1} \alpha_i \cc_i\cc_i^T = \matlow\calD\matlow^T
+			\]
+			\small
+			where \,\footnotesize$c_i$\,\small\ is the \,\footnotesize$i^{\text{th}}$\,\small\ column of  \,\footnotesize$\matlow$\,\small,  \,\footnotesize$\alpha_i$\,\small\ is the \,\footnotesize$i^{\text{th}}$\,\small\ diagonal of  \,\footnotesize$\calD$\,\small\ 
+	\end{enumerate}
 }
 
-\frame{
-	\frametitle{Cholesky Factorization for Laplacians}
-}
+%\frame{
+%	\frametitle{Gaussian Elimination for Laplacians: An Example}
+%}
 
 \frame{
 	\frametitle{Clique Structure of Schur Complements}
+	\vspace{20pt}
+	\begin{figure}
+		\includegraphics[width=0.7\textwidth]{cliques.png}
+	\end{figure}
+	%\vspace{-8pt}
+	\small
+	\begin{itemize}
+		\item \,\scriptsize$\LL_{v_1} \defeq \,\sum\nolimits_{e\in N(v_1)} w(e)\bb_e\bb_e^T
+			\quad \spliteq\quad \begin{pmatrix} d & -\aa^T \\ -\aa & \diag(\aa) \end{pmatrix}$\,\footnotesize\ 
+		\item \scriptsize$\SS^{(1)}$\,\footnotesize\ is a Laplacian
+			\scriptsize\vspace{-8pt}
+			\begin{align*}
+				\hspace{-15pt}
+				\SS^{(1)} &\defeq \LL - \frac{1}{\LL_{[1,1]}} \LL_{[:,1]} \LL_{[:,1]}^T
+				= \kh{\LL - \LL_{v_1}} + \kh{\LL_{v_1} - \frac{1}{\LL_{[1,1]}} \LL_{[:,1]} \LL_{[:,1]}^T} \\[3pt]
+				&= \LL_{G[V\setminus v_1]} + \begin{pmatrix} 0 & \zero^T \\ \zero & \diag(\aa) - \frac{\aa\aa^T}{d} \end{pmatrix}
+				= \LL_{G[V\setminus v_1]} + \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T
+			\end{align*}
+	\end{itemize}
 }
 
 \frame{
@@ -774,10 +834,10 @@
 }
 
 \frame{
-	\frametitle{Clique Sampling}
+	\frametitle{Clique Sampling\footnote[frame]{R. Kyng and S. Sachdeva. \textbf{FOCS`16}.}}
 }
 
-\frame{
+\frame<0 | 0:handout>{
 	\frametitle{Solving \large$\LL\xx = \bb$}
 }
 
@@ -887,7 +947,7 @@
 			\vspace{2.5pt}
 			\includegraphics[width=1\textwidth]{xhr}
 			\label{exp2}
-			\caption{Div-conquer in timeline}
+			\caption{Div-conquer in query timeline}
 		\end{subfigure}
 		}
 		\\[-2pt]
@@ -913,9 +973,12 @@
 \frame{
 	\frametitle{Algorithms That Use Div-conquer}
 	\footnotesize
-	\vspace{20pt}
-	\begin{table}
+	%\vspace{20pt}
+	%\begin{itemize}
+		%\item Algorithms that use div-conquer
+	\begin{table}\caption{Algorithms that use div-conquer}
 		\centering
+		%\hspace{-60pt}
 		\begin{tabular}{c|c|c}
 			\hline
 			\rowcolor{Gray}
@@ -931,7 +994,7 @@
 					Approx. \scriptsize$\tilde{O}(n^{2})$
 					\footnote[frame]{D. Durfee, J. Peebles, R. Peng, and A. B. Rao. \textbf{FOCS`17}.}
 				\end{tabular}
-			& \scriptsize$\tilde{O}(n^2)$\footnotesize \footnotesize\footnotemark[2]
+			& \scriptsize$\tilde{O}(n^2)$\footnotesize \footnotesize\footnotemark[3]
 				 \\
 			\hline
 			Rand spanning tree &
@@ -941,7 +1004,7 @@
 						\footnote[frame]{D. Durfee, R. Kyng, J. Peebles, A. B. Rao, and S. Sachdeva. \textbf{STOC`17}.} \\
 					%\hline
 					%\vspace{-5pt}
-					Approx. \scriptsize$\tilde{O}(n^{2})$\footnotesize\footnotemark[2]
+					Approx. \scriptsize$\tilde{O}(n^{2})$\footnotesize\footnotemark[3]
 				\end{tabular}
 				&
 				\scriptsize$\tilde{O}(m^{4/3})$\footnotesize
@@ -952,20 +1015,35 @@
 			%\hline
 			Approx. maxflow & \scriptsize$\tilde{O}(m)$\footnotesize
 				\footnote[frame]{R. Peng. \textbf{SODA`16}.} &
-				\scriptsize$\tilde{O}(m)$\footnotesize\footnotemark[5] \\
+				\scriptsize$\tilde{O}(m)$\footnotesize\footnotemark[6] \\
 			\hline
 			\scriptsize$\LL\xx = \bb$\footnotesize & \scriptsize$\tilde{O}(m)$\footnotesize
 				\footnote[frame]{M. B. Cohen, R. Kyng, G. L. Miller, J. W. Pachocki, and R. Peng. \textbf{STOC`14}.} &
-				\scriptsize$\tilde{O}(m)$\footnotesize\footnotemark[6] \\
+				\scriptsize$\tilde{O}(m)$\footnotesize\footnotemark[7] \\
 			\hline
 		\end{tabular}
 	\end{table}
+	%\end{itemize}
 }
 
 \frame{
 	\frametitle{Properties of Schur Complements}
 }
 
+
+\subsection{Approximating\, \footnotesize$\mathcal{C}_{\theta}^\Delta(e) \defeq \mathcal{K}(G\bsk e) - \mathcal{K}(G)$\,\small\ in\,\ 
+	\footnotesize$\tilde{O}(m)$\,\small\ time}
+	
+\frame{\frametitle{Outline} \tableofcontents[currentsection,currentsubsection]}
+
+
+	
+\subsection{Approximating\, \footnotesize$\mathcal{C}_{\theta}^\Delta(v) \defeq \mathcal{K}(G\bsk N(v)) - \mathcal{K}(G)$\,\small\ in\,\ 
+	\footnotesize$\tilde{O}(m)$\,\small\ time}
+	
+\begin{frame}
+	\Huge{\centerline{The End}}
+\end{frame}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \frame{
