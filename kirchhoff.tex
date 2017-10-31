@@ -162,6 +162,7 @@
 \newcommand\NN{\boldsymbol{\mathit{N}}}
 \newcommand\MM{\boldsymbol{\mathit{M}}}
 \newcommand\LL{\boldsymbol{\mathit{L}}}
+\newcommand\LH{\boldsymbol{\mathit{H}}}
 \newcommand\PP{\boldsymbol{\mathit{P}}}
 \newcommand\QQ{\boldsymbol{\mathit{Q}}}
 \newcommand\RR{\boldsymbol{\mathit{R}}}
@@ -835,6 +836,54 @@
 
 \frame{
 	\frametitle{Clique Sampling\footnote[frame]{R. Kyng and S. Sachdeva. \textbf{FOCS`16}.}}
+	\vspace{5pt}
+	\begin{itemize}
+		\small
+		\item Graph sparsification
+			\begin{itemize}
+				\item \footnotesize Sampling edges by \scriptsize$w(e)\er(e)$\footnotesize\,\ leads to an
+					\scriptsize$\tilde{O}(n)$\footnotesize-edge \scriptsize$\LH \approx_\eps \LL$\footnotesize\,\ since
+					\scriptsize\vspace{-8pt}
+					\[
+						\vspace{-8pt}
+						\sum\nolimits_{e\in E} w(e)\er(e) = n - 1
+					\]
+					\footnotesize
+				\item Sampling by \scriptsize$\ttau_e \geq w(e)\er(e)$\footnotesize\,\ leads to an
+					\scriptsize$\tilde{O}(\sum\nolimits_{e\in E}\ttau_e)$\footnotesize-edge \scriptsize$\LH \approx_\eps \LL$\footnotesize
+			\end{itemize}
+		\item Sparsifying \,\footnotesize$\SS^{(1)} = \LL_{G[V\setminus v_1]} + \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T$\small
+		\begin{itemize}
+			\item \footnotesize  Schur complements preserves ER: \,\scriptsize$\er^{\LL}(i,j) = \er^{\SS^{(1)}}(i,j)$\footnotesize
+			\vspace{5pt}
+			\item \scriptsize$\er(i,j) \leq \er(1,i) + \er(1,j)\leq \frac{1}{w(1,i)} + \frac{1}{w(1,j)}$\footnotesize
+			\vspace{5pt}
+			\item Sampling by \scriptsize$\frac{w(1,i)w(1,j)}{d} \kh{\frac{1}{w(1,i)} + \frac{1}{w(1,j)}} =
+				\frac{w(1,i) + w(1,j)}{d}$\footnotesize
+			\vspace{5pt}
+			\item Total edge number \scriptsize$\sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i) + w(1,j)}{d}
+				= \sizeof{N(v_1)}$
+		\end{itemize}
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Approximate Gaussian Elimination for Laplacians}
+	\begin{itemize}
+		\item Eliminate vertices in random order
+			\begin{itemize}
+				\item Every step eliminate a vertex with average degree in expectation
+				\item Total elimination time and total nonzero entries in factorization are both
+					\footnotesize
+					\[
+						\frac{m}{n} + \frac{m}{n-1} + \ldots + \frac{m}{1} = O(m\log n)
+					\]\small
+				\item Thereby obtain an approximate Cholesky factorization \footnotesize$\LL\approx_\eps \matlow\calD\matlow^T$  
+					\small\ with \footnotesize$\tilde{O}(m)$\small\ nonzero entries in \footnotesize$\tilde{O}(m)$\small\ time
+			\end{itemize}
+		\item For any vector \footnotesize$\zz \in \mathbb{R}^n$\small, we can compute in \footnotesize$\tilde{O}(m)$\small\ time
+			an \footnotesize$\eps$\small-approximation of \footnotesize$\zz^T\LL^\dag\zz$\small
+	\end{itemize}
 }
 
 \frame<0 | 0:handout>{
