@@ -873,14 +873,16 @@
 		\item Eliminate vertices in random order
 			\begin{itemize}
 				\item Every step eliminate a vertex with average degree in expectation
-				\item Total elimination time and total nonzero entries in factorization are both
-					\footnotesize
+				\item Total elimination time and total nonzero entries in factorization:
+					\footnotesize\vspace{-7pt}
 					\[
+						\vspace{-7pt}
 						\frac{m}{n} + \frac{m}{n-1} + \ldots + \frac{m}{1} = O(m\log n)
 					\]\small
 				\item Thereby obtain an approximate Cholesky factorization \footnotesize$\LL\approx_\eps \matlow\calD\matlow^T$  
 					\small\ with \footnotesize$\tilde{O}(m)$\small\ nonzero entries in \footnotesize$\tilde{O}(m)$\small\ time
 			\end{itemize}
+		\item \small $\tilde{O}(m) \defeq O(m\ \mathrm{poly}(\log n))$\normalsize\ \,is called nearly linear time
 		\item For any vector \footnotesize$\zz \in \mathbb{R}^n$\small, we can compute in \footnotesize$\tilde{O}(m)$\small\ time
 			an \footnotesize$\eps$\small-approximation of \footnotesize$\zz^T\LL^\dag\zz$\small
 	\end{itemize}
@@ -962,7 +964,6 @@
 \frame{
 	\frametitle{Approximating \large$\mathcal{K}(G)$\,\Large\ in Nearly Linear Time}
 	\begin{itemize}
-		\item Nearly Linear time denotes\, \small $\tilde{O}(m) \defeq O(m\ \mathrm{poly}(\log n))$
 		\item Approximating \small$\mathcal{K}(G) = n\trace{\LL^\dag}$
 		\begin{enumerate}
 			\item Compute in \footnotesize$\tilde{O}(m)$\,\small\ time\, \footnotesize$\LL \approx_\eps \matlow \calD \matlow^T$
@@ -1076,9 +1077,76 @@
 }
 
 \frame{
-	\frametitle{Properties of Schur Complements}
+	\frametitle{Partial Cholesky Factorization}
+	\vspace{20pt}
+	\begin{itemize}
+		\item \footnotesize Eliminate a set of vertices \,\scriptsize$F = \setof{v_1,\ldots,v_k}$\footnotesize\ \,%in random order by
+			\scriptsize \vspace{-7pt}
+			\[
+				\vspace{-7pt}
+				\alpha_i = 1 / \SS^{(i-1)}_{[i,i]},\quad\cc_i = \SS^{(i-1)}_{[:,i]},\quad
+				\SS^{(i)} = \SS^{(i-1)} - \alpha_i\cc_i\cc_i^T
+			\]
+			\footnotesize
+		\item \textbf{{\color{blue} Partial} Cholesky factorization} (letting \,\scriptsize$C = V - F$\footnotesize) %of \,\scriptsize$\LL$\footnotesize\ \,
+		\scriptsize\vspace{-7pt}
+		\[
+			\vspace{-7pt}
+			\LL =
+			\begin{pmatrix}
+				\matlow_{FF} & \zero_{FC}\\
+				\matlow_{FC} & \II_{CC}
+			\end{pmatrix}
+			\begin{pmatrix}
+				\calD & \zero\\
+				\zero & \SS
+			\end{pmatrix}
+			\begin{pmatrix}
+				\matlow_{FF} & \zero_{FC}\\
+				\matlow_{FC} & \II_{CC}
+			\end{pmatrix}^T
+		\]\footnotesize
+		\item Recall the Schur complement w.r.t. \,\scriptsize$v_1$\footnotesize
+		\footnotesize\vspace{-7pt}
+		\[
+			\vspace{-7pt}
+			\SS^{(1)}
+				= \LL_{G[V\setminus v_1]} + \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T
+		\]
+		\item Commutativity with edge addition/deletion in \,\scriptsize$C$\footnotesize\ \,
+		\scriptsize\vspace{-7pt}
+		\[
+			\vspace{-7pt}
+			\LL\bsk e =
+			\begin{pmatrix}
+				\matlow_{FF} & \zero_{FC}\\
+				\matlow_{FC} & \II_{CC}
+			\end{pmatrix}
+			\begin{pmatrix}
+				\calD & \zero\\
+				\zero & \SS\bsk e
+			\end{pmatrix}
+			\begin{pmatrix}
+				\matlow_{FF} & \zero_{FC}\\
+				\matlow_{FC} & \II_{CC}
+			\end{pmatrix}^T
+		\]\footnotesize
+	\end{itemize}
 }
 
+\frame{
+	\frametitle{Approximating \large$\zz^T(\LL\bsk e)^\dag\zz$\Large\,\ for all \large$e\in E$\Large\ by Recursion}
+}
+
+%\frame{
+%	\frametitle{Approximating\, \large$\mathcal{C}_{\theta}^\Delta(e) = \mathcal{K}(G\bsk e) - \mathcal{K}(G)$}
+%	\begin{itemize}
+%%	\end{itemize}
+%}
+
+\frame{
+	\frametitle{Errors and Running time}
+}
 
 \subsection{Approximating\, \footnotesize$\mathcal{C}_{\theta}^\Delta(e) \defeq \mathcal{K}(G\bsk e) - \mathcal{K}(G)$\,\small\ in\,\ 
 	\footnotesize$\tilde{O}(m)$\,\small\ time}
