@@ -858,7 +858,7 @@
 				\hline
 			\end{tabular}
 		\end{table}
-		\item Properties
+		\item Properties of \scriptsize$\eps$\footnotesize-approximation
 			\begin{enumerate}
 				\item \scriptsize$\AA\approx_\eps \BB, \CC\approx_\eps \DD \quad \Rightarrow \quad 
 					\AA + \CC \approx_\eps \BB + \DD$\footnotesize
@@ -916,21 +916,32 @@
 
 \frame{
 	\frametitle{Approximate Gaussian Elimination for Laplacians\footnotemark[1]}
+	\small
 	\begin{itemize}
 		\item Eliminate vertices in random order
 			\begin{itemize}
-				\item Every step eliminate a vertex with average degree in expectation
+				\item \footnotesize Every step eliminate a vertex with average degree in expectation
+				\vspace{5pt}
 				\item Total elimination time and total nonzero entries in factorization:
-					\footnotesize\vspace{-7pt}
+					\scriptsize\vspace{-7pt}
 					\[
 						\vspace{-7pt}
-						\frac{m}{n} + \frac{m}{n-1} + \ldots + \frac{m}{1} = O(m\log n)
-					\]\small
-				\item Thereby obtain an approximate Cholesky factorization \footnotesize$\LL\approx_\eps \matlow\calD\matlow^T$  
-					\small\ with \footnotesize$\widetilde{O}(m/\eps^2)$\small\ nonzero entries in \footnotesize$\widetilde{O}(m/\eps^2)$\small\ time
+						\frac{2m}{n} + \frac{2m}{n-1} + \ldots + \frac{2m}{2} = O(m\log n)
+					\]\footnotesize
+				\item Number of times an edge is sampled:
+					\scriptsize\vspace{-8pt}
+					\[
+						\vspace{-8pt}
+						\frac{2}{n} + \frac{2}{n-1} + \ldots + \frac{2}{2} = O(\log n)
+					\]\footnotesize
+				%\vspace{5pt}
+				\item \small Thereby obtain an approximate Cholesky factorization \scriptsize$\LL\approx_\eps \matlow\calD\matlow^T$  
+					\footnotesize\ with \scriptsize$\widetilde{O}(m/\eps^2)$\footnotesize\ nonzero entries in \scriptsize$\widetilde{O}(m/\eps^2)$\footnotesize\ time
 			\end{itemize}
-		\item \small $\widetilde{O}(m) \defeq O(m\ \mathrm{poly}(\log n))$\normalsize\ \,is called nearly linear time
-		\item For any vector \footnotesize$\zz \in \mathbb{R}^n$\small, we can compute in \footnotesize$\widetilde{O}(m/\eps^2)$\small\ time
+		\vspace{-5pt}
+		\item \footnotesize $\widetilde{O}(m) \defeq O(m\ \mathrm{poly}(\log n))$\small\ \,is called nearly linear time
+		\vspace{-5pt}
+		\item \small For any vector \footnotesize$\zz \in \mathbb{R}^n$\small, we can compute in \footnotesize$\widetilde{O}(m/\eps^2)$\small\ time
 			an \footnotesize$\eps$\small-approximation of \footnotesize$\zz^T\LL^\dag\zz$\small
 	\end{itemize}
 }
@@ -1241,6 +1252,11 @@
 
 \frame{
 	\frametitle{Errors and Running time}	
+	\begin{figure}
+		\caption{Recursion tree}
+		\includegraphics[width = 0.8\textwidth]{l_1.eps}
+		\vspace{-5pt}
+	\end{figure}
 	\begin{itemize}
 		\item Set the error of elimination to \small$O(\eps / \log n)$\normalsize\ everywhere
 		\item Total running time \small$\widetilde{O}(m/\eps^{4})$
