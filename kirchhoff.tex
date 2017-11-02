@@ -835,7 +835,7 @@
 	\frametitle{Multiplicative Approximation}
 	\begin{itemize}
 		\footnotesize
-		\item \scriptsize$\AA \pleq \BB \quad\Leftrightarrow\quad \forall \xx\in\mathbb{R}^n,\ \xx^T\AA\xx \pleq \xx^T\BB\xx$\footnotesize\
+		\item \scriptsize$\AA \pleq \BB \quad\Leftrightarrow\quad \forall \xx\in\mathbb{R}^n,\ \xx^T\AA\xx \leq \xx^T\BB\xx$\footnotesize\
 		\item \scriptsize$(1+\eps)$\footnotesize-approximation and \scriptsize$\eps$\footnotesize-approximation
 			(\scriptsize$\exp(\eps) \approx 1 + \eps$\footnotesize\ \,for small \scriptsize$\eps$\footnotesize)
 		\vspace{-15pt}
@@ -865,7 +865,7 @@
 				\item \scriptsize$\AA\approx_\eps \BB \quad \Rightarrow \quad 
 					\VV^T\AA\VV \approx_\eps \VV^T\BB\VV$\footnotesize
 				\item \scriptsize$\AA\approx_{\eps_1} \BB, \BB\approx_{\eps_2} \CC \quad \Rightarrow \quad
-				\AA \approx_{\eps_1 + \eps_2} \BB + \DD$\footnotesize
+				\AA \approx_{\eps_1 + \eps_2} \CC$\footnotesize
 				\item \scriptsize$\AA\approx_\eps \BB \quad \Rightarrow \quad 
 					\AA^{-1} \approx_\eps \BB^{-1}$\footnotesize
 			\end{enumerate}
@@ -874,9 +874,9 @@
 					\AA - \CC \approx_\eps \BB - \DD$\footnotesize }
 			\vspace{-5pt}
 			\begin{itemize}
-				\item {\color{red} \scriptsize$91\approx_{0.1} 100, 90\approx_{0.1} 90$\footnotesize\ \,
+				\item {\color{red} \scriptsize$91\approx_{1.1} 100, 90\approx_{1.1} 90$\footnotesize\ \,
 					but
-					\ \scriptsize$1 \centernot\approx_{0.1} 10$\footnotesize }
+					\ \scriptsize$1 \centernot\approx_{1.1} 10$\footnotesize }
 			\end{itemize}
 	\end{itemize}
 }
@@ -935,7 +935,7 @@
 						\frac{2}{n} + \frac{2}{n-1} + \ldots + \frac{2}{2} = O(\log n)
 					\]\footnotesize
 				%\vspace{5pt}
-				\item \small Thereby obtain an approximate Cholesky factorization \scriptsize$\LL\approx_\eps \matlow\calD\matlow^T$  
+				\item Thereby obtain an approximate Cholesky factorization \scriptsize$\LL\approx_\eps \matlow\calD\matlow^T$  
 					\footnotesize\ with \scriptsize$\widetilde{O}(m/\eps^2)$\footnotesize\ nonzero entries in \scriptsize$\widetilde{O}(m/\eps^2)$\footnotesize\ time
 			\end{itemize}
 		\vspace{-5pt}
@@ -960,7 +960,7 @@
 	For any $M \geq 48\eps^{-2} \ln(2n)$,
 	the following statement holds with probability at least $1 - 1/n$: \vspace{-12pt}
 	\[
-		\frac{1}{M}\sum\limits_{i=1}^M \zz_i^T \AA \zz_i \approx_\eps \trace{\LL^\dag}.
+		\frac{1}{M}\sum\limits_{i=1}^M \zz_i^T \AA \zz_i \approx_\eps \trace{\AA}.
 	\]
 	\end{block}
 	\begin{itemize}
@@ -1003,13 +1003,17 @@
 		\item \small Proof of number of samples required \vspace{-5pt}
 		\scriptsize %\vspace{-5pt}
 		\begin{align*}
+			\hspace{-5pt}
 			\trace{\AA} &= \trace{\AA^{1/2} \AA^{1/2}} = \norm{\AA^{1/2}}_F^2
-			\approx_\eps \norm{\QQ_{O(\log n / \eps^2)\times n}\AA^{1/2}}_F^2 \\
-			&= \trace{\QQ\AA^{1/2}\AA^{1/2}\QQ^T} = \trace{\QQ\AA\QQ^T}
-			= \sum\limits_{i=1}^{O(\log n / \eps^2)} \qq_i^T\AA \qq_i
+			\approx_\eps \frac{1}{k}\norm{\QQ_{k\times n}\AA^{1/2}}_F^2 \\
+			& = \frac{1}{k}\sum\limits_{i=1}^{k}\norm{\qq_i \AA^{1/2}}_2^2
+			= \frac{1}{k}\sum\limits_{i=1}^{k} \kh{\qq_i \AA^{1/2}} \kh{\qq_i \AA^{1/2}}^T
+			= \frac{1}{k}\sum\limits_{i=1}^{k} \qq_i\AA \qq_i^T
+			%&= \trace{\QQ\AA^{1/2}\AA^{1/2}\QQ^T} = \trace{\QQ\AA\QQ^T}
+			%= \sum\limits_{i=1}^{O(\log n / \eps^2)} \qq_i^T\AA \qq_i
 		\end{align*}
 		\quad\\[-7.5pt]
-		\small where \scriptsize$\qq_i^T$\,\small\ denotes the $i^{\text{th}}$ row of \scriptsize$\QQ$
+		\small where \scriptsize$\qq_i$\,\small\ denotes the $i^{\text{th}}$ row of \scriptsize$\QQ$
 		%\trace{\AA} &= \trace{\AA^{1/2} \AA^{1/2}} \qquad
 			%	\text{\footnotesize since\scriptsize\ $\AA$ \footnotesize is positive semidefinite \scriptsize} \\
 			%	&= \sum\limits_{j=1}^{n} \norm{\aa_j}^2_2 \qquad \text{\footnotesize by letting\scriptsize\ $\aa_1,\ldots,\aa_n$\,\footnotesize\ be columns of\scriptsize\ $\AA^{1/2}$} \\
@@ -1199,7 +1203,7 @@
 			\footnotesize
 			\item Divide edges in \scriptsize$E_Q$\footnotesize\ into \scriptsize$E^{(1)}, E^{(2)}$\footnotesize\ with equal sizes \vspace{-5pt}
 			\item \label{item:start} \footnotesize Let \scriptsize$C$\footnotesize\ denote endpoints of edges in \scriptsize$E^{(1)}$\footnotesize\ and \scriptsize$F = V\setminus C$\footnotesize
-			\item Eliminate vertices in \scriptsize$F$\footnotesize\ in random order in nearly linear time:
+			\item Eliminate vertices in \scriptsize$F$\footnotesize\ by clique sampling in random order in nearly linear time:
 			\scriptsize\vspace{-8pt}
 			\[\vspace{-8pt}
 				\LL^\dag \approx_{\eps} 
@@ -1209,7 +1213,7 @@
 			\end{pmatrix}^{-T}
 			\begin{pmatrix}
 				\calD^{-1} & \zero\\
-				\zero & \SS^\dag
+				\zero & {\color{red} \SS^\dag}
 			\end{pmatrix}
 			\begin{pmatrix}
 				\matlow_{FF} & \zero_{FC}\\
@@ -1221,11 +1225,11 @@
 				\matlow_{FF} & \zero_{FC}\\
 				\matlow_{FC} & \II_{CC}
 			\end{pmatrix}^{-1}\zz \defeq \yy \ \spliteq\ \begin{pmatrix} \yy_F \\ \yy_C \end{pmatrix}$\footnotesize,
-			then
+			then for all \,\scriptsize$e\in E^{(1)}$\footnotesize
 			\scriptsize\vspace{-7pt}
 			\[
 				\vspace{-12pt}
-				\zz^T\LL^\dag\zz = \yy_F^T \calD^{-1}\yy_F + \yy_C^T \SS^\dag \yy_C
+				\zz^T(\LL\bsk e)^\dag\zz = \yy_F^T \calD^{-1}\yy_F + \yy_C^T (\SS\bsk e)^\dag \yy_C
 			\]
 			\footnotesize
 			\item \label{item:end} Sparsify \scriptsize$\SS\,\backslash E^{(1)}$\footnotesize\ and compute
@@ -1276,6 +1280,8 @@
 \begin{frame}
 	\Huge{\centerline{The End}}
 \end{frame}
+\end{spacing}
+\end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \frame{
