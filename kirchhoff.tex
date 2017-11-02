@@ -22,6 +22,7 @@
 \usepackage{dsfont}
 \usepackage{xeCJK}
 \usepackage[backend=biber]{biblatex}
+\usepackage{centernot}
 
 %\setbeamertemplate{footline}{}
 \setbeamertemplate{headline}{}
@@ -832,6 +833,52 @@
 
 \frame{
 	\frametitle{Multiplicative Approximation}
+	\begin{itemize}
+		\footnotesize
+		\item \scriptsize$\AA \pleq \BB \quad\Leftrightarrow\quad \forall \xx\in\mathbb{R}^n,\ \xx^T\AA\xx \pleq \xx^T\BB\xx$\footnotesize\
+		\item \scriptsize$(1+\eps)$\footnotesize-approximation and \scriptsize$\eps$\footnotesize-approximation
+			(\scriptsize$\exp(\eps) \approx 1 + \eps$\footnotesize\ \,for small \scriptsize$\eps$\footnotesize)
+		\vspace{-15pt}
+		\begin{table}
+			\centering
+			\begin{tabular}{c|c|c}
+				\hline
+				\rowcolor{Gray}
+				Approximation & Nonnegative scalars & PSD Matrices \\
+				\hline
+				\scriptsize$(1+\eps)$\footnotesize-approximation &
+				\scriptsize$(1-\eps)a \leq b \leq (1 + \eps)a$\footnotesize
+					&
+				\scriptsize$(1-\eps)\AA \pleq \BB \pleq (1 + \eps)\AA$\footnotesize\\
+				\hline
+				\scriptsize$\eps$\footnotesize-approximation &
+				\scriptsize$\exp(-\eps) a \leq b \leq \exp(\eps) a$\footnotesize
+					&
+				\scriptsize$\exp(-\eps) \AA \pleq \BB \pleq \exp(\eps) \AA$\footnotesize \\
+				\hline
+			\end{tabular}
+		\end{table}
+		\item Properties
+			\begin{enumerate}
+				\item \scriptsize$\AA\approx_\eps \BB, \CC\approx_\eps \DD \quad \Rightarrow \quad 
+					\AA + \CC \approx_\eps \BB + \DD$\footnotesize
+				\item \scriptsize$\AA\approx_\eps \BB \quad \Rightarrow \quad 
+					\VV^T\AA\VV \approx_\eps \VV^T\BB\VV$\footnotesize
+				\item \scriptsize$\AA\approx_{\eps_1} \BB, \BB\approx_{\eps_2} \CC \quad \Rightarrow \quad
+				\AA \approx_{\eps_1 + \eps_2} \BB + \DD$\footnotesize
+				\item \scriptsize$\AA\approx_\eps \BB \quad \Rightarrow \quad 
+					\AA^{-1} \approx_\eps \BB^{-1}$\footnotesize
+			\end{enumerate}
+			\vspace{-5pt}
+		\item {\color{red} \scriptsize$\AA\approx_\eps \BB, \CC\approx_\eps \DD \quad \centernot\Rightarrow \quad 
+					\AA - \CC \approx_\eps \BB - \DD$\footnotesize }
+			\vspace{-5pt}
+			\begin{itemize}
+				\item {\color{red} \scriptsize$91\approx_{0.1} 100, 90\approx_{0.1} 90$\footnotesize\ \,
+					but
+					\ \scriptsize$1 \centernot\approx_{0.1} 10$\footnotesize }
+			\end{itemize}
+	\end{itemize}
 }
 
 \frame{
