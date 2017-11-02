@@ -682,7 +682,7 @@
 \section{Nearly Linear Time Algorithms}
 
 \subsection{Approximating\, \footnotesize$\mathcal{C}_{\theta}(e) \defeq \mathcal{K}(G\bsk e)$\,\small\ in\,\ 
-	\footnotesize$\tilde{O}(m)$\,\small\ time}
+	\footnotesize$\widetilde{O}(m)$\,\small\ time}
 
 \frame{\frametitle{Outline} \tableofcontents[currentsection,currentsubsection]}
 
@@ -795,7 +795,7 @@
 			\footnotesize \vspace{-8pt}
 			\[
 				\vspace{-8pt}
-				\LL = \SS^{(n)} + \sum\limits_{i=1}^{n-1} \alpha_i \cc_i\cc_i^T =
+				\LL = \SS^{(n-1)} + \sum\limits_{i=1}^{n-1} \alpha_i \cc_i\cc_i^T =
 				\sum\limits_{i=1}^{n-1} \alpha_i \cc_i\cc_i^T = \matlow\calD\matlow^T
 			\]
 			\small
@@ -842,7 +842,7 @@
 		\item Graph sparsification
 			\begin{itemize}
 				\item \footnotesize Sampling edges by \scriptsize$w(e)\er(e)$\footnotesize\,\ leads to an
-					\scriptsize$\tilde{O}(n)$\footnotesize-edge \scriptsize$\LH \approx_\eps \LL$\footnotesize\,\ since
+					\scriptsize$\widetilde{O}(n)$\footnotesize-edge \scriptsize$\LH \approx_\eps \LL$\footnotesize\,\ since
 					\scriptsize\vspace{-8pt}
 					\[
 						\vspace{-8pt}
@@ -850,7 +850,7 @@
 					\]
 					\footnotesize
 				\item Sampling by \scriptsize$\ttau_e \geq w(e)\er(e)$\footnotesize\,\ leads to an
-					\scriptsize$\tilde{O}(\sum\nolimits_{e\in E}\ttau_e)$\footnotesize-edge \scriptsize$\LH \approx_\eps \LL$\footnotesize
+					\scriptsize$\widetilde{O}(\sum\nolimits_{e\in E}\ttau_e)$\footnotesize-edge \scriptsize$\LH \approx_\eps \LL$\footnotesize
 			\end{itemize}
 		\item Sparsifying \,\footnotesize$\SS^{(1)} = \LL_{G[V\setminus v_1]} + \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T$\small
 		\begin{itemize}
@@ -880,10 +880,10 @@
 						\frac{m}{n} + \frac{m}{n-1} + \ldots + \frac{m}{1} = O(m\log n)
 					\]\small
 				\item Thereby obtain an approximate Cholesky factorization \footnotesize$\LL\approx_\eps \matlow\calD\matlow^T$  
-					\small\ with \footnotesize$\tilde{O}(m)$\small\ nonzero entries in \footnotesize$\tilde{O}(m)$\small\ time
+					\small\ with \footnotesize$\widetilde{O}(m/\eps^2)$\small\ nonzero entries in \footnotesize$\widetilde{O}(m/\eps^2)$\small\ time
 			\end{itemize}
-		\item \small $\tilde{O}(m) \defeq O(m\ \mathrm{poly}(\log n))$\normalsize\ \,is called nearly linear time
-		\item For any vector \footnotesize$\zz \in \mathbb{R}^n$\small, we can compute in \footnotesize$\tilde{O}(m)$\small\ time
+		\item \small $\widetilde{O}(m) \defeq O(m\ \mathrm{poly}(\log n))$\normalsize\ \,is called nearly linear time
+		\item For any vector \footnotesize$\zz \in \mathbb{R}^n$\small, we can compute in \footnotesize$\widetilde{O}(m/\eps^2)$\small\ time
 			an \footnotesize$\eps$\small-approximation of \footnotesize$\zz^T\LL^\dag\zz$\small
 	\end{itemize}
 }
@@ -964,10 +964,10 @@
 \frame{
 	\frametitle{Approximating \large$\mathcal{K}(G)$\,\Large\ in Nearly Linear Time}
 	\begin{itemize}
-		\item Approximating \small$\mathcal{K}(G) = n\trace{\LL^\dag}$
+		\item Approximating \,\small$\mathcal{K}(G) = n\trace{\LL^\dag}$\normalsize\ \,in \,\footnotesize$\widetilde{O}(m/\eps^4)$\,\normalsize\ time
 		\begin{enumerate}
-			\item Compute in \footnotesize$\tilde{O}(m)$\,\small\ time\, \footnotesize$\LL \approx_\eps \matlow \calD \matlow^T$
-				with \footnotesize$\tilde{O}(m)$\,\small\ nonzero entries
+			\item Compute in \footnotesize$\widetilde{O}(m/\eps^2)$\,\small\ time\, \footnotesize$\LL \approx_\eps \matlow \calD \matlow^T$
+				with \footnotesize$\widetilde{O}(m/\eps^2)$\,\small\ nonzeros
 			\item Generate \footnotesize$M = O(\log n/\eps^2)$\,\small\ independent random \footnotesize$\pm 1$ vectors $\zz_1,\ldots,\zz_M$
 			\item Return \footnotesize$\frac{n}{M}\sum\nolimits_{i=1}^M \zz_i^T \matlow^{-T}\calD^\dag \matlow^{-1} \zz_i$\,\small\ as
 				an estimate of \footnotesize$\mathcal{K}(G)$
@@ -1006,14 +1006,14 @@
 			\includegraphics[width=1\textwidth]{sgu_short}
 %			\vspace{-25pt}
 			\label{exp1}
-			\caption{Maintaining MST under updates in \scriptsize$\tilde{O}(m)$}
+			\caption{Maintaining MST under updates in \scriptsize$\widetilde{O}(m)$}
 		\end{subfigure}
 		\begin{subfigure}[H]{0.58\textwidth}
 			\vspace{14pt}
 			\includegraphics[width=1\textwidth]{cf100551}
 			%\vspace{0.1pt}
 			\label{exp2}
-			\caption{Maintaining \#CC under updates in \scriptsize$\tilde{O}(m)$}
+			\caption{Maintaining \#CC under updates in \scriptsize$\widetilde{O}(m)$}
 		\end{subfigure}
 		}
 		%\caption{The spectrum of $A$ (left) and $B$ (right)}
@@ -1037,39 +1037,39 @@
 			Determinant &
 			\begin{tabular}{c}
 					%\hline
-					Exact \scriptsize$\tilde{O}(n^{2.37})$\footnotesize\footnote[frame]{V. V. Williams. \textbf{STOC`12}.} \\
+					Exact \scriptsize$\widetilde{O}(n^{2.37})$\footnotesize\footnote[frame]{V. V. Williams. \textbf{STOC`12}.} \\
 						%\footnote[frame]{D. Durfee, R. Kyng, J. Peebles, A. B. Rao, and S. Sachdeva. \textbf{STOC`17}.} \\
 					%\hline
 					%\vspace{-5pt}
-					Approx. \scriptsize$\tilde{O}(n^{2})$
+					Approx. \scriptsize$\widetilde{O}(n^{2})$
 					\footnote[frame]{D. Durfee, J. Peebles, R. Peng, and A. B. Rao. \textbf{FOCS`17}.}
 				\end{tabular}
-			& \scriptsize$\tilde{O}(n^2)$\footnotesize \footnotesize\footnotemark[3]
+			& \scriptsize$\widetilde{O}(n^2)$\footnotesize \footnotesize\footnotemark[3]
 				 \\
 			\hline
 			Rand spanning tree &
 				\begin{tabular}{c}
 					%\hline
-					Exact \scriptsize$\tilde{O}(n^{5/3}m^{1/3})$\footnotesize
+					Exact \scriptsize$\widetilde{O}(n^{5/3}m^{1/3})$\footnotesize
 						\footnote[frame]{D. Durfee, R. Kyng, J. Peebles, A. B. Rao, and S. Sachdeva. \textbf{STOC`17}.} \\
 					%\hline
 					%\vspace{-5pt}
-					Approx. \scriptsize$\tilde{O}(n^{2})$\footnotesize\footnotemark[3]
+					Approx. \scriptsize$\widetilde{O}(n^{2})$\footnotesize\footnotemark[3]
 				\end{tabular}
 				&
-				\scriptsize$\tilde{O}(m^{4/3})$\footnotesize
+				\scriptsize$\widetilde{O}(m^{4/3})$\footnotesize
 					\footnote[frame]{A. Madry, D. Straszak, and J. Tarnawski. \textbf{SODA`15}.} \\
 			\hline
 			%Max matching & \scriptsize$O(n^{2.37})$\footnotesize &
-			%	\scriptsize$\tilde{O}(m^{7/4})$\footnotesize \\
+			%	\scriptsize$\widetilde{O}(m^{7/4})$\footnotesize \\
 			%\hline
-			Approx. maxflow & \scriptsize$\tilde{O}(m)$\footnotesize
+			Approx. maxflow & \scriptsize$\widetilde{O}(m)$\footnotesize
 				\footnote[frame]{R. Peng. \textbf{SODA`16}.} &
-				\scriptsize$\tilde{O}(m)$\footnotesize\footnotemark[6] \\
+				\scriptsize$\widetilde{O}(m)$\footnotesize\footnotemark[6] \\
 			\hline
-			\scriptsize$\LL\xx = \bb$\footnotesize & \scriptsize$\tilde{O}(m)$\footnotesize
+			\scriptsize$\LL\xx = \bb$\footnotesize & \scriptsize$\widetilde{O}(m)$\footnotesize
 				\footnote[frame]{M. B. Cohen, R. Kyng, G. L. Miller, J. W. Pachocki, and R. Peng. \textbf{STOC`14}.} &
-				\scriptsize$\tilde{O}(m)$\footnotesize\footnotemark[7] \\
+				\scriptsize$\widetilde{O}(m)$\footnotesize\footnotemark[7] \\
 			\hline
 		\end{tabular}
 	\end{table}
@@ -1089,10 +1089,10 @@
 			\]
 			\footnotesize
 		\item \textbf{{\color{blue} Partial} Cholesky factorization} (letting \,\scriptsize$C = V - F$\footnotesize) %of \,\scriptsize$\LL$\footnotesize\ \,
-		\scriptsize\vspace{-7pt}
+		\scriptsize\vspace{-5pt}
 		\[
-			\vspace{-7pt}
-			\LL =
+			\vspace{-5pt}
+			\LL = \SS^{(k)} + \sum\limits_{i=1}^k \alpha_i \cc_i \cc_i^T =
 			\begin{pmatrix}
 				\matlow_{FF} & \zero_{FC}\\
 				\matlow_{FC} & \II_{CC}
@@ -1136,6 +1136,54 @@
 
 \frame{
 	\frametitle{Approximating \large$\zz^T(\LL\bsk e)^\dag\zz$\Large\,\ for all \large$e\in E$\Large\ by Recursion}
+	\begin{block}{\small$\textsc{QuadEst}\footnotesize(\LL, \zz, E_Q = E)$: \small Estimate\ \footnotesize$\zz^T(\LL\bsk e)^\dag\zz$\hspace{4pt}\small for all \footnotesize$e\in E_Q$}
+		\begin{enumerate}
+			\footnotesize
+			\item Divide edges in \scriptsize$E_Q$\footnotesize\ into \scriptsize$E^{(1)}, E^{(2)}$\footnotesize\ with equal sizes \vspace{-5pt}
+			\item \label{item:start} \footnotesize Let \scriptsize$C$\footnotesize\ denote endpoints of edges in \scriptsize$E^{(1)}$\footnotesize\ and \scriptsize$F = V\setminus C$\footnotesize
+			\item Eliminate vertices in \scriptsize$F$\footnotesize\ in random order in nearly linear time:
+			\scriptsize\vspace{-8pt}
+			\[\vspace{-8pt}
+				\LL^\dag \approx_{\eps} 
+				\begin{pmatrix}
+				\matlow_{FF} & \zero_{FC}\\
+				\matlow_{FC} & \II_{CC}
+			\end{pmatrix}^{-T}
+			\begin{pmatrix}
+				\calD^{-1} & \zero\\
+				\zero & \SS^\dag
+			\end{pmatrix}
+			\begin{pmatrix}
+				\matlow_{FF} & \zero_{FC}\\
+				\matlow_{FC} & \II_{CC}
+			\end{pmatrix}^{-1}
+			\]
+			\footnotesize
+			\item Let \scriptsize$\begin{pmatrix}
+				\matlow_{FF} & \zero_{FC}\\
+				\matlow_{FC} & \II_{CC}
+			\end{pmatrix}^{-1}\zz \defeq \yy \ \spliteq\ \begin{pmatrix} \yy_F \\ \yy_C \end{pmatrix}$\footnotesize,
+			then
+			\scriptsize\vspace{-7pt}
+			\[
+				\vspace{-12pt}
+				\zz^T\LL^\dag\zz = \yy_F^T \calD^{-1}\yy_F + \yy_C^T \SS^\dag \yy_C
+			\]
+			\footnotesize
+			\item \label{item:end} Sparsify \scriptsize$\SS\,\backslash E^{(1)}$\footnotesize\ and compute
+				\scriptsize$\yy_C^T \SS^\dag \yy_C$\footnotesize\ by \,\scriptsize$\footnotesize\textsc{QuadEst}\scriptsize
+					(\SS, \yy_C, E^{(1)})$\footnotesize\ \,recursively
+			\vspace{-2pt}
+			\item Repeat steps~\ref{item:start}\,-\,\ref{item:end} to \scriptsize$E^{(2)}$\footnotesize
+			%\vspace{-2pt}
+			\item Keep recursing until \scriptsize$\LL$\footnotesize\ only has \scriptsize$O(1)$\footnotesize\ vertices, for which
+				calculate \scriptsize
+				$
+					\zz^T(\LL\bsk e)^\dag\zz
+				$
+				\footnotesize\ directly for all \scriptsize$e\in E_Q$
+		\end{enumerate}
+	\end{block}
 }
 
 %\frame{
@@ -1145,18 +1193,22 @@
 %}
 
 \frame{
-	\frametitle{Errors and Running time}
+	\frametitle{Errors and Running time}	
+	\begin{itemize}
+		\item Set the error of elimination to \small$O(\eps / \log n)$\normalsize\ everywhere
+		\item Total running time \small$\widetilde{O}(m/\eps^{4})$
+	\end{itemize}
 }
 
 \subsection{Approximating\, \footnotesize$\mathcal{C}_{\theta}^\Delta(e) \defeq \mathcal{K}(G\bsk e) - \mathcal{K}(G)$\,\small\ in\,\ 
-	\footnotesize$\tilde{O}(m)$\,\small\ time}
+	\footnotesize$\widetilde{O}(m)$\,\small\ time}
 	
 \frame{\frametitle{Outline} \tableofcontents[currentsection,currentsubsection]}
 
 
 	
 \subsection{Approximating\, \footnotesize$\mathcal{C}_{\theta}^\Delta(v) \defeq \mathcal{K}(G\bsk N(v)) - \mathcal{K}(G)$\,\small\ in\,\ 
-	\footnotesize$\tilde{O}(m)$\,\small\ time}
+	\footnotesize$\widetilde{O}(m)$\,\small\ time}
 	
 \begin{frame}
 	\Huge{\centerline{The End}}
