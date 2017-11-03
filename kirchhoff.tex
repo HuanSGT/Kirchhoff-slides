@@ -260,6 +260,7 @@
 
 \newcommand{\bsk}{\backslash_\theta}
 
+%\definecolor{Red}{red}{0.95}
 \definecolor{Gray}{gray}{0.95}
 \definecolor{LightCyan}{rgb}{0.9,1,1}
 
@@ -960,7 +961,7 @@
 				\item Sampling by \scriptsize$\ttau_e \geq w(e)\er(e)$\footnotesize\,\ leads to an
 					\scriptsize$\widetilde{O}(\sum\nolimits_{e\in E}\ttau_e)$\footnotesize-edge \scriptsize$\LH \approx_\eps \LL$\footnotesize
 			\end{itemize}
-		\item Sparsifying \,\footnotesize$\SS^{(1)} = \LL_{G[V\setminus v_1]} + \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T$\small
+		\item Sparsifying \,\footnotesize$\SS^{(1)} = \LL_{G[V\setminus v_1]} + {\color{red} \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T}$\small
 		\begin{itemize}
 			\item \footnotesize  Schur complements preserves ER: \,\scriptsize$\er^{\LL}(i,j) = \er^{\SS^{(1)}}(i,j)$\footnotesize
 			\vspace{5pt}
