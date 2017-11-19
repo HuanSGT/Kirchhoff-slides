@@ -533,9 +533,9 @@
 			\begin{itemize}
 				\item \footnotesize$\mathcal{K}(G)$\small\ increases when edge conductance is decreased
 					%(i.e. edge resistance increased)
-				\item Thus, edge deactivation makes the graph less connected
+				\item Thus, edge (partial) deletion makes the graph less connected
 			\end{itemize}
-		\item An edge \small$e$\normalsize 's importance is reflected in the increase of Kirchhoff index when $e$ is deactivated
+		\item An edge \small$e$\normalsize 's importance is reflected in the increase of Kirchhoff index when $e$ is partially deleted
 			\begin{itemize}
 				\item Resembling the power grid case
 			\end{itemize}
@@ -717,7 +717,7 @@
 	\begin{wrapfigure}{L}{0.58\textwidth}
 		\includegraphics[width=0.5\textwidth]{lapl}
 	\end{wrapfigure}
-	\quad\\[10pt]
+	\quad\\[6pt]
 	Coordinates \footnotesize$\Leftrightarrow$\,\ \normalsize Vertices \\
 	Nonzeros \footnotesize$\Leftrightarrow$\,\ \normalsize Edges
 	%\insfig[0.5]{lapl}
@@ -726,7 +726,8 @@
 	\begin{itemize}
 		\item \small Laplacian \footnotesize $\LL \ \defeq \ \begin{cases}\sum_{u\neq v} w(u,v) \quad & u = v \\
 			- w(u,v) \quad & u \neq v \end{cases}$ \small
-		\vspace{5pt}
+		\vspace{6pt}
+		\item \footnotesize $\LL$\,\small\ is PSD as \, \footnotesize $\xx^T \LL \xx = \sum\nolimits_{(u,v) \in E} w(u,v)(\xx_u - \xx_v)^2$ \small \vspace{2.5pt}
 		\item
 		%\footnotesize $\LL = \sum\nolimits_{i=1}^{n} \lambda_i \vv_i \vv_i^T$,\ \,
 		Defining pseudoinverse \footnotesize $\LL^\dag$% = \sum\nolimits_{i=2}^{n} \frac{1}{\lambda_i} \vv_i \vv_i^T$
@@ -737,7 +738,7 @@
 %					are eigenvalues of \scriptsize$\LL$
 %				\item \scriptsize$\one = \vv_1, \vv_2, \ldots, \vv_n$\,\footnotesize\ are the orthonormal eigenvectors
 %			\end{itemize}%\vspace{2pt}
-		\vspace{7pt}
+		\vspace{4pt}
 		\item \footnotesize $\er(u,v) = (\ee_u - \ee_v)^T \LL^\dag (\ee_u - \ee_v)$\,\ ,\quad%\vspace{7pt}
 		\footnotesize $\mathcal{K}(G) = n\,\trace{\LL^\dag}$%\vspace{5pt}
 	\end{itemize}
@@ -768,7 +769,7 @@
 }
 
 \frame{
-	\frametitle{Symmetric Gaussian Elimination}
+	\frametitle{Symmetric Gaussian Elimination: Additive View}
 	\vspace{20pt}
 	\begin{figure}
 		\includegraphics[width=0.7\textwidth]{cliques.png}
@@ -870,7 +871,14 @@
 	\frametitle{Clique Structure of Schur Complements}
 	\vspace{20pt}
 	\begin{figure}
+		\makebox[\linewidth][c]{
 		\includegraphics[width=0.7\textwidth]{cliques.png}
+		\begin{minipage}[b]{0.07\textwidth}
+		\centering
+		\small $\approx_\eps$ \normalsize \\[5pt] \quad
+		\end{minipage}
+		\includegraphics[width=0.3\textwidth]{sparsifier.png}
+		}
 	\end{figure}
 	%\vspace{-8pt}
 	\small
@@ -939,7 +947,9 @@
 	\end{itemize}
 }
 
-\frame{
+%\footnote[frame]{\label{KS16}R. Kyng and S. Sachdeva. \textbf{FOCS`16}.}
+
+\frame<0 | handout : 0>{
 	\frametitle{Clique Sampling\footnote[frame]{\label{KS16}R. Kyng and S. Sachdeva. \textbf{FOCS`16}.}}
 	\vspace{5pt}
 	\begin{itemize}
@@ -972,7 +982,7 @@
 	\end{itemize}
 }
 
-\frame{
+\frame<0 | handout : 0>{
 	\frametitle{Approximate Gaussian Elimination for Laplacians\footnotemark[1]}
 	\small
 	\begin{itemize}
@@ -1010,31 +1020,41 @@
 
 \frame{
 	\frametitle{Estimating Trace of an Implicit Matrix}
-	\begin{block}{Lemma (Hutchinson's Monte-Carlo Trace Estimation)}
-		\scriptsize
-		Let $\AA$ be a $n\times n$ positive semidefinite matrix.
-	Let $\zz_1,\ldots,\zz_M$ be $M$ independent random $\pm 1$ vectors.
-	Let $\eps$ be a scalar such that $0 < \eps \leq 1/2$.
-	For any $M \geq 48\eps^{-2} \ln(2n)$,
-	the following statement holds with probability at least $1 - 1/n$: \vspace{-12pt}
-	\[
-		\frac{1}{M}\sum\limits_{i=1}^M \zz_i^T \AA \zz_i \approx_\eps \trace{\AA}.
-	\]
+%	\begin{block}{Lemma (Hutchinson's Monte-Carlo Trace Estimation)}
+%		\scriptsize
+%		Let $\AA$ be a $n\times n$ positive semidefinite matrix.
+%	Let $\zz_1,\ldots,\zz_M$ be $M$ independent random $\pm 1$ vectors.
+%	Let $\eps$ be a scalar such that $0 < \eps \leq 1/2$.
+%	For any $M \geq 48\eps^{-2} \ln(2n)$,
+%	the following statement holds with probability at least $1 - 1/n$: \vspace{-12pt}
+%	\[
+%		\frac{1}{M}\sum\limits_{i=1}^M \zz_i^T \AA \zz_i \approx_\eps \trace{\AA}.
+%	\]
+%	\end{block}
+	\vspace{10pt}
+	\begin{block}{Hutchinson's Monte-Carlo Trace Estimation
+	\footnote[frame]{Hutchinson `89.}
+}
+		\vspace{5pt}
+		\begin{enumerate}
+			\item Let \small $\zz$\,\normalsize\ be a random \small$\pm 1$\,\normalsize\ vector
+			\item \small$\expec{}{\zz^T \AA \zz} = \expec{}{\sum_{u,v}\AA_{[u,v]} \zz_{[u]} \zz_{[v]}} = \trace{\AA}$\,\normalsize\ since\vspace{4pt}
+			\begin{itemize}
+				\item \scriptsize$\expec{}{\AA_{[u,v]} \zz_{[u]} \zz_{[v]}} = 0$\,\footnotesize\ for \scriptsize$u\neq v$
+				\vspace{6pt}
+				\item \scriptsize$\expec{}{\AA_{[u,u]} \zz_{[u]}^2} = \AA_{[u,u]}$\,\footnotesize\ for \scriptsize$u = v$
+			\end{itemize}
+			\item \small$\frac{1}{M}\sum\nolimits_{i=1}^M \zz_i^T \AA \zz_i$\,\normalsize\ 
+				should be close to \small$\trace{\AA}$\,\normalsize\ when \small$M$\,\normalsize\ is large
+			%\begin{itemize}
+				\item \small$O(\log n/\eps^2)$\,\normalsize\ samples are enough to get an	\small$\eps$\normalsize-approximation
+				\footnote[frame]{Avron and Toledo `11.}
+				\begin{itemize}
+					\item Derived from Johnson-Lindenstrauss lemma
+				\end{itemize}
+			%\end{itemize}
+		\end{enumerate}
 	\end{block}
-	\begin{itemize}
-		\item \small$\expec{}{\zz^T \AA \zz} = \trace{\AA}$\,\normalsize\ 
-			for a random \small$\pm 1$\,\normalsize\ vector \small $\zz$\,\normalsize\ since\vspace{4pt}
-		\begin{itemize}
-			\item \scriptsize$\expec{}{\AA_{[u,v]} \zz_{[u]} \zz_{[v]}} = 0$\,\footnotesize\ for \scriptsize$u\neq v$
-			\vspace{6pt}
-			\item \scriptsize$\expec{}{\AA_{[u,u]} \zz_{[u]}^2} = \AA_{[u,u]}$\,\footnotesize\ for \scriptsize$u = v$
-		\end{itemize}
-		\item \small$\frac{1}{M}\sum\nolimits_{i=1}^M \zz_i^T \AA \zz_i$\,\normalsize\ 
-			should be close to \small$\trace{\AA}$\,\normalsize\ when \small$M$\,\normalsize\ is large
-		%\begin{itemize}
-			\item \small$O(\log n/\eps^2)$\,\normalsize\ samples are enough to get an	\small$\eps$\normalsize-approximation
-		%\end{itemize}
-	\end{itemize}
 }
 
 \frame<0 | handout : 0>{
@@ -1200,16 +1220,17 @@
 	\frametitle{Partial Cholesky Factorization}
 	\vspace{20pt}
 	\begin{itemize}
-		\item \footnotesize Eliminate a set of vertices \,\scriptsize$F = \setof{v_1,\ldots,v_k}$\footnotesize\ \,%in random order by
-			\scriptsize \vspace{-7pt}
+		\item \small Eliminate a set of vertices \,\footnotesize$F = \setof{v_1,\ldots,v_k}$\small\ \,%in random order by
+			\footnotesize \vspace{-7pt}
 			\[
 				\vspace{-7pt}
 				\alpha_i = 1 / \SS^{(i-1)}_{[i,i]},\quad\cc_i = \SS^{(i-1)}_{[:,i]},\quad
 				\SS^{(i)} = \SS^{(i-1)} - \alpha_i\cc_i\cc_i^T
+				\vspace{2.5pt}
 			\]
-			\footnotesize
-		\item \textbf{{\color{blue} Partial} Cholesky factorization} (letting \,\scriptsize$C = V - F$\footnotesize) %of \,\scriptsize$\LL$\footnotesize\ \,
-		\scriptsize\vspace{-5pt}
+			\small
+		\item \textbf{{\color{blue} Partial} Cholesky factorization} (letting \,\footnotesize$C = V - F$\small) %of \,\footnotesize$\LL$\small\ \,
+		\footnotesize\vspace{-5pt}
 		\[
 			\vspace{-5pt}
 			\LL = \SS^{(k)} + \sum\limits_{i=1}^k \alpha_i \cc_i \cc_i^T =
@@ -1225,16 +1246,19 @@
 				\matlow_{FF} & \zero\\
 				\matlow_{CF} & \II_{CC}
 			\end{pmatrix}^T
-		\]\footnotesize
-		\item Recall the Schur complement w.r.t. \,\scriptsize$v_1$\footnotesize
+			\vspace{5pt}
+		\]\small
+		%\vspace{5pt}
+		\item \small Recall that elimination of \,\footnotesize$v_1$\,\small\ adds a clique to the remaining graph
+%		\small\vspace{-7pt}
+%		\[
+%			\vspace{-7pt}
+%			\SS^{(1)}
+%				= \LL_{G[V\setminus v_1]} + \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T
+%		\]
+		\vspace{2.5pt}
+		\item Commutativity with edge deletions in \,\footnotesize$C$\small\ \,
 		\footnotesize\vspace{-7pt}
-		\[
-			\vspace{-7pt}
-			\SS^{(1)}
-				= \LL_{G[V\setminus v_1]} + \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T
-		\]
-		\item Commutativity with edge addition/deletion in \,\scriptsize$C$\footnotesize\ \,
-		\scriptsize\vspace{-7pt}
 		\[
 			\vspace{-7pt}
 			\LL\bsk e =
@@ -1250,7 +1274,7 @@
 				\matlow_{FF} & \zero\\
 				\matlow_{CF} & \II_{CC}
 			\end{pmatrix}^T
-		\]\footnotesize
+		\]\small
 	\end{itemize}
 }
 
@@ -1260,7 +1284,7 @@
 		\begin{enumerate}
 			\footnotesize
 			\item Divide edges in \scriptsize$E_Q$\footnotesize\ into \scriptsize$E^{(1)}, E^{(2)}$\footnotesize\ with equal sizes \vspace{-5pt}
-			\item \label{item:start} \footnotesize Let \scriptsize$C$\footnotesize\ denote endpoints of edges in \scriptsize$E^{(1)}$\footnotesize\ and \scriptsize$F = V\setminus C$\footnotesize
+			\item \label{item:start} \footnotesize Let \scriptsize$C$\footnotesize\ denote endpoints of edges in \scriptsize$E^{(1)}$\footnotesize\ and \scriptsize$F = V - C$\footnotesize
 			\item Eliminate vertices in \scriptsize$F$\footnotesize\ by clique sampling in random order in nearly linear time:
 			\scriptsize\vspace{-8pt}
 			\[\vspace{-8pt}
