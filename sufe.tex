@@ -275,7 +275,7 @@
 
 \title[Kirchhoff Centrality: Nearly Linear Time Algorithms]{Kirchhoff Index As a Measure of Edge Centrality in Weighted Networks: Nearly Linear Time Algorithms}
 
-\author[Huan Li and Zhongzhi Zhang]{\quad\\Huan Li\inst{1,2} \and Zhongzhi Zhang\inst{1,2}}
+\author{\quad\\Huan Li\inst{1,2} \and Zhongzhi Zhang\inst{1,2}}
 
 \institute{
 	\inst{1}
@@ -296,7 +296,7 @@
 }
 
 %\date{ \\[10pt] Speaker:\quad 李\,寰 \vspace{-10pt}}
-\date{ \\[10pt] Speaker:\quad 章忠志 \vspace{-10pt}}
+\date{ \\[10pt] Speaker:\quad Huan\,Li \vspace{-10pt}}
 
 \newcommand{\insfig}[2][1]{
 	\begin{figure}
@@ -713,54 +713,37 @@
 
 \frame{
 	\frametitle{Graph Laplacians}	
-	\insfig[0.5]{lapl}
-	\scriptsize
-	%\begin{table}
-	%	\centering
-	%	\begin{tabular}{c|c}
-	%		\hline
-	\vspace{-12pt}
-			\begin{align*}
-			\LL &= \DD - \AA = 
-			\begin{pmatrix}
-				3 & 0 & 0 \\
-				0 & 4 & 0 \\
-				0 & 0 & 5
-			\end{pmatrix}
-			-
-			\begin{pmatrix}
-				0 & 1 & 2 \\
-				1 & 0 & 3 \\
-				2 & 3 & 0
-			\end{pmatrix}\\[5pt]
-			&= \sum\limits_{e\in E}w(e) \bb_{e}\bb_{e}^T =
-			\begin{pmatrix}
-				1 & -1 & 0 \\
-				-1 & 1 & 0 \\
-				0 & 0 & 0
-			\end{pmatrix}
-			+
-			\begin{pmatrix}
-				2 & 0 & -2 \\
-				0 & 0 & 0 \\
-				-2 & 0 & 2
-			\end{pmatrix}
-			+
-			\begin{pmatrix}
-				0 & 0 & 0 \\
-				0 & 3 & -3 \\
-				0 & -3 & 3
-			\end{pmatrix}
-			\end{align*}% \\
-			%\hline
-		%\end{tabular}
-	%\end{table}
-	\footnotesize
-	where\, \scriptsize$\bb_{e} = \bb_{u,v} = \ee_u - \ee_v$\,\footnotesize\ 
-	for an edge \scriptsize$e = (u,v) \in E$
+	{
+	\begin{wrapfigure}{L}{0.58\textwidth}
+		\includegraphics[width=0.5\textwidth]{lapl}
+	\end{wrapfigure}
+	\quad\\[10pt]
+	Coordinates \footnotesize$\Leftrightarrow$\,\ \normalsize Vertices \\
+	Nonzeros \footnotesize$\Leftrightarrow$\,\ \normalsize Edges
+	%\insfig[0.5]{lapl}
+	\quad \\[30pt]
+	}
+	\begin{itemize}
+		\item \small Laplacian \footnotesize $\LL \ \defeq \ \begin{cases}\sum_{u\neq v} w(u,v) \quad & u = v \\
+			- w(u,v) \quad & u \neq v \end{cases}$ \small
+		\vspace{5pt}
+		\item
+		%\footnotesize $\LL = \sum\nolimits_{i=1}^{n} \lambda_i \vv_i \vv_i^T$,\ \,
+		Defining pseudoinverse \footnotesize $\LL^\dag$% = \sum\nolimits_{i=2}^{n} \frac{1}{\lambda_i} \vv_i \vv_i^T$
+		\small\ \, by inverting all nonzero eigenvalues
+%		 where\\[3pt]
+%			\begin{itemize}
+%				\item \scriptsize$0 = \lambda_1 \leq \lambda_2 \leq\ldots\leq \lambda_n$\,\footnotesize\ 
+%					are eigenvalues of \scriptsize$\LL$
+%				\item \scriptsize$\one = \vv_1, \vv_2, \ldots, \vv_n$\,\footnotesize\ are the orthonormal eigenvectors
+%			\end{itemize}%\vspace{2pt}
+		\vspace{7pt}
+		\item \footnotesize $\er(u,v) = (\ee_u - \ee_v)^T \LL^\dag (\ee_u - \ee_v)$\,\ ,\quad%\vspace{7pt}
+		\footnotesize $\mathcal{K}(G) = n\,\trace{\LL^\dag}$%\vspace{5pt}
+	\end{itemize}
 }
 
-\frame{
+\frame<0 | handout : 0>{
 	\frametitle{Turning Kirchhoff Index into Trace of Pseudoinverse}
 	\quad\\[8pt]
 	\begin{itemize}
@@ -855,7 +838,7 @@
 			\SS^{(1)} \defeq \LL - \frac{1}{\LL_{[1,1]}} \LL_{[:,1]} \LL_{[:,1]}^T\small
 			%\quad \text{\small called the Schur complement w.r.t. \,\footnotesize$v_1$}
 		\]
-		where we have \,\footnotesize$\kh{\frac{1}{\LL_{[1,1]}} \LL_{[:,1]} \LL_{[:,1]}^T}_{[1,j]} = \LL_{[1,j]}$\,\small
+		%where we have \,\footnotesize$\kh{\frac{1}{\LL_{[1,1]}} \LL_{[:,1]} \LL_{[:,1]}^T}_{[1,j]} = \LL_{[1,j]}$\,\small
 		\item \footnotesize$\SS^{(1)}$\,\small\ is called the \,\textbf{Schur complement}\,\ w.r.t. \,\footnotesize$v_1$\small
 		\vspace{-5pt}
 		\item Eliminate vertices \,\footnotesize$v_1,\ldots,v_{n-1}$\,\small\ by
@@ -1054,7 +1037,7 @@
 	\end{itemize}
 }
 
-\frame{
+\frame<0 | handout : 0>{
 	\frametitle{Estimating Trace by JL}
 	\vspace{10pt}
 	\begin{block}{Lemma (Johnson-Lindenstrauss)}
@@ -1115,12 +1098,12 @@
 				\item Maintaining \footnotesize$\mathcal{K}(G)$\,\small\ 
 					under \footnotesize$O(m)$\,\small\ edge updates
 				\item All updates are given beforehand
-				\item Processing queries offline
+				\item Processing queries offline: {\color{blue} offline div-conquer}
 			\end{itemize}
 	\end{itemize}
 }
 
-\frame{
+\frame<0 | handout : 0>{
 	\frametitle{Offline Div-conquer (离线分治): OI version}
 	%\vspace{-5pt}
 	\begin{figure}
@@ -1157,7 +1140,7 @@
 	\end{figure}
 }
 
-\frame{
+\frame<0 | handout : 0>{
 	\frametitle{Algorithms That Use Div-conquer}
 	\footnotesize
 	%\vspace{20pt}
@@ -1357,18 +1340,9 @@
 	\footnotesize$\widetilde{O}(m)$\,\small\ time}
 	
 \frame{\frametitle{Outline} \tableofcontents[currentsection,currentsubsection]}
-
-\begin{frame}
-	\vspace{30pt}
-	\Large{To be published on SODA 2018}
-	\vspace{5pt}
-	\begin{figure}
-		\includegraphics[width=0.7\textwidth]{da18.jpg}
-	\end{figure}
-\end{frame}
 	
 \begin{frame}
-	\Huge{\centerline{The End}}	
+	\Huge{\centerline{The End}}
 \end{frame}
 \end{spacing}
 \end{document}
