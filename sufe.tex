@@ -1413,6 +1413,66 @@
 
 \frame{
 	\frametitle{Equivalent Definitions for Laplacians}
+		\begin{figure}
+			\includegraphics[width=0.5\textwidth]{lapl.pdf}
+			\begin{minipage}[b]{0.15\textwidth}
+				\centering
+				\scriptsize $\quad = \quad \DD - \AA$ \normalsize \\[5pt] \quad
+			\end{minipage}
+		\end{figure}
+		%\insfig[0.5]{lapl}
+	\scriptsize
+	%\begin{table}
+	%	\centering
+	%	\begin{tabular}{c|c}
+	%		\hline
+	\vspace{-12pt}
+			\begin{align*}
+			\LL 
+			&= \sum\limits_{e\in E}w(e) \bb_{e}\bb_{e}^T =
+			\begin{pmatrix}
+				1 & -1 & 0 \\
+				-1 & 1 & 0 \\
+				0 & 0 & 0
+			\end{pmatrix}
+			+
+			\begin{pmatrix}
+				2 & 0 & -2 \\
+				0 & 0 & 0 \\
+				-2 & 0 & 2
+			\end{pmatrix}
+			+
+			\begin{pmatrix}
+				0 & 0 & 0 \\
+				0 & 3 & -3 \\
+				0 & -3 & 3
+			\end{pmatrix}\\[5pt]
+			&= \BB^T \WW \BB =
+			\begin{pmatrix}
+				1 & 1 & 0 \\
+				-1 & 0 & 1 \\
+				0 & -1 & -1
+			\end{pmatrix}
+			\begin{pmatrix}
+				1 & 0 & 0 \\
+				0 & 2 & 0 \\
+				0 & 0 & 3
+			\end{pmatrix}
+			\begin{pmatrix}
+				1 & -1 & 0 \\
+				1 & 0 & -1 \\
+				0 & 1 & -1
+			\end{pmatrix}% \\
+			\end{align*}
+			%\hline
+		%\end{tabular}
+	%\end{table}
+	\footnotesize
+	where\, \scriptsize$\bb_{e} = \bb_{u,v} = \ee_u - \ee_v$\,\footnotesize\ 
+	for an edge \scriptsize$e = (u,v) \in E$,\footnotesize\ 
+	\scriptsize$\BB^T = \begin{pmatrix} \bb_{1} & \cdots & \bb_{m} \end{pmatrix}$,\footnotesize\ 
+	and
+	\scriptsize$\WW = \mathrm{Diag}(w(1), \ldots, w(m))$
 }
 
 \frame{
