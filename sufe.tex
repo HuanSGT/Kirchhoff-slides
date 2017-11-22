@@ -1405,7 +1405,8 @@
 				\vspace{-5pt}
 				\norm{\hat{\xx} - \xx}_{\LL} \leq \eps \norm{\xx}_{\LL}
 			\]
-			where \footnotesize$\norm{\xx}_{\LL} = \sqrt{\xx^T \LL \xx}$
+			where \footnotesize$\norm{\xx}_{\LL} = \sqrt{\xx^T \LL \xx}$\small
+			\item Total running time \footnotesize$\widetilde{O}(m\log(1/\eps))$
 		\end{enumerate}
 	\end{block}
 }
@@ -1417,6 +1418,8 @@
 \frame{
 	\only<1-1>{\frametitle{Sherman-Morrison}}
 	\only<2-2>{\frametitle{Sherman-Morrison (Cont.)}}
+	\only<1-1>{\vspace{-2.2pt}}
+	\only<2-2>{\vspace{10pt}}
 	\begin{itemize}
 		\item \footnotesize By Sherman-Morrison formula
 		\vspace{-5pt}\scriptsize
@@ -1438,14 +1441,14 @@
 		\footnotesize
 		where \scriptsize$\LL^\dag \zz_i$\,\footnotesize\ can be computed by solving \scriptsize$\LL\xx = \zz_i$\,\footnotesize\ 
 		\vspace{5pt}
-		\item {\color{blue} Lemma:} \scriptsize$\norm{\hat{\yy}_i - \LL^\dag \zz_i}_{\LL} \leq \frac{1}{36}\eps / n^{-7}$\,\footnotesize\ gives
+		\item {\color{blue} Lemma:} \scriptsize$\norm{\hat{\yy}_i - \LL^\dag \zz_i}_{\LL} \leq \frac{1}{36}\eps / n^{7}$\,\footnotesize\ gives
 		\scriptsize
 		\vspace{-5pt}
 		\[
 			\vspace{-5pt}
-			\frac{1}{M} \sum\limits_{i=1}^{M} \hat{\yy}_i^T \bb_e \bb_e^T \hat{\yy}_i
+			\sum\limits_{i=1}^{M} \hat{\yy}_i^T \bb_e \bb_e^T \hat{\yy}_i
 			\approx_{\eps}
-			\frac{1}{M} \sum\limits_{i=1}^{M} \zz_i^T \LL^\dag \bb_e \bb_e^T \LL^\dag \zz_i
+			\trace{\LL^\dag \bb_e \bb_e^T \LL^\dag}
 		\]
 		\footnotesize
 		(Derived from polynomial bounds on eigenvalues of \scriptsize$\LL$\footnotesize)
@@ -1475,20 +1478,6 @@
 		}
 	\end{itemize}
 }
-
-\frame{
-	\frametitle{Sherman-Morrison (Cont.)}
-	\begin{itemize}
-		\item \footnotesize By Sherman-Morrison formula
-		\vspace{-5pt}\scriptsize
-		\[
-			\vspace{-5pt}
-			\kh{\LL - (1 - \theta)\bb_e\bb_e^T}^\dag =
-			\LL^\dag + (1 - \theta) \frac{\LL^\dag \bb_e \bb_e^T \LL^\dag}{1 - (1 - \theta)\bb_e^T \LL^\dag \bb_e}
-		\]
-		\footnotesize
-	\end{itemize}
-}
 	
 \subsection{Approximating\, \footnotesize$%\mathcal{C}_{\theta}^\Delta(v) \defeq
 \mathcal{K}(G\bsk N(v)) - \mathcal{K}(G)$\,\small\   for
@@ -1496,10 +1485,127 @@
 	\footnotesize$\widetilde{O}(m)$\,\small\ time}
 	
 \frame{\frametitle{Outline} \tableofcontents[currentsection,currentsubsection]}
-	
+
+\frame{
+	\frametitle{Woodbury}
+	\begin{itemize}
+		\item \footnotesize By Woodbury formula
+		\scriptsize
+		\vspace{-5pt}
+		\begin{multline*}
+			\kh{\LL - (1 - \theta)\BB_{N(v)}^T \BB_{N(v)}}^\dag =\\
+			\LL^\dag + (1 - \theta)\LL^\dag \BB_{N(v)}^T \kh{\II - (1 - \theta)\BB_{N(v)}\LL^\dag \BB_{N(v)}^T}^{-1} \BB_{N(v)}\LL^\dag
+		\end{multline*}
+		\footnotesize
+		\vspace{-20pt}
+		\item By Hutchinson's trace estimation the goal becomes estimating
+		\scriptsize
+		\vspace{-5pt}
+		\[
+			\vspace{-5pt}
+			\zz_i^T \LL^\dag \BB_{N(v)}^T \kh{\II - (1 - \theta)\BB_{N(v)}\LL^\dag \BB_{N(v)}^T}^{-1} \BB_{N(v)}\LL^\dag \zz_i
+		\]
+		\footnotesize
+		where \scriptsize$\LL^\dag \zz_i$\,\footnotesize\ can be computed by solving \scriptsize$\LL\xx = \zz_i$\,\footnotesize\ 
+		\vspace{2.5pt}
+		\item {\color{blue} Lemma:} \scriptsize$\frac{1}{36}\theta \eps / n^{7}$\footnotesize -approximate
+			solutions give \scriptsize$\eps$\footnotesize -approximate trace
+		\vspace{2.5pt}
+		\item Need to approximate quadratic forms of
+			\scriptsize
+			\vspace{-5pt}
+			\[
+				\vspace{-5pt}
+				\kh{\II - (1 - \theta)\BB_{N(v)}\LL^\dag \BB_{N(v)}^T}^{-1}
+			\]
+			\footnotesize
+	\end{itemize}
+}
+
 \begin{frame}
-	\Huge{\centerline{The End}}
+	\frametitle{Approximating Quadratic Forms}
+	\vspace{5pt}
+	\begin{itemize}
+		\item \footnotesize \scriptsize$\II - (1 - \theta)\BB_{N(v)}\LL^\dag \BB_{N(v)}^T \defeq \II - \AA$\,\footnotesize\ 
+			\vspace{2.5pt}
+			\begin{itemize}
+				\item \scriptsize$\lambda_{\mathrm{max}}(\AA) \leq 1 - \theta \quad \Rightarrow \quad \lambda_{\mathrm{min}}(\II - \AA) \geq \theta$\footnotesize
+			\end{itemize}
+		\item \footnotesize First-order richardson: solving \scriptsize$(\II - \AA)\xx = \zz_i$\,\footnotesize\ in
+			\scriptsize$O(1/\theta \log(1/\eps))$\,\footnotesize\ iterations
+		\begin{itemize}
+			\item \footnotesize Taylor expansion: \scriptsize$(\II - \AA)^{-1} = \II + \AA + \AA^2 + \cdots$\footnotesize
+			\item Let \scriptsize$\hat{\xx} = (\II + \AA + \cdots + \AA^k)\zz_i,\ k = O(1 / \theta \log 1/\eps)$\footnotesize, then
+			\scriptsize
+			\vspace{-7.5pt}
+			\[
+				\vspace{-5pt}
+				\norm{\hat{\xx} - (\II - \AA)^{-1}\zz_i} \leq \eps \norm{(\II - \AA)^{-1} \zz_i}
+			\]
+			\footnotesize
+			and
+			\scriptsize
+			\vspace{-5pt}
+			\[
+				\vspace{-5pt}
+				\langle \hat{\xx}, \zz_i \rangle \approx_{\eps} \norm{\zz_i^T (\II - \AA)^{-1} \zz_i}
+			\]
+			\footnotesize
+			\item \scriptsize$\hat{\xx}$\,\footnotesize\ can be computed by \scriptsize$\xx^{(i+1)} = \AA \xx^{(i)} + \bb$\,\footnotesize\ by Laplacian solvers
+		\end{itemize}
+		\item \footnotesize Chebyshev polynomial only requires \scriptsize$O(\sqrt{1/\theta}\log(1/\eps))$\,\footnotesize\ iterations
+		\item However, applying \scriptsize$\BB_{N(v)}\LL^\dag \BB_{N(v)}^T$\,\footnotesize\ for all
+			\scriptsize$v \in V$\,\footnotesize\ requires \scriptsize$\widetilde{O}(nm)$\,\footnotesize\ time
+	\end{itemize}
 \end{frame}
+
+\begin{frame}
+	\frametitle{Div-conquer}
+	\vspace{20pt}
+	\begin{itemize}
+		\item \footnotesize Observation:
+			\scriptsize$\BB_{N(v)}$\,\footnotesize\ only have
+			\scriptsize$2\deg(v)$\,\footnotesize\ nonzeros with column indices in
+			\scriptsize$N[v]$\,\footnotesize\ 
+			\scriptsize
+			\vspace{-5pt}
+			\[
+				\vspace{-5pt}
+				\BB_{N(v)} \LL^\dag \BB_{N(v)}^T = \kh{\BB_{N(v)}}_{[:, N[v]]}
+				\kh{\LL^\dag}_{[N[v], N[v]]} \kh{\BB_{N(v)}^T}_{[N[v], :]}
+			\]
+			\footnotesize
+		\item Define \,%the Schur complement of
+			%\scriptsize$\LL$\,\footnotesize\ 
+			%onto \scriptsize$C \subset V$\,\footnotesize\ as
+			\scriptsize$\mathrm{SC}(\LL,C) \defeq \SS^{(k)}$\,\footnotesize\ where
+			\scriptsize$F = V - C = \setof{v_1, \ldots, v_k}$\,\footnotesize\ 
+			\begin{itemize}
+				\item {\color{blue} Fact:} 
+				\scriptsize$\kh{\mathrm{SC}(\LL,C)}^\dag = \kh{\LL^\dag}_{[C,C]}$\,\footnotesize\ 
+			\end{itemize}
+		\item Approximating \scriptsize$\mathrm{SC}(\LL,N[v])$\,\footnotesize\ for all 
+			\scriptsize$v \in V$\,\footnotesize\ by div-conquer
+			\begin{itemize}
+				\item If\, \scriptsize$\exists v$\,\footnotesize\ with at least \scriptsize$\frac{1}{4}$\,\footnotesize\  total degree,
+					divide \scriptsize$V$\,\footnotesize\ into \scriptsize$\setof{v}$\,\footnotesize\ and
+					\scriptsize$V - \setof{v}$\,\footnotesize\ 
+				\item Otherwise divide \scriptsize$V$\,\footnotesize\  into
+				\scriptsize$V_1,\ V_2$\,\footnotesize\ with at most \scriptsize$\frac{3}{4}$\,\footnotesize\  total degree
+				\item Running time \scriptsize$T(m) = T(\frac{1}{4} m) + T(\frac{3}{4} m) + \widetilde{O}(m)$\footnotesize
+			\end{itemize}
+			\item \footnotesize Overall running time \scriptsize$\widetilde{O}\kh{m/\kh{\theta^{2.5} \eps^4}}$\,\footnotesize\ 
+	\end{itemize}
+	\vspace{-10pt}
+	\pause
+	\begin{center}
+		\normalsize \textbf{Thank \,you!}
+	\end{center}
+\end{frame}
+	
+%\begin{frame}
+%	\Huge{\centerline{The End}}
+%\end{frame}
 \end{spacing}
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
