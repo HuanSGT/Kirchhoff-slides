@@ -275,7 +275,7 @@
 
 \title[Kirchhoff Centrality: Nearly Linear Time Algorithms]{Kirchhoff Index As a Measure of Edge Centrality in Weighted Networks: Nearly Linear Time Algorithms}
 
-\author{\quad\\Huan Li\inst{1,2} \and Zhongzhi Zhang\inst{1,2}}
+\author[Huan Li \,\&\, Zhongzhi Zhang]{\quad\\Huan Li\inst{1,2} \and Zhongzhi Zhang\inst{1,2}}
 
 \institute{
 	\inst{1}
@@ -719,12 +719,13 @@
 	\end{wrapfigure}
 	\quad\\[6pt]
 	Coordinates \footnotesize$\Leftrightarrow$\,\ \normalsize Vertices \\
+	%\hspace{8.5pt}
 	Nonzeros \footnotesize$\Leftrightarrow$\,\ \normalsize Edges
 	%\insfig[0.5]{lapl}
 	\quad \\[30pt]
 	}
 	\begin{itemize}
-		\item \small Laplacian \footnotesize $\LL \ \defeq \ \begin{cases}\sum_{u\neq v} w(u,v) \quad & u = v \\
+		\item \small Laplacian \footnotesize $\LL_{[u,v]} \ \defeq \ \begin{cases}\sum_{u\neq v} w(u,v) \quad & u = v \\
 			- w(u,v) \quad & u \neq v \end{cases}$ \small
 		\vspace{6pt}
 		\item \footnotesize $\LL$\,\small\ is PSD as \, \footnotesize $\xx^T \LL \xx = \sum\nolimits_{(u,v) \in E} w(u,v)(\xx_u - \xx_v)^2$ \small \vspace{2.5pt}
@@ -868,8 +869,74 @@
 %}
 
 \frame{
-	\frametitle{Clique Structure of Schur Complements}
-	\vspace{20pt}
+	\frametitle{Approximating Positive Semi-Definite Matrices}
+	\begin{itemize}
+		%\item \scriptsize$\AA \pleq \BB \quad\Leftrightarrow\quad \forall \xx\in\mathbb{R}^n,\ \xx^T\AA\xx \leq \xx^T\BB\xx$\footnotesize\
+		\item \footnotesize Worst-case running time \scriptsize$O(n^3)$:\,\footnotesize\ need to sparsify cliques in Schur complements
+		\begin{itemize}
+			\item \footnotesize Approximating the clique with a sparser graph
+		\end{itemize}
+		\item \scriptsize$(1+\eps)$\footnotesize-approximation and \scriptsize$\eps$\footnotesize-approximation
+			(\scriptsize$\exp(\eps) \approx 1 + \eps$\footnotesize\ \,for small \scriptsize$\eps$\footnotesize)
+		%\vspace{-15pt}
+		\begin{table}
+			\centering
+			%\hspace{-10pt}
+			\begin{tabular}{c|c|c}
+				\hline
+				\rowcolor{Gray}
+				Approximation & Nonnegative scalars & PSD Matrices \\
+				\hline
+				\scriptsize$(1+\eps)$\footnotesize-approx. &
+				\scriptsize$(1-\eps)a \leq b \leq (1 + \eps)a$\footnotesize
+					&
+				\scriptsize$\forall \xx\in\mathbb{R}^n,\ \xx^T \AA \xx \approx_{1 + \eps} \xx^T \BB \xx$\footnotesize\\
+				\hline
+				\scriptsize$\eps$\footnotesize-approx. &
+				\scriptsize$\exp(-\eps) a \leq b \leq \exp(\eps) a$\footnotesize
+					&
+				\scriptsize$\forall \xx\in\mathbb{R}^n,\ \xx^T \AA \xx \approx_{\eps} \xx^T \BB \xx$\footnotesize\\
+				\hline
+			\end{tabular}
+		\end{table}
+		\item \footnotesize For two graphs \scriptsize$G$\,\footnotesize\ and \scriptsize$H$,\,\footnotesize\ 
+			\scriptsize$\LL_G \approx_{\eps} \LL_H$\,\footnotesize\ implies
+			\begin{enumerate}
+				\item \footnotesize All eigenvalues between \scriptsize$\LL_G$\,\footnotesize\ and \scriptsize$\LL_H$\,\footnotesize\ 
+					are similar
+				\item All cut values between \scriptsize$G$\,\footnotesize\ and \scriptsize$H$\,\footnotesize\ 
+					are similar
+				\item Random walks in \scriptsize$G$\,\footnotesize\ and \scriptsize$H$\,\footnotesize\ 
+					has similar mixing time and cover time
+				%\item The solution of linear equations in \scriptsize$\LL_G$\,\footnotesize\ and \scriptsize$\LL_H$\,\footnotesize\ are similar
+				\item The inverses are similar, i.e. \scriptsize$\LL_G^\dag \approx_{\eps} \LL_H^\dag$\,\footnotesize\
+			\end{enumerate}
+%		\item Properties of \scriptsize$\eps$\footnotesize-approximation
+%			\begin{enumerate}
+%				\item \scriptsize$\AA\approx_\eps \BB, \CC\approx_\eps \DD \quad \Rightarrow \quad 
+%					\AA + \CC \approx_\eps \BB + \DD$\footnotesize
+%				\item \scriptsize$\AA\approx_\eps \BB \quad \Rightarrow \quad 
+%					\VV^T\AA\VV \approx_\eps \VV^T\BB\VV$\footnotesize
+%				\item \scriptsize$\AA\approx_{\eps_1} \BB, \BB\approx_{\eps_2} \CC \quad \Rightarrow \quad
+%				\AA \approx_{\eps_1 + \eps_2} \CC$\footnotesize
+%				\item \scriptsize$\AA\approx_\eps \BB \quad \Rightarrow \quad 
+%					\AA^{-1} \approx_\eps \BB^{-1}$\footnotesize
+%			\end{enumerate}
+%			\vspace{-5pt}
+%		\item {\color{red} \scriptsize$\AA\approx_\eps \BB, \CC\approx_\eps \DD \quad \centernot\Rightarrow \quad 
+%					\AA - \CC \approx_\eps \BB - \DD$\footnotesize }
+%			\vspace{-5pt}
+%			\begin{itemize}
+%				\item {\color{red} \scriptsize$91\approx_{1.1} 100, 90\approx_{1.1} 90$\footnotesize\ \,
+%					but
+%					\ \scriptsize$1 \centernot\approx_{1.1} 10$\footnotesize }
+%			\end{itemize}
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Sparsifying Cliques in Schur Complements}
+	\vspace{10pt}
 	\begin{figure}
 		\makebox[\linewidth][c]{
 		\includegraphics[width=0.7\textwidth]{cliques.png}
@@ -880,76 +947,39 @@
 		\includegraphics[width=0.3\textwidth]{sparsifier.png}
 		}
 	\end{figure}
-	%\vspace{-8pt}
+	\vspace{-8pt}
 	\small
 	\begin{itemize}
-		\item \,\scriptsize$\LL_{v_1} \defeq \,\sum\nolimits_{e\in N(v_1)} w(e)\bb_e\bb_e^T
-			\quad \spliteq\quad \begin{pmatrix} d & -\aa^T \\ -\aa & \diag(\aa) \end{pmatrix}$\,\footnotesize\ 
-		\item The Schur complement \scriptsize$\SS^{(1)}$\,\footnotesize\ is a Laplacian
-			\scriptsize\vspace{-8pt}
-			\begin{align*}
-				\hspace{-15pt}
-				\SS^{(1)} &\defeq \LL - \frac{1}{\LL_{[1,1]}} \LL_{[:,1]} \LL_{[:,1]}^T
-				= \kh{\LL - \LL_{v_1}} + \kh{\LL_{v_1} - \frac{1}{\LL_{[1,1]}} \LL_{[:,1]} \LL_{[:,1]}^T} \\[3pt]
-				&= \LL_{G[V\setminus v_1]} + \begin{pmatrix} 0 & \zero^T \\ \zero & \diag(\aa) - \frac{\aa\aa^T}{d} \end{pmatrix}
-				= \LL_{G[V\setminus v_1]} + \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T
-			\end{align*}
-	\end{itemize}
-}
-
-\frame{
-	\frametitle{Multiplicative Approximation}
-	\begin{itemize}
-		\footnotesize
-		\item \scriptsize$\AA \pleq \BB \quad\Leftrightarrow\quad \forall \xx\in\mathbb{R}^n,\ \xx^T\AA\xx \leq \xx^T\BB\xx$\footnotesize\
-		\item \scriptsize$(1+\eps)$\footnotesize-approximation and \scriptsize$\eps$\footnotesize-approximation
-			(\scriptsize$\exp(\eps) \approx 1 + \eps$\footnotesize\ \,for small \scriptsize$\eps$\footnotesize)
-		\vspace{-15pt}
-		\begin{table}
-			\centering
-			\begin{tabular}{c|c|c}
-				\hline
-				\rowcolor{Gray}
-				Approximation & Nonnegative scalars & PSD Matrices \\
-				\hline
-				\scriptsize$(1+\eps)$\footnotesize-approximation &
-				\scriptsize$(1-\eps)a \leq b \leq (1 + \eps)a$\footnotesize
-					&
-				\scriptsize$(1-\eps)\AA \pleq \BB \pleq (1 + \eps)\AA$\footnotesize\\
-				\hline
-				\scriptsize$\eps$\footnotesize-approximation &
-				\scriptsize$\exp(-\eps) a \leq b \leq \exp(\eps) a$\footnotesize
-					&
-				\scriptsize$\exp(-\eps) \AA \pleq \BB \pleq \exp(\eps) \AA$\footnotesize \\
-				\hline
-			\end{tabular}
-		\end{table}
-		\item Properties of \scriptsize$\eps$\footnotesize-approximation
-			\begin{enumerate}
-				\item \scriptsize$\AA\approx_\eps \BB, \CC\approx_\eps \DD \quad \Rightarrow \quad 
-					\AA + \CC \approx_\eps \BB + \DD$\footnotesize
-				\item \scriptsize$\AA\approx_\eps \BB \quad \Rightarrow \quad 
-					\VV^T\AA\VV \approx_\eps \VV^T\BB\VV$\footnotesize
-				\item \scriptsize$\AA\approx_{\eps_1} \BB, \BB\approx_{\eps_2} \CC \quad \Rightarrow \quad
-				\AA \approx_{\eps_1 + \eps_2} \CC$\footnotesize
-				\item \scriptsize$\AA\approx_\eps \BB \quad \Rightarrow \quad 
-					\AA^{-1} \approx_\eps \BB^{-1}$\footnotesize
-			\end{enumerate}
-			\vspace{-5pt}
-		\item {\color{red} \scriptsize$\AA\approx_\eps \BB, \CC\approx_\eps \DD \quad \centernot\Rightarrow \quad 
-					\AA - \CC \approx_\eps \BB - \DD$\footnotesize }
-			\vspace{-5pt}
+		\small
+		\item \footnotesize Graph sparsification [SS11]%\footnote[frame]{D. Spielman and S. Srivastava `11.}
 			\begin{itemize}
-				\item {\color{red} \scriptsize$91\approx_{1.1} 100, 90\approx_{1.1} 90$\footnotesize\ \,
-					but
-					\ \scriptsize$1 \centernot\approx_{1.1} 10$\footnotesize }
+				\vspace{-2.5pt}
+				\item \footnotesize Sampling edges by \scriptsize$w(e)\er(e)$\footnotesize\,\ leads to an
+					\scriptsize$\widetilde{O}(n)$\footnotesize-edge \scriptsize$\LL_H \approx_\eps \LL_G$\footnotesize\,\ % since
+%					\scriptsize\vspace{-8pt}
+%					\[
+%						\vspace{-8pt}
+%						\sum\nolimits_{e\in E} w(e)\er(e) = n - 1
+%					\]
+%					\footnotesize
+			\vspace{-5pt}
+			\end{itemize}
+		\item \footnotesize Approximate Gaussian elimination [KS16]%\footnote[frame]{R. Kyng and S. Sachdeva `16.}
+			\begin{itemize}
+				\vspace{-2.5pt}
+				\item \footnotesize Sampling edges of the clique by upper bounds of \scriptsize$w(e)\er(e)$\footnotesize\,\ gives a \scriptsize$\deg(v)$\footnotesize-edge sparsifer% \scriptsize$\LH \approx_\eps \LL$\footnotesize
+				\item By eliminating vertices in a random order, computes \scriptsize$\LL\approx_\eps \matlow\calD\matlow^T$  
+					\footnotesize\ with \scriptsize$\widetilde{O}(m/\eps^2)$\footnotesize\ nonzero entries in \scriptsize$\widetilde{O}(m/\eps^2)$\footnotesize\ time
+				\item Enables us to \scriptsize$\eps$\footnotesize -approximate \scriptsize$\zz^T \LL^\dag \zz$\ \footnotesize\ 
+					in \scriptsize$\widetilde{O}(m/\eps^2)$\,\footnotesize\ time
 			\end{itemize}
 	\end{itemize}
 }
 
 %\footnote[frame]{\label{KS16}R. Kyng and S. Sachdeva. \textbf{FOCS`16}.}
 
-\frame<0 | handout : 0>{
+\frame<0 | handout : 0>
+{
 	\frametitle{Clique Sampling\footnote[frame]{\label{KS16}R. Kyng and S. Sachdeva. \textbf{FOCS`16}.}}
 	\vspace{5pt}
 	\begin{itemize}
@@ -1033,11 +1063,11 @@
 %	\end{block}
 	\vspace{10pt}
 	\begin{block}{Hutchinson's Monte-Carlo Trace Estimation
-	\footnote[frame]{Hutchinson `89.}
+	[Hut89]%\footnote[frame]{Hutchinson `89.}
 }
 		\vspace{5pt}
 		\begin{enumerate}
-			\item Let \small $\zz$\,\normalsize\ be a random \small$\pm 1$\,\normalsize\ vector
+			\item Let \small $\AA$\,\normalsize\ be a PSD and \small $\zz$\,\normalsize\ be a random \small$\pm 1$\,\normalsize\ vector
 			\item \small$\expec{}{\zz^T \AA \zz} = \expec{}{\sum_{u,v}\AA_{[u,v]} \zz_{[u]} \zz_{[v]}} = \trace{\AA}$\,\normalsize\ since\vspace{4pt}
 			\begin{itemize}
 				\item \scriptsize$\expec{}{\AA_{[u,v]} \zz_{[u]} \zz_{[v]}} = 0$\,\footnotesize\ for \scriptsize$u\neq v$
@@ -1048,7 +1078,8 @@
 				should be close to \small$\trace{\AA}$\,\normalsize\ when \small$M$\,\normalsize\ is large
 			%\begin{itemize}
 				\item \small$O(\log n/\eps^2)$\,\normalsize\ samples are enough to get an	\small$\eps$\normalsize-approximation
-				\footnote[frame]{Avron and Toledo `11.}
+				[AT11]
+				%\footnote[frame]{Avron and Toledo `11.}
 				\begin{itemize}
 					\item Derived from Johnson-Lindenstrauss lemma
 				\end{itemize}
@@ -1356,7 +1387,108 @@
 	
 \frame{\frametitle{Outline} \tableofcontents[currentsection,currentsubsection]}
 
+\frame{
+	\frametitle{Solving \large$\LL\xx = \bb$\,\Large\ in \large$\widetilde{O}(m\log(1/\eps))$\,\Large\ Time}
+	\begin{block}{Solving \small$\LL\xx = \bb$\,\normalsize\ by Iterative Refinement}
+		\small
+		\begin{enumerate}
+			\item Computes \footnotesize$\LL \approx_{1/2} \matlow \calD \matlow^T$\,\small\ 
+				with \footnotesize$\widetilde{O}(m)$\,\small\ nonzeros in \footnotesize$\widetilde{O}(m)$\,\small\ time
+			\item Let \footnotesize$\xx^{(0)} = \zero$\,\small\ and compute\vspace{-5pt}
+			\[
+				\vspace{-5pt}
+				\xx^{(i+1)} \leftarrow \xx^{(i)} - \frac{1}{2}  \matlow^{-T} \calD \matlow^{-1} (\LL \xx^{(i)} - \bb)
+			\]
+			\item \footnotesize$O(\log(1/\eps))$\,\small\ iterations gives a solution \footnotesize$\hat{x}$\,\small\ satisfying
+			\vspace{-5pt}
+			\[
+				\vspace{-5pt}
+				\norm{\hat{\xx} - \xx}_{\LL} \leq \eps \norm{\xx}_{\LL}
+			\]
+			where \footnotesize$\norm{\xx}_{\LL} = \sqrt{\xx^T \LL \xx}$
+		\end{enumerate}
+	\end{block}
+}
 
+\frame{
+	\frametitle{Equivalent Definitions for Laplacians}
+}
+
+\frame{
+	\only<1-1>{\frametitle{Sherman-Morrison}}
+	\only<2-2>{\frametitle{Sherman-Morrison (Cont.)}}
+	\begin{itemize}
+		\item \footnotesize By Sherman-Morrison formula
+		\vspace{-5pt}\scriptsize
+		\[
+			\vspace{-5pt}
+			\kh{\LL - (1 - \theta)\bb_e\bb_e^T}^\dag =
+			\LL^\dag + (1 - \theta) \frac{\LL^\dag \bb_e \bb_e^T \LL^\dag}{1 - (1 - \theta)\bb_e^T \LL^\dag \bb_e}
+		\]
+		\footnotesize
+		\only<1-1>{
+		\item Approximating the numerator
+		\vspace{-5pt}
+		\scriptsize
+		\[
+			\vspace{-5pt}
+			\trace{\LL^\dag \bb_e \bb_e^T \LL^\dag} \approx_{\eps}
+			\frac{1}{M} \sum\limits_{i=1}^{M} \zz_i^T \LL^\dag \bb_e \bb_e^T \LL^\dag \zz_i
+		\]
+		\footnotesize
+		where \scriptsize$\LL^\dag \zz_i$\,\footnotesize\ can be computed by solving \scriptsize$\LL\xx = \zz_i$\,\footnotesize\ 
+		\vspace{5pt}
+		\item {\color{blue} Lemma:} \scriptsize$\norm{\hat{\yy}_i - \LL^\dag \zz_i}_{\LL} \leq \frac{1}{36}\eps / n^{-7}$\,\footnotesize\ gives
+		\scriptsize
+		\vspace{-5pt}
+		\[
+			\vspace{-5pt}
+			\frac{1}{M} \sum\limits_{i=1}^{M} \hat{\yy}_i^T \bb_e \bb_e^T \hat{\yy}_i
+			\approx_{\eps}
+			\frac{1}{M} \sum\limits_{i=1}^{M} \zz_i^T \LL^\dag \bb_e \bb_e^T \LL^\dag \zz_i
+		\]
+		\footnotesize
+		(Derived from polynomial bounds on eigenvalues of \scriptsize$\LL$\footnotesize)
+		}
+		\only<2-2>{
+			\item Approximating the denominator \scriptsize$1 - (1-\theta)\er(e)$\footnotesize
+			\begin{itemize}
+				\item \scriptsize$\hat{r}_e \approx_\eps \er(e) \quad\Rightarrow\quad
+					1 - (1-\theta)\hat{r}_e \approx_{3\eps/\theta} 1 - (1-\theta)\er(e)$\footnotesize
+				\item \scriptsize$\abs{\hat{r}_e - \er(e)} \leq 2\eps \er(e)$\footnotesize
+				\vspace{2.5pt}
+				\item \scriptsize$\er(e) \leq 1 \quad \Rightarrow 1 - (1 - \theta)\er(e) \geq \theta \er(e)$
+			\end{itemize}
+			\vspace{5pt}
+			\item Approximating \scriptsize$\er(e)$\,\footnotesize\ for all \scriptsize$e \in E$\,\footnotesize\ in
+				\scriptsize$\widetilde{O}(m/\eps^2)$\,\footnotesize\ time [SS11]
+				\vspace{-5pt}
+				\scriptsize
+				\begin{align*}
+					\er(e) &= \bb_e^T \LL^\dag \bb_e = \bb_e^T \LL^\dag \LL \LL^\dag \bb_e = \bb_e \LL^\dag \BB^T \BB \LL^\dag \bb_e
+					\\ &= \trace{\BB\LL^\dag \bb_e \bb_e^T \LL^\dag \BB^T}
+					\approx_{\eps} \sum\limits_{i=1}^{M} \zz_i^T \BB\LL^\dag \bb_e \bb_e^T \LL^\dag \BB^T \zz_i
+				\end{align*}
+				\footnotesize
+				\vspace{-20pt}
+			\item Overall running time \scriptsize$\widetilde{O}\kh{m/\kh{\eps^2\theta^2}}$\footnotesize
+		}
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Sherman-Morrison (Cont.)}
+	\begin{itemize}
+		\item \footnotesize By Sherman-Morrison formula
+		\vspace{-5pt}\scriptsize
+		\[
+			\vspace{-5pt}
+			\kh{\LL - (1 - \theta)\bb_e\bb_e^T}^\dag =
+			\LL^\dag + (1 - \theta) \frac{\LL^\dag \bb_e \bb_e^T \LL^\dag}{1 - (1 - \theta)\bb_e^T \LL^\dag \bb_e}
+		\]
+		\footnotesize
+	\end{itemize}
+}
 	
 \subsection{Approximating\, \footnotesize$%\mathcal{C}_{\theta}^\Delta(v) \defeq
 \mathcal{K}(G\bsk N(v)) - \mathcal{K}(G)$\,\small\   for
