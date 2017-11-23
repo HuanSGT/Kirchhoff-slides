@@ -120,7 +120,7 @@
 \newcommand\ggamma{\boldsymbol{\gamma}}
 \newcommand\ddelta{\boldsymbol{\delta}}
 
-\newcommand\er{R_{\mathrm{eff}}}
+\newcommand\er{r}%R_{\mathrm{eff}}}
 \newcommand\ccc{C_{\mathrm{CC}}}
 \newcommand\ci{C_{\mathrm{I}}}
 
@@ -872,7 +872,7 @@
 	\frametitle{Approximating Positive Semi-Definite Matrices}
 	\begin{itemize}
 		%\item \scriptsize$\AA \pleq \BB \quad\Leftrightarrow\quad \forall \xx\in\mathbb{R}^n,\ \xx^T\AA\xx \leq \xx^T\BB\xx$\footnotesize\
-		\item \footnotesize Worst-case running time \scriptsize$O(n^3)$:\,\footnotesize\ need to sparsify cliques in Schur complements
+		\item \footnotesize Worst-case running time \scriptsize$O(n^3)$%:\,\footnotesize\ need to sparsify cliques in Schur complements
 		\begin{itemize}
 			\item \footnotesize Approximating the clique with a sparser graph
 		\end{itemize}
@@ -902,9 +902,9 @@
 		\item \footnotesize For two graphs \scriptsize$G$\,\footnotesize\ and \scriptsize$H$,\,\footnotesize\ 
 			\scriptsize$\LL_G \approx_{\eps} \LL_H$\,\footnotesize\ implies
 			\begin{enumerate}
-				\item \footnotesize All eigenvalues between \scriptsize$\LL_G$\,\footnotesize\ and \scriptsize$\LL_H$\,\footnotesize\ 
+				\item \footnotesize All eigenvalues of \scriptsize$\LL_G$\,\footnotesize\ and \scriptsize$\LL_H$\,\footnotesize\ 
 					are similar
-				\item All cut values between \scriptsize$G$\,\footnotesize\ and \scriptsize$H$\,\footnotesize\ 
+				\item All cut values of \scriptsize$G$\,\footnotesize\ and \scriptsize$H$\,\footnotesize\ 
 					are similar
 				\item Random walks in \scriptsize$G$\,\footnotesize\ and \scriptsize$H$\,\footnotesize\ 
 					has similar mixing time and cover time
@@ -951,7 +951,7 @@
 	\small
 	\begin{itemize}
 		\small
-		\item \footnotesize Graph sparsification [SS11]%\footnote[frame]{D. Spielman and S. Srivastava `11.}
+		\item \footnotesize Spectral sparsification [SS11]%\footnote[frame]{D. Spielman and S. Srivastava `11.}
 			\begin{itemize}
 				\vspace{-2.5pt}
 				\item \footnotesize Sampling edges by \scriptsize$w(e)\er(e)$\footnotesize\,\ leads to an
@@ -1074,6 +1074,7 @@
 				\vspace{6pt}
 				\item \scriptsize$\expec{}{\AA_{[u,u]} \zz_{[u]}^2} = \AA_{[u,u]}$\,\footnotesize\ for \scriptsize$u = v$
 			\end{itemize}
+			\item Let \small$\zz_1, \ldots, \zz_M$\,\normalsize\ be \small$M$\,\normalsize\ independent \small$\pm 1$\,\normalsize\ vectors
 			\item \small$\frac{1}{M}\sum\nolimits_{i=1}^M \zz_i^T \AA \zz_i$\,\normalsize\ 
 				should be close to \small$\trace{\AA}$\,\normalsize\ when \small$M$\,\normalsize\ is large
 			%\begin{itemize}
@@ -1486,7 +1487,7 @@
 		\[
 			\vspace{-5pt}
 			\kh{\LL - (1 - \theta)\bb_e\bb_e^T}^\dag =
-			\LL^\dag + (1 - \theta) \frac{\LL^\dag \bb_e \bb_e^T \LL^\dag}{1 - (1 - \theta)\bb_e^T \LL^\dag \bb_e}
+			\LL^\dag + {\color{blue} (1 - \theta) \frac{\LL^\dag \bb_e \bb_e^T \LL^\dag}{1 - (1 - \theta)\bb_e^T \LL^\dag \bb_e}}
 		\]
 		\footnotesize
 		\only<1-1>{
@@ -1501,7 +1502,8 @@
 		\footnotesize
 		where \scriptsize$\LL^\dag \zz_i$\,\footnotesize\ can be computed by solving \scriptsize$\LL\xx = \zz_i$\,\footnotesize\ 
 		\vspace{5pt}
-		\item {\color{blue} Lemma:} \scriptsize$\norm{\hat{\yy}_i - \LL^\dag \zz_i}_{\LL} \leq \frac{1}{36}\eps / n^{7}$\,\footnotesize\ gives
+		\item {%\color{blue}
+			\textbf{Lemma:}}\quad \scriptsize$\norm{\hat{\yy}_i - \LL^\dag \zz_i}_{\LL} \leq \frac{1}{36}\eps / n^{7}$\,\footnotesize\ gives
 		\scriptsize
 		\vspace{-5pt}
 		\[
@@ -1516,9 +1518,9 @@
 		\only<2-2>{
 			\item Approximating the denominator \scriptsize$1 - (1-\theta)\er(e)$\footnotesize
 			\begin{itemize}
-				\item \scriptsize$\hat{r}_e \approx_\eps \er(e) \quad\Rightarrow\quad
-					1 - (1-\theta)\hat{r}_e \approx_{3\eps/\theta} 1 - (1-\theta)\er(e)$\footnotesize
-				\item \scriptsize$\abs{\hat{r}_e - \er(e)} \leq 2\eps \er(e)$\footnotesize
+				\item \scriptsize$\hat{r}(e) \approx_\eps \er(e) \quad\Rightarrow\quad
+					1 - (1-\theta)\hat{r}(e) \approx_{3\eps/\theta} 1 - (1-\theta)\er(e)$\footnotesize
+				\item \scriptsize$\abs{\hat{r}(e) - \er(e)} \leq 2\eps \er(e)$\footnotesize
 				\vspace{2.5pt}
 				\item \scriptsize$\er(e) \leq 1 \quad \Rightarrow 1 - (1 - \theta)\er(e) \geq \theta \er(e)$
 			\end{itemize}
@@ -1568,7 +1570,7 @@
 		\footnotesize
 		where \scriptsize$\LL^\dag \zz_i$\,\footnotesize\ can be computed by solving \scriptsize$\LL\xx = \zz_i$\,\footnotesize\ 
 		\vspace{2.5pt}
-		\item {\color{blue} Lemma:} \scriptsize$\frac{1}{36}\theta \eps / n^{7}$\footnotesize -approximate
+		\item {\textbf{Lemma}:}\quad \scriptsize$\frac{1}{36}\theta \eps / n^{7}$\footnotesize -approximate
 			solutions give \scriptsize$\eps$\footnotesize -approximate trace
 		\vspace{2.5pt}
 		\item Need to approximate quadratic forms of
@@ -1641,22 +1643,24 @@
 			\scriptsize$\mathrm{SC}(\LL,C) \defeq \SS^{(k)}$\,\footnotesize\ where
 			\scriptsize$F = V - C = \setof{v_1, \ldots, v_k}$\,\footnotesize\ 
 			\begin{itemize}
-				\item {\color{blue} Fact:} 
+				\item {\textbf{Fact:}}\quad 
 				\scriptsize$\kh{\mathrm{SC}(\LL,C)}^\dag = \kh{\LL^\dag}_{[C,C]}$\,\footnotesize\ 
+				\item {\textbf{Lemma:}}\quad \scriptsize$\hat{\SS} \approx_{\eps} \SS^{(k)}
+					\quad \Rightarrow \quad \II - (1 - \theta)\BB_{N(v)}(\hat{\SS})^\dag \BB_{N(v)}^T \approx_{3\eps/\theta} \II - \AA$\,\footnotesize\ 
 			\end{itemize}
 		\item Approximating \scriptsize$\mathrm{SC}(\LL,N[v])$\,\footnotesize\ for all 
 			\scriptsize$v \in V$\,\footnotesize\ by div-conquer
 			\begin{itemize}
-				\item If\, \scriptsize$\exists v$\,\footnotesize\ with at least \scriptsize$\frac{1}{4}$\,\footnotesize\  total degree,
-					divide \scriptsize$V$\,\footnotesize\ into \scriptsize$\setof{v}$\,\footnotesize\ and
-					\scriptsize$V - \setof{v}$\,\footnotesize\ 
+				\item If\, \scriptsize$\exists u$\,\footnotesize\ with at least \scriptsize$\frac{1}{4}$\,\footnotesize\  total degree,
+					divide \scriptsize$V$\,\footnotesize\ into \scriptsize$\setof{u}$\,\footnotesize\ and
+					\scriptsize$V - \setof{u}$\,\footnotesize\ 
 				\item Otherwise divide \scriptsize$V$\,\footnotesize\  into
 				\scriptsize$V_1,\ V_2$\,\footnotesize\ with at most \scriptsize$\frac{3}{4}$\,\footnotesize\  total degree
-				\item Running time \scriptsize$T(m) = T(\frac{1}{4} m) + T(\frac{3}{4} m) + \widetilde{O}(m)$\footnotesize
+				\item Running time \scriptsize$T(m) = T(\frac{1}{4} m) + T(\frac{3}{4} m) + \widetilde{O}\kh{m/\kh{\eps^2\theta^2}}$\footnotesize
 			\end{itemize}
-			\item \footnotesize Overall running time \scriptsize$\widetilde{O}\kh{m/\kh{\theta^{2.5} \eps^4}}$\,\footnotesize\ 
+			\item \footnotesize Overall running time \scriptsize$\widetilde{O}\kh{m/\kh{\eps^4\theta^{2.5}}}$\,\footnotesize\ 
 	\end{itemize}
-	\vspace{-10pt}
+	\vspace{-7.5pt}
 	\pause
 	\begin{center}
 		\normalsize \textbf{Thank \,you!}
