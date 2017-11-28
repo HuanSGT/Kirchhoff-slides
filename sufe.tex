@@ -558,7 +558,7 @@
 					\hline
 					\scriptsize$\theta$\footnotesize-Kirchhoff vertex centrality \scriptsize$\mathcal{C}_\theta^\Delta(v)$
 					&
-						\scriptsize$\mathcal{C}_\theta^\Delta(v) \defeq \mathcal{K}\kh{G\bsk N(v)} - \mathcal{K}\kh{G}$ \\
+						\scriptsize$\mathcal{C}_\theta^\Delta(v) \defeq \mathcal{K}\kh{G\bsk E(v)} - \mathcal{K}\kh{G}$ \\
 					\hline
 				\end{tabular}
 		  \end{table}
@@ -951,7 +951,7 @@
 	\small
 	\begin{itemize}
 		\small
-		\item \footnotesize Spectral sparsification [SS11]%\footnote[frame]{D. Spielman and S. Srivastava `11.}
+		\item \footnotesize Spectral sparsification by effective resistances [SS11]%\footnote[frame]{D. Spielman and S. Srivastava `11.}
 			\begin{itemize}
 				\vspace{-2.5pt}
 				\item \footnotesize Sampling edges by \scriptsize$w(e)\er(e)$\footnotesize\,\ leads to an
@@ -977,76 +977,6 @@
 }
 
 %\footnote[frame]{\label{KS16}R. Kyng and S. Sachdeva. \textbf{FOCS`16}.}
-
-\frame<0 | handout : 0>
-{
-	\frametitle{Clique Sampling\footnote[frame]{\label{KS16}R. Kyng and S. Sachdeva. \textbf{FOCS`16}.}}
-	\vspace{5pt}
-	\begin{itemize}
-		\small
-		\item Graph sparsification
-			\begin{itemize}
-				\item \footnotesize Sampling edges by \scriptsize$w(e)\er(e)$\footnotesize\,\ leads to an
-					\scriptsize$\widetilde{O}(n)$\footnotesize-edge \scriptsize$\LH \approx_\eps \LL$\footnotesize\,\ since
-					\scriptsize\vspace{-8pt}
-					\[
-						\vspace{-8pt}
-						\sum\nolimits_{e\in E} w(e)\er(e) = n - 1
-					\]
-					\footnotesize
-				\item Sampling by \scriptsize$\ttau_e \geq w(e)\er(e)$\footnotesize\,\ leads to an
-					\scriptsize$\widetilde{O}(\sum\nolimits_{e\in E}\ttau_e)$\footnotesize-edge \scriptsize$\LH \approx_\eps \LL$\footnotesize
-			\end{itemize}
-		\item Sparsifying \,\footnotesize$\SS^{(1)} = \LL_{G[V\setminus v_1]} + {\color{red} \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T}$\small
-		\begin{itemize}
-			\item \footnotesize  Schur complements preserves ER: \,\scriptsize$\er^{\LL}(i,j) = \er^{\SS^{(1)}}(i,j)$\footnotesize
-			\vspace{5pt}
-			\item \scriptsize$\er(i,j) \leq \er(1,i) + \er(1,j)\leq \frac{1}{w(1,i)} + \frac{1}{w(1,j)}$\footnotesize
-			\vspace{5pt}
-			\item Sampling by \scriptsize$\frac{w(1,i)w(1,j)}{d} \kh{\frac{1}{w(1,i)} + \frac{1}{w(1,j)}} =
-				\frac{w(1,i) + w(1,j)}{d}$\footnotesize
-			\vspace{5pt}
-			\item Total edge number \scriptsize$\sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i) + w(1,j)}{d}
-				= \sizeof{N(v_1)}$
-		\end{itemize}
-	\end{itemize}
-}
-
-\frame<0 | handout : 0>{
-	\frametitle{Approximate Gaussian Elimination for Laplacians\footnotemark[1]}
-	\small
-	\begin{itemize}
-		\item Eliminate vertices in random order
-			\begin{itemize}
-				\item \footnotesize Every step eliminate a vertex with average degree in expectation
-				\vspace{5pt}
-				\item Total elimination time and total nonzero entries in factorization:
-					\scriptsize\vspace{-7pt}
-					\[
-						\vspace{-7pt}
-						\frac{2m}{n} + \frac{2m}{n-1} + \ldots + \frac{2m}{2} = O(m\log n)
-					\]\footnotesize
-				%\item Number of times an edge is sampled:
-				%	\scriptsize\vspace{-8pt}
-				%	\[
-				%		\vspace{-8pt}
-				%		\frac{2}{n} + \frac{2}{n-1} + \ldots + \frac{2}{2} = O(\log n)
-				%	\]\footnotesize
-				%\vspace{5pt}
-				\item Thereby obtain an approximate Cholesky factorization \scriptsize$\LL\approx_\eps \matlow\calD\matlow^T$  
-					\footnotesize\ with \scriptsize$\widetilde{O}(m/\eps^2)$\footnotesize\ nonzero entries in \scriptsize$\widetilde{O}(m/\eps^2)$\footnotesize\ time
-			\end{itemize}
-		\vspace{-5pt}
-		\item \footnotesize $\widetilde{O}(m) \defeq O(m\ \mathrm{poly}(\log n))$\small\ \,is called nearly linear time
-		\vspace{-5pt}
-		\item \small For any vector \footnotesize$\zz \in \mathbb{R}^n$\small, we can compute in \footnotesize$\widetilde{O}(m/\eps^2)$\small\ time
-			an \footnotesize$\eps$\small-approximation of \footnotesize$\zz^T\LL^\dag\zz$\small
-	\end{itemize}
-}
-
-\frame<0 | 0:handout>{
-	\frametitle{Solving \large$\LL\xx = \bb$}
-}
 
 \frame{
 	\frametitle{Estimating Trace of an Implicit Matrix}
@@ -1078,7 +1008,7 @@
 			\item \small$\frac{1}{M}\sum\nolimits_{i=1}^M \zz_i^T \AA \zz_i$\,\normalsize\ 
 				should be close to \small$\trace{\AA}$\,\normalsize\ when \small$M$\,\normalsize\ is large
 			%\begin{itemize}
-				\item \small$O(\log n/\eps^2)$\,\normalsize\ samples are enough to get an	\small$\eps$\normalsize-approximation
+				\item \small$\Omega(\log n/\eps^2)$\,\normalsize\ samples are enough to get an	\small$\eps$\normalsize-approximation
 				[AT11]
 				%\footnote[frame]{Avron and Toledo `11.}
 				\begin{itemize}
@@ -1087,50 +1017,6 @@
 			%\end{itemize}
 		\end{enumerate}
 	\end{block}
-}
-
-\frame<0 | handout : 0>{
-	\frametitle{Estimating Trace by JL}
-	\vspace{10pt}
-	\begin{block}{Lemma (Johnson-Lindenstrauss)}
-		%\begin{lemma}[Johnson-Lindenstrauss]
-		\scriptsize
-		Given fixed vectors $\vv_1,\vv_2,\cdots,\vv_n \in \mathbb{R}^d$ and $0 < \eps \leq 1/2$, let $k$ be a positive integer such that \vspace{-12pt}
-	\[
-		\vspace{-12pt}
-		%k \geq 24 \eps^{-2} \log n.
-		k \geq 4(\eps^2/2 - \eps^3/3)^{-1}\ln n.
-	\]
-	and $\QQ$ be a $k \times d$ random $\pm 1$ matrix.
-	With probability at least $1 - 2 / n$, \vspace{-12pt}
-	\[
-		%\vspace{-10pt}
-		\forall 1\leq i\leq n, \norm{\vv_i}^2_2 \approx_\epsilon \frac{1}{k} \norm{\QQ \vv_i}_2^2.
-	\]
-	%\end{lemma}
-	\end{block}
-	\begin{itemize}
-		\item \small Proof of number of samples required \vspace{-5pt}
-		\scriptsize %\vspace{-5pt}
-		\begin{align*}
-			\hspace{-5pt}
-			\trace{\AA} &= \trace{\AA^{1/2} \AA^{1/2}} = \norm{\AA^{1/2}}_F^2
-			\approx_\eps \frac{1}{k}\norm{\QQ_{k\times n}\AA^{1/2}}_F^2 \\
-			& = \frac{1}{k}\sum\limits_{i=1}^{k}\norm{\qq_i \AA^{1/2}}_2^2
-			= \frac{1}{k}\sum\limits_{i=1}^{k} \kh{\qq_i \AA^{1/2}} \kh{\qq_i \AA^{1/2}}^T
-			= \frac{1}{k}\sum\limits_{i=1}^{k} \qq_i\AA \qq_i^T
-			%&= \trace{\QQ\AA^{1/2}\AA^{1/2}\QQ^T} = \trace{\QQ\AA\QQ^T}
-			%= \sum\limits_{i=1}^{O(\log n / \eps^2)} \qq_i^T\AA \qq_i
-		\end{align*}
-		\quad\\[-7.5pt]
-		\small where \scriptsize$\qq_i$\,\small\ denotes the $i^{\text{th}}$ row of \scriptsize$\QQ$
-		%\trace{\AA} &= \trace{\AA^{1/2} \AA^{1/2}} \qquad
-			%	\text{\footnotesize since\scriptsize\ $\AA$ \footnotesize is positive semidefinite \scriptsize} \\
-			%	&= \sum\limits_{j=1}^{n} \norm{\aa_j}^2_2 \qquad \text{\footnotesize by letting\scriptsize\ $\aa_1,\ldots,\aa_n$\,\footnotesize\ be columns of\scriptsize\ $\AA^{1/2}$} \\
-			%	&\approx_{\eps} \sum\limits_{j=1}^{n} \norm{\QQ_{k\times n}\aa_j}^2_2 \qquad
-			%		\text{\footnotesize where \scriptsize$k = O(\log n/\eps^2)$} \\
-			%	&=
-	\end{itemize}
 }
 
 \frame{
@@ -1153,99 +1039,6 @@
 				\item Processing queries offline: {\color{blue} offline div-conquer}
 			\end{itemize}
 	\end{itemize}
-}
-
-\frame<0 | handout : 0>{
-	\frametitle{Offline Div-conquer (离线分治): OI version}
-	%\vspace{-5pt}
-	\begin{figure}
-		\makebox[\linewidth][c]{
-		\begin{subfigure}[H]{0.55\textwidth}
-			\includegraphics[width=1\textwidth]{cdq2}
-			\label{exp1}	
-			\caption{Dynamic programming by div-conquer}
-		\end{subfigure}
-		\begin{subfigure}[H]{0.55\textwidth}
-			\vspace{2.5pt}
-			\includegraphics[width=1\textwidth]{xhr}
-			\label{exp2}
-			\caption{Div-conquer in query timeline}
-		\end{subfigure}
-		}
-		\\[-2pt]
-		\makebox[\linewidth][c]{
-		\begin{subfigure}[H]{0.58\textwidth}
-			\includegraphics[width=1\textwidth]{sgu_short}
-%			\vspace{-25pt}
-			\label{exp1}
-			\caption{Maintaining MST under updates in \scriptsize$\widetilde{O}(m)$}
-		\end{subfigure}
-		\begin{subfigure}[H]{0.58\textwidth}
-			\vspace{14pt}
-			\includegraphics[width=1\textwidth]{cf100551}
-			%\vspace{0.1pt}
-			\label{exp2}
-			\caption{Maintaining \#CC under updates in \scriptsize$\widetilde{O}(m)$}
-		\end{subfigure}
-		}
-		%\caption{The spectrum of $A$ (left) and $B$ (right)}
-	\end{figure}
-}
-
-\frame<0 | handout : 0>{
-	\frametitle{Algorithms That Use Div-conquer}
-	\footnotesize
-	%\vspace{20pt}
-	%\begin{itemize}
-		%\item Algorithms that use div-conquer
-	\begin{table}\caption{Algorithms that use div-conquer}
-		\centering
-		%\hspace{-60pt}
-		\begin{tabular}{c|c|c}
-			\hline
-			\rowcolor{Gray}
-			Problem & Dense \scriptsize$\kh{m\approx n^2}$\footnotesize & Sparse \scriptsize$\kh{m\approx n}$\footnotesize \\
-			\hline
-			Determinant &
-			\begin{tabular}{c}
-					%\hline
-					Exact \scriptsize$\widetilde{O}(n^{2.37})$\footnotesize\footnote[frame]{V. V. Williams. \textbf{STOC`12}.} \\
-						%\footnote[frame]{D. Durfee, R. Kyng, J. Peebles, A. B. Rao, and S. Sachdeva. \textbf{STOC`17}.} \\
-					%\hline
-					%\vspace{-5pt}
-					Approx. \scriptsize$\widetilde{O}(n^{2})$
-					\footnote[frame]{D. Durfee, J. Peebles, R. Peng, and A. B. Rao. \textbf{FOCS`17}.}
-				\end{tabular}
-			& \scriptsize$\widetilde{O}(n^2)$\footnotesize \footnotesize\footnotemark[3]
-				 \\
-			\hline
-			Rand spanning tree &
-				\begin{tabular}{c}
-					%\hline
-					Exact \scriptsize$\widetilde{O}(n^{5/3}m^{1/3})$\footnotesize
-						\footnote[frame]{D. Durfee, R. Kyng, J. Peebles, A. B. Rao, and S. Sachdeva. \textbf{STOC`17}.} \\
-					%\hline
-					%\vspace{-5pt}
-					Approx. \scriptsize$\widetilde{O}(n^{2})$\footnotesize\footnotemark[3]
-				\end{tabular}
-				&
-				\scriptsize$\widetilde{O}(m^{4/3})$\footnotesize
-					\footnote[frame]{A. Madry, D. Straszak, and J. Tarnawski. \textbf{SODA`15}.} \\
-			\hline
-			%Max matching & \scriptsize$O(n^{2.37})$\footnotesize &
-			%	\scriptsize$\widetilde{O}(m^{7/4})$\footnotesize \\
-			%\hline
-			Approx. maxflow & \scriptsize$\widetilde{O}(m)$\footnotesize
-				\footnote[frame]{R. Peng. \textbf{SODA`16}.} &
-				\scriptsize$\widetilde{O}(m)$\footnotesize\footnotemark[6] \\
-			\hline
-			\scriptsize$\LL\xx = \bb$\footnotesize & \scriptsize$\widetilde{O}(m)$\footnotesize
-				\footnote[frame]{M. B. Cohen, R. Kyng, G. L. Miller, J. W. Pachocki, and R. Peng. \textbf{STOC`14}.} &
-				\scriptsize$\widetilde{O}(m)$\footnotesize\footnotemark[7] \\
-			\hline
-		\end{tabular}
-	\end{table}
-	%\end{itemize}
 }
 
 \frame{
@@ -1400,7 +1193,7 @@
 				\vspace{-5pt}
 				\xx^{(i+1)} \leftarrow \xx^{(i)} - \frac{1}{2}  \matlow^{-T} \calD \matlow^{-1} (\LL \xx^{(i)} - \bb)
 			\]
-			\item \footnotesize$O(\log(1/\eps))$\,\small\ iterations gives a solution \footnotesize$\hat{x}$\,\small\ satisfying
+			\item \footnotesize$\Omega(\log(1/\eps))$\,\small\ iterations gives a solution \footnotesize$\hat{x}$\,\small\ satisfying
 			\vspace{-5pt}
 			\[
 				\vspace{-5pt}
@@ -1508,7 +1301,7 @@
 		\vspace{-5pt}
 		\[
 			\vspace{-5pt}
-			\sum\limits_{i=1}^{M} \hat{\yy}_i^T \bb_e \bb_e^T \hat{\yy}_i
+			\frac{1}{M} \sum\limits_{i=1}^{M} \hat{\yy}_i^T \bb_e \bb_e^T \hat{\yy}_i
 			\approx_{\eps}
 			\trace{\LL^\dag \bb_e \bb_e^T \LL^\dag}
 		\]
@@ -1536,13 +1329,13 @@
 				\end{align*}
 				\footnotesize
 				\vspace{-20pt}
-			\item Overall running time \scriptsize$\widetilde{O}\kh{m/\kh{\eps^2\theta^2}}$\footnotesize
+			\item Overall running time \, \scriptsize$\widetilde{O}\kh{m/\kh{\eps^2\theta^2}}$\footnotesize
 		}
 	\end{itemize}
 }
 	
 \subsection{Approximating\, \footnotesize$%\mathcal{C}_{\theta}^\Delta(v) \defeq
-\mathcal{K}(G\bsk N(v)) - \mathcal{K}(G)$\,\small\   for
+\mathcal{K}(G\bsk E(v)) - \mathcal{K}(G)$\,\small\   for
 	all \footnotesize$v \in V$\,\small\   in\,\ 
 	\footnotesize$\widetilde{O}(m)$\,\small\ time}
 	
@@ -1555,8 +1348,8 @@
 		\scriptsize
 		\vspace{-5pt}
 		\begin{multline*}
-			\kh{\LL - (1 - \theta)\BB_{N(v)}^T \BB_{N(v)}}^\dag =\\
-			\LL^\dag + {\color{blue} (1 - \theta)\LL^\dag \BB_{N(v)}^T \kh{\II - (1 - \theta)\BB_{N(v)}\LL^\dag \BB_{N(v)}^T}^{-1} \BB_{N(v)}\LL^\dag }
+			\kh{\LL - (1 - \theta)\BB_{E(v)}^T \BB_{E(v)}}^\dag =\\
+			\LL^\dag + {\color{blue} (1 - \theta)\LL^\dag \BB_{E(v)}^T \kh{\II - (1 - \theta)\BB_{E(v)}\LL^\dag \BB_{E(v)}^T}^{-1} \BB_{E(v)}\LL^\dag }
 		\end{multline*}
 		\footnotesize
 		\vspace{-20pt}
@@ -1565,7 +1358,7 @@
 		\vspace{-5pt}
 		\[
 			\vspace{-5pt}
-			\zz_i^T \LL^\dag \BB_{N(v)}^T \kh{\II - (1 - \theta)\BB_{N(v)}\LL^\dag \BB_{N(v)}^T}^{-1} \BB_{N(v)}\LL^\dag \zz_i
+			\zz_i^T \LL^\dag \BB_{E(v)}^T \kh{\II - (1 - \theta)\BB_{E(v)}\LL^\dag \BB_{E(v)}^T}^{-1} \BB_{E(v)}\LL^\dag \zz_i
 		\]
 		\footnotesize
 		where \scriptsize$\LL^\dag \zz_i$\,\footnotesize\ can be computed by solving \scriptsize$\LL\xx = \zz_i$\,\footnotesize\ 
@@ -1578,7 +1371,7 @@
 			\vspace{-5pt}
 			\[
 				\vspace{-5pt}
-				\kh{\II - (1 - \theta)\BB_{N(v)}\LL^\dag \BB_{N(v)}^T}^{-1}
+				\kh{\II - (1 - \theta)\BB_{E(v)}\LL^\dag \BB_{E(v)}^T}^{-1}
 			\]
 			\footnotesize
 	\end{itemize}
@@ -1588,16 +1381,16 @@
 	\frametitle{Approximating Quadratic Forms}
 	\vspace{5pt}
 	\begin{itemize}
-		\item \footnotesize \scriptsize$\II - (1 - \theta)\BB_{N(v)}\LL^\dag \BB_{N(v)}^T \defeq \II - \AA$\,\footnotesize\ 
+		\item \footnotesize \scriptsize$\II - (1 - \theta)\BB_{E(v)}\LL^\dag \BB_{E(v)}^T \defeq \II - \AA$\,\footnotesize\ 
 			\vspace{2.5pt}
 			\begin{itemize}
 				\item \scriptsize$\lambda_{\mathrm{max}}(\AA) \leq 1 - \theta \quad \Rightarrow \quad \lambda_{\mathrm{min}}(\II - \AA) \geq \theta$\footnotesize
 			\end{itemize}
-		\item \footnotesize First-order richardson: solving \scriptsize$(\II - \AA)\xx = \zz_i$\,\footnotesize\ in
-			\scriptsize$O(1/\theta \log(1/\eps))$\,\footnotesize\ iterations
+		\item \footnotesize First-order richardson: solving \scriptsize$(\II - \AA)\xx = \zz_i$\,\footnotesize\ %in
+			%\scriptsize$O(1/\theta \log(1/\eps))$\,\footnotesize\ iterations
 		\begin{itemize}
 			\item \footnotesize Taylor expansion: \scriptsize$(\II - \AA)^{-1} = \II + \AA + \AA^2 + \cdots$\footnotesize
-			\item Let \scriptsize$\hat{\xx} = (\II + \AA + \cdots + \AA^k)\zz_i,\ k = O(1 / \theta \log 1/\eps)$\footnotesize, then
+			\item Let \scriptsize$\hat{\xx} = (\II + \AA + \cdots + \AA^k)\zz_i,\ k = \Omega(1 / \theta \log 1/\eps)$\footnotesize, then
 			\scriptsize
 			\vspace{-7.5pt}
 			\[
@@ -1610,13 +1403,13 @@
 			\vspace{-5pt}
 			\[
 				\vspace{-5pt}
-				\langle \hat{\xx}, \zz_i \rangle \approx_{\eps} \norm{\zz_i^T (\II - \AA)^{-1} \zz_i}
+				\langle \hat{\xx}, \zz_i \rangle \approx_{\eps} \zz_i^T (\II - \AA)^{-1} \zz_i
 			\]
 			\footnotesize
-			\item \scriptsize$\hat{\xx}$\,\footnotesize\ can be computed by \scriptsize$\xx^{(i+1)} = \AA \xx^{(i)} + \bb$\,\footnotesize\ by Laplacian solvers
+			\item \scriptsize$\hat{\xx}$\,\footnotesize\ can be computed by \scriptsize$\xx^{(i+1)} = \AA \xx^{(i)} + \zz_i$\,\footnotesize\ by Laplacian solvers
 		\end{itemize}
-		\item \footnotesize Chebyshev polynomial only requires \scriptsize$O(\sqrt{1/\theta}\log(1/\eps))$\,\footnotesize\ iterations
-		\item However, applying \scriptsize$\BB_{N(v)}\LL^\dag \BB_{N(v)}^T$\,\footnotesize\ for all
+		\item \footnotesize Chebyshev polynomial only requires \scriptsize$\Omega(\sqrt{1/\theta}\log(1/\eps))$\,\footnotesize\ iterations
+		\item However, applying \scriptsize$\BB_{E(v)}\LL^\dag \BB_{E(v)}^T$\,\footnotesize\ for all
 			\scriptsize$v \in V$\,\footnotesize\ requires \scriptsize$\widetilde{O}(nm)$\,\footnotesize\ time
 	\end{itemize}
 \end{frame}
@@ -1626,15 +1419,15 @@
 	\vspace{20pt}
 	\begin{itemize}
 		\item \footnotesize Observation:
-			\scriptsize$\BB_{N(v)}$\,\footnotesize\ only have
+			\scriptsize$\BB_{E(v)}$\,\footnotesize\ only has
 			\scriptsize$2\deg(v)$\,\footnotesize\ nonzeros with column indices in
 			\scriptsize$N[v]$\,\footnotesize\ 
 			\scriptsize
 			\vspace{-5pt}
 			\[
 				\vspace{-5pt}
-				\BB_{N(v)} \LL^\dag \BB_{N(v)}^T = \kh{\BB_{N(v)}}_{[:, N[v]]}
-				\kh{\LL^\dag}_{[N[v], N[v]]} \kh{\BB_{N(v)}^T}_{[N[v], :]}
+				\BB_{E(v)} \LL^\dag \BB_{E(v)}^T = \kh{\BB_{E(v)}}_{[:, N[v]]}
+				\kh{\LL^\dag}_{[N[v], N[v]]} \kh{\BB_{E(v)}^T}_{[N[v], :]}
 			\]
 			\footnotesize
 		\item Define \,%the Schur complement of
@@ -1645,8 +1438,8 @@
 			\begin{itemize}
 				\item {\textbf{Fact:}}\quad 
 				\scriptsize$\kh{\mathrm{SC}(\LL,C)}^\dag = \kh{\LL^\dag}_{[C,C]}$\,\footnotesize\ 
-				\item {\textbf{Lemma:}}\quad \scriptsize$\hat{\SS} \approx_{\eps} \SS^{(k)}
-					\quad \Rightarrow \quad \II - (1 - \theta)\BB_{N(v)}(\hat{\SS})^\dag \BB_{N(v)}^T \approx_{3\eps/\theta} \II - \AA$\,\footnotesize\ 
+				\item {\textbf{Lemma:}}\ \scriptsize$\hat{\SS} \approx_{\eps} \mathrm{SC}(\LL, N[v]) %\SS^{(k)}
+					\ \Rightarrow \ \II - (1 - \theta)\BB_{E(v)}(\hat{\SS})^\dag \BB_{E(v)}^T \approx_{3\eps/\theta} \II - \AA$\,\footnotesize\ 
 			\end{itemize}
 		\item Approximating \scriptsize$\mathrm{SC}(\LL,N[v])$\,\footnotesize\ for all 
 			\scriptsize$v \in V$\,\footnotesize\ by div-conquer
@@ -1660,12 +1453,258 @@
 			\end{itemize}
 			\item \footnotesize Overall running time \scriptsize$\widetilde{O}\kh{m/\kh{\eps^4\theta^{2.5}}}$\,\footnotesize\ 
 	\end{itemize}
-	\vspace{-7.5pt}
+	%\vspace{-7.5pt}
+\end{frame}
+
+\frame{
+	\frametitle{Conclusions and Future Directions}
+	\begin{itemize}
+		\item \small Conclusions
+			\begin{itemize}
+				\item \footnotesize We propose three centrality measures based on Kirchhoff index
+				\item We show empirically our centrality have a better discriminating power
+				\item We develop nearly linear time algorithms for proposed centrality measures
+			\end{itemize}
+		\item \small Future directions
+			\begin{itemize}
+				%\item \footnotesize Reducing\, \scriptsize$O(\log n)$\,\footnotesize\ and\, \scriptsize$\mathrm{poly}(\eps, \theta)$\,\footnotesize\ factors
+				\item \footnotesize Implementing the algorithms and doing experiments on larger networks
+				\item Finding \scriptsize$k$\,\footnotesize\ edges with maximum centrality
+				\item Theoretically modeling advantages/disadvantages of centrality measures
+			\end{itemize}
+	\end{itemize}
+	\vspace{-10pt}
 	\pause
 	\begin{center}
 		\normalsize \textbf{Thank \,you!}
 	\end{center}
-\end{frame}
+}
+
+\frame{
+	\frametitle{Estimating Trace by JL}
+	\vspace{10pt}
+	\begin{block}{Lemma (Johnson-Lindenstrauss)}
+		%\begin{lemma}[Johnson-Lindenstrauss]
+		\scriptsize
+		Given fixed vectors $\vv_1,\vv_2,\cdots,\vv_n \in \mathbb{R}^d$ and $0 < \eps \leq 1/2$, let $k$ be a positive integer such that \vspace{-12pt}
+	\[
+		\vspace{-12pt}
+		%k \geq 24 \eps^{-2} \log n.
+		k \geq 4(\eps^2/2 - \eps^3/3)^{-1}\ln n.
+	\]
+	and $\QQ$ be a $k \times d$ random $\pm 1$ matrix.
+	With probability at least $1 - 2 / n$, \vspace{-12pt}
+	\[
+		%\vspace{-10pt}
+		\forall 1\leq i\leq n, \norm{\vv_i}^2_2 \approx_\epsilon \frac{1}{k} \norm{\QQ \vv_i}_2^2.
+	\]
+	%\end{lemma}
+	\end{block}
+	\begin{itemize}
+		\item \small Proof of number of samples required \vspace{-5pt}
+		\scriptsize %\vspace{-5pt}
+		\begin{align*}
+			\hspace{-5pt}
+			\trace{\AA} &= \trace{\AA^{1/2} \AA^{1/2}} = \norm{\AA^{1/2}}_F^2
+			\approx_\eps \frac{1}{k}\norm{\QQ_{k\times n}\AA^{1/2}}_F^2 \\
+			& = \frac{1}{k}\sum\limits_{i=1}^{k}\norm{\qq_i \AA^{1/2}}_2^2
+			= \frac{1}{k}\sum\limits_{i=1}^{k} \kh{\qq_i \AA^{1/2}} \kh{\qq_i \AA^{1/2}}^T
+			= \frac{1}{k}\sum\limits_{i=1}^{k} \qq_i\AA \qq_i^T
+			%&= \trace{\QQ\AA^{1/2}\AA^{1/2}\QQ^T} = \trace{\QQ\AA\QQ^T}
+			%= \sum\limits_{i=1}^{O(\log n / \eps^2)} \qq_i^T\AA \qq_i
+		\end{align*}
+		\quad\\[-7.5pt]
+		\small where \scriptsize$\qq_i$\,\small\ denotes the $i^{\text{th}}$ row of \scriptsize$\QQ$
+		%\trace{\AA} &= \trace{\AA^{1/2} \AA^{1/2}} \qquad
+			%	\text{\footnotesize since\scriptsize\ $\AA$ \footnotesize is positive semidefinite \scriptsize} \\
+			%	&= \sum\limits_{j=1}^{n} \norm{\aa_j}^2_2 \qquad \text{\footnotesize by letting\scriptsize\ $\aa_1,\ldots,\aa_n$\,\footnotesize\ be columns of\scriptsize\ $\AA^{1/2}$} \\
+			%	&\approx_{\eps} \sum\limits_{j=1}^{n} \norm{\QQ_{k\times n}\aa_j}^2_2 \qquad
+			%		\text{\footnotesize where \scriptsize$k = O(\log n/\eps^2)$} \\
+			%	&=
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Clique Structure of Schur Complements}
+	\vspace{20pt}
+	\begin{figure}
+		\includegraphics[width=0.7\textwidth]{cliques.png}
+	\end{figure}
+	%\vspace{-8pt}
+	\small
+	\begin{itemize}
+		\item \,\scriptsize$\LL_{v_1} \defeq \,\sum\nolimits_{e\in N(v_1)} w(e)\bb_e\bb_e^T
+			\quad \spliteq\quad \begin{pmatrix} d & -\aa^T \\ -\aa & \diag(\aa) \end{pmatrix}$\,\footnotesize\ 
+		\item The Schur complement \scriptsize$\SS^{(1)}$\,\footnotesize\ is a Laplacian
+			\scriptsize\vspace{-8pt}
+			\begin{align*}
+				\hspace{-15pt}
+				\SS^{(1)} &\defeq \LL - \frac{1}{\LL_{[1,1]}} \LL_{[:,1]} \LL_{[:,1]}^T
+				= \kh{\LL - \LL_{v_1}} + \kh{\LL_{v_1} - \frac{1}{\LL_{[1,1]}} \LL_{[:,1]} \LL_{[:,1]}^T} \\[3pt]
+				&= \LL_{G[V\setminus v_1]} + \begin{pmatrix} 0 & \zero^T \\ \zero & \diag(\aa) - \frac{\aa\aa^T}{d} \end{pmatrix}
+				= \LL_{G[V\setminus v_1]} + \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T
+			\end{align*}
+	\end{itemize}
+}
+
+\frame
+{
+	\frametitle{Clique Sampling\footnote[frame]{\label{KS16}R. Kyng and S. Sachdeva. \textbf{FOCS`16}.}}
+	\vspace{5pt}
+	\begin{itemize}
+		\small
+		\item Graph sparsification
+			\begin{itemize}
+				\item \footnotesize Sampling edges by \scriptsize$w(e)\er(e)$\footnotesize\,\ leads to an
+					\scriptsize$\widetilde{O}(n)$\footnotesize-edge \scriptsize$\LH \approx_\eps \LL$\footnotesize\,\ since
+					\scriptsize\vspace{-8pt}
+					\[
+						\vspace{-8pt}
+						\sum\nolimits_{e\in E} w(e)\er(e) = n - 1
+					\]
+					\footnotesize
+				\item Sampling by \scriptsize$\ttau_e \geq w(e)\er(e)$\footnotesize\,\ leads to an
+					\scriptsize$\widetilde{O}(\sum\nolimits_{e\in E}\ttau_e)$\footnotesize-edge \scriptsize$\LH \approx_\eps \LL$\footnotesize
+			\end{itemize}
+		\item Sparsifying \,\footnotesize$\SS^{(1)} = \LL_{G[V\setminus v_1]} + {\color{red} \sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i)w(1,j)}{d}\bb_{i,j}\bb_{i,j}^T}$\small
+		\begin{itemize}
+			\item \footnotesize  Schur complements preserves ER: \,\scriptsize$\er^{\LL}(i,j) = \er^{\SS^{(1)}}(i,j)$\footnotesize
+			\vspace{5pt}
+			\item \scriptsize$\er(i,j) \leq \er(1,i) + \er(1,j)\leq \frac{1}{w(1,i)} + \frac{1}{w(1,j)}$\footnotesize
+			\vspace{5pt}
+			\item Sampling by \scriptsize$\frac{w(1,i)w(1,j)}{d} \kh{\frac{1}{w(1,i)} + \frac{1}{w(1,j)}} =
+				\frac{w(1,i) + w(1,j)}{d}$\footnotesize
+			\vspace{5pt}
+			\item Total edge number \scriptsize$\sum\limits_{i\sim 1}\sum\limits_{j\sim 1} \frac{w(1,i) + w(1,j)}{d}
+				= \sizeof{N(v_1)}$
+		\end{itemize}
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Approximate Gaussian Elimination for Laplacians\footnotemark[1]}
+	\small
+	\begin{itemize}
+		\item Eliminate vertices in random order
+			\begin{itemize}
+				\item \footnotesize Every step eliminate a vertex with average degree in expectation
+				\vspace{5pt}
+				\item Total elimination time and total nonzero entries in factorization:
+					\scriptsize\vspace{-7pt}
+					\[
+						\vspace{-7pt}
+						\frac{2m}{n} + \frac{2m}{n-1} + \ldots + \frac{2m}{2} = O(m\log n)
+					\]\footnotesize
+				%\item Number of times an edge is sampled:
+				%	\scriptsize\vspace{-8pt}
+				%	\[
+				%		\vspace{-8pt}
+				%		\frac{2}{n} + \frac{2}{n-1} + \ldots + \frac{2}{2} = O(\log n)
+				%	\]\footnotesize
+				%\vspace{5pt}
+				\item Thereby obtain an approximate Cholesky factorization \scriptsize$\LL\approx_\eps \matlow\calD\matlow^T$  
+					\footnotesize\ with \scriptsize$\widetilde{O}(m/\eps^2)$\footnotesize\ nonzero entries in \scriptsize$\widetilde{O}(m/\eps^2)$\footnotesize\ time
+			\end{itemize}
+		\vspace{-5pt}
+		\item \footnotesize $\widetilde{O}(m) \defeq O(m\ \mathrm{poly}(\log n))$\small\ \,is called nearly linear time
+		\vspace{-5pt}
+		\item \small For any vector \footnotesize$\zz \in \mathbb{R}^n$\small, we can compute in \footnotesize$\widetilde{O}(m/\eps^2)$\small\ time
+			an \footnotesize$\eps$\small-approximation of \footnotesize$\zz^T\LL^\dag\zz$\small
+	\end{itemize}
+}
+
+\frame{
+	\frametitle{Algorithms That Use Div-conquer}
+	\footnotesize
+	%\vspace{20pt}
+	%\begin{itemize}
+		%\item Algorithms that use div-conquer
+	\begin{table}\caption{Algorithms that use div-conquer}
+		\centering
+		%\hspace{-60pt}
+		\begin{tabular}{c|c|c}
+			\hline
+			\rowcolor{Gray}
+			Problem & Dense \scriptsize$\kh{m\approx n^2}$\footnotesize & Sparse \scriptsize$\kh{m\approx n}$\footnotesize \\
+			\hline
+			Determinant &
+			\begin{tabular}{c}
+					%\hline
+					Exact \scriptsize$\widetilde{O}(n^{2.37})$\footnotesize\footnote[frame]{V. V. Williams. \textbf{STOC`12}.} \\
+						%\footnote[frame]{D. Durfee, R. Kyng, J. Peebles, A. B. Rao, and S. Sachdeva. \textbf{STOC`17}.} \\
+					%\hline
+					%\vspace{-5pt}
+					Approx. \scriptsize$\widetilde{O}(n^{2})$
+					\footnote[frame]{D. Durfee, J. Peebles, R. Peng, and A. B. Rao. \textbf{FOCS`17}.}
+				\end{tabular}
+			& \scriptsize$\widetilde{O}(n^2)$\footnotesize \footnotesize\footnotemark[3]
+				 \\
+			\hline
+			Rand spanning tree &
+				\begin{tabular}{c}
+					%\hline
+					Exact \scriptsize$\widetilde{O}(n^{5/3}m^{1/3})$\footnotesize
+						\footnote[frame]{D. Durfee, R. Kyng, J. Peebles, A. B. Rao, and S. Sachdeva. \textbf{STOC`17}.} \\
+					%\hline
+					%\vspace{-5pt}
+					Approx. \scriptsize$\widetilde{O}(n^{2})$\footnotesize\footnotemark[3]
+				\end{tabular}
+				&
+				\scriptsize$\widetilde{O}(m^{4/3})$\footnotesize
+					\footnote[frame]{A. Madry, D. Straszak, and J. Tarnawski. \textbf{SODA`15}.} \\
+			\hline
+			%Max matching & \scriptsize$O(n^{2.37})$\footnotesize &
+			%	\scriptsize$\widetilde{O}(m^{7/4})$\footnotesize \\
+			%\hline
+			Approx. maxflow & \scriptsize$\widetilde{O}(m)$\footnotesize
+				\footnote[frame]{R. Peng. \textbf{SODA`16}.} &
+				\scriptsize$\widetilde{O}(m)$\footnotesize\footnotemark[6] \\
+			\hline
+			\scriptsize$\LL\xx = \bb$\footnotesize & \scriptsize$\widetilde{O}(m)$\footnotesize
+				\footnote[frame]{M. B. Cohen, R. Kyng, G. L. Miller, J. W. Pachocki, and R. Peng. \textbf{STOC`14}.} &
+				\scriptsize$\widetilde{O}(m)$\footnotesize\footnotemark[7] \\
+			\hline
+		\end{tabular}
+	\end{table}
+	%\end{itemize}
+}
+
+\frame{
+	\frametitle{Offline Div-conquer (离线分治): OI version}
+	%\vspace{-5pt}
+	\begin{figure}
+		\makebox[\linewidth][c]{
+		\begin{subfigure}[H]{0.55\textwidth}
+			\includegraphics[width=1\textwidth]{cdq2}
+			\label{exp1}	
+			\caption{Dynamic programming by div-conquer}
+		\end{subfigure}
+		\begin{subfigure}[H]{0.55\textwidth}
+			\vspace{2.5pt}
+			\includegraphics[width=1\textwidth]{xhr}
+			\label{exp2}
+			\caption{Div-conquer in query timeline}
+		\end{subfigure}
+		}
+		\\[-2pt]
+		\makebox[\linewidth][c]{
+		\begin{subfigure}[H]{0.58\textwidth}
+			\includegraphics[width=1\textwidth]{sgu_short}
+%			\vspace{-25pt}
+			\label{exp1}
+			\caption{Maintaining MST under updates in \scriptsize$\widetilde{O}(m)$}
+		\end{subfigure}
+		\begin{subfigure}[H]{0.58\textwidth}
+			\vspace{14pt}
+			\includegraphics[width=1\textwidth]{cf100551}
+			%\vspace{0.1pt}
+			\label{exp2}
+			\caption{Maintaining \#CC under updates in \scriptsize$\widetilde{O}(m)$}
+		\end{subfigure}
+		}
+		%\caption{The spectrum of $A$ (left) and $B$ (right)}
+	\end{figure}
+}
 	
 %\begin{frame}
 %	\Huge{\centerline{The End}}
