@@ -1074,7 +1074,7 @@
 			\vspace{5pt}
 		\]\small
 		%\vspace{5pt}
-		\item \small Recall that elimination of \,\footnotesize$v_1$\,\small\ adds a clique to the remaining graph
+		\item \small Elimination of vertices adds edges to the remaining graph
 %		\small\vspace{-7pt}
 %		\[
 %			\vspace{-7pt}
@@ -1105,7 +1105,7 @@
 
 \frame{
 	\frametitle{Approximating \large$\zz^T(\LL\bsk e)^\dag\zz$\Large\,\ for all \large$e\in E$\Large\ by Recursion}
-	\begin{block}{\small$\textsc{QuadEst}\footnotesize(\LL, \zz, E_Q = E)$: \small Estimate\ \footnotesize$\zz^T(\LL\bsk e)^\dag\zz$\hspace{4pt}\small for all \footnotesize$e\in E_Q$}
+	\begin{block}{\small$\textsc{QuadEst}\footnotesize(\LL, \zz, E_Q = E)$: \small Estimate\ \footnotesize$\zz^T(\LL\bsk e)^\dag\zz$\hspace{4pt}\small for all \footnotesize$e\in E_Q$\small\ \,[DKP+17]}
 		\begin{enumerate}
 			\footnotesize
 			\item Divide edges in \scriptsize$E_Q$\footnotesize\ into \scriptsize$E^{(1)}, E^{(2)}$\footnotesize\ with equal sizes \vspace{-5pt}
@@ -1182,7 +1182,7 @@
 \frame{\frametitle{Outline} \tableofcontents[currentsection,currentsubsection]}
 
 \frame{
-	\frametitle{Solving \large$\LL\xx = \bb$\,\Large\ in \large$\widetilde{O}(m\log(1/\eps))$\,\Large\ Time}
+	\frametitle{Solving \large$\LL\xx = \bb$\,\Large\ in \large$\widetilde{O}(m\log(1/\eps))$\,\Large\ Time [KS16]}
 	\begin{block}{Solving \small$\LL\xx = \bb$\,\normalsize\ by Iterative Refinement}
 		\small
 		\begin{enumerate}
@@ -1371,7 +1371,7 @@
 			\vspace{-5pt}
 			\[
 				\vspace{-5pt}
-				\kh{\II - (1 - \theta)\BB_{E(v)}\LL^\dag \BB_{E(v)}^T}^{-1}
+				\kh{{\color{red} \II - (1 - \theta)\BB_{E(v)}\LL^\dag \BB_{E(v)}^T}}^{-1}
 			\]
 			\footnotesize
 	\end{itemize}
@@ -1462,13 +1462,16 @@
 		\item \small Conclusions
 			\begin{itemize}
 				\item \footnotesize We propose three centrality measures based on Kirchhoff index
-				\item We show empirically our centrality have a better discriminating power
+				\item We show empirically that our centrality has a better discriminating power
 				\item We develop nearly linear time algorithms for proposed centrality measures
 			\end{itemize}
+		%\pause
 		\item \small Future directions
 			\begin{itemize}
 				%\item \footnotesize Reducing\, \scriptsize$O(\log n)$\,\footnotesize\ and\, \scriptsize$\mathrm{poly}(\eps, \theta)$\,\footnotesize\ factors
-				\item \footnotesize Implementing the algorithms and doing experiments on larger networks
+				%\item \footnotesize Implementing the algorithms and doing experiments on larger networks
+				\item \footnotesize Reducing logarithmic
+					factors in the running times
 				\item Finding \scriptsize$k$\,\footnotesize\ edges with maximum centrality
 				\item Theoretically modeling advantages/disadvantages of centrality measures
 			\end{itemize}
