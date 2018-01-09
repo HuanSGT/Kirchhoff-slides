@@ -275,14 +275,15 @@
 
 \title[Kirchhoff Centrality: Nearly Linear Time Algorithms]{Kirchhoff Index As a Measure of Edge Centrality in Weighted Networks: Nearly Linear Time Algorithms}
 
-\author[Huan Li \,\&\, Zhongzhi Zhang]{\quad\\Huan Li\inst{1,2} \and Zhongzhi Zhang\inst{1,2}}
+\author[Huan Li \,\&\, Zhongzhi Zhang]{\quad\\Huan Li\inst{1}
+\and Zhongzhi Zhang\inst{1}}
 
 \institute{
 	\inst{1}
 	School of Computer Science, Fudan University
-	\and
-	\inst{2}
-	Shanghai Key Laboratory of Intelligent Information Processing, Shanghai 200433
+	%\and
+	%\inst{2}
+	%Shanghai Key Laboratory of Intelligent Information Processing, Shanghai 200433
 	%\inst{4}
 	%Laboratoire de Physique Statistique, CNRS UMR 8550, \\
   %Universit\'e P. et M. Curie Paris 6 et \'Ecole Normale Sup\'erieure,
@@ -874,7 +875,8 @@
 		%\item \scriptsize$\AA \pleq \BB \quad\Leftrightarrow\quad \forall \xx\in\mathbb{R}^n,\ \xx^T\AA\xx \leq \xx^T\BB\xx$\footnotesize\
 		\item \footnotesize Worst-case running time \scriptsize$O(n^3)$%:\,\footnotesize\ need to sparsify cliques in Schur complements
 		\begin{itemize}
-			\item \footnotesize Approximating the clique with a sparser graph
+			\item \footnotesize Approximating the dense
+			Schur complement with a sparser graph
 		\end{itemize}
 		\item \scriptsize$(1+\eps)$\footnotesize-approximation and \scriptsize$\eps$\footnotesize-approximation
 			(\scriptsize$\exp(\eps) \approx 1 + \eps$\footnotesize\ \,for small \scriptsize$\eps$\footnotesize)
@@ -951,19 +953,19 @@
 	\small
 	\begin{itemize}
 		\small
-		\item \footnotesize Spectral sparsification by effective resistances [SS11]%\footnote[frame]{D. Spielman and S. Srivastava `11.}
-			\begin{itemize}
-				\vspace{-2.5pt}
-				\item \footnotesize Sampling edges by \scriptsize$w(e)\er(e)$\footnotesize\,\ leads to an
-					\scriptsize$\widetilde{O}(n)$\footnotesize-edge \scriptsize$\LL_H \approx_\eps \LL_G$\footnotesize\,\ % since
+		%\item \footnotesize Spectral sparsification by effective resistances [SS11]%\footnote[frame]{D. Spielman and S. Srivastava `11.}
+			%\begin{itemize}
+				%\vspace{-2.5pt}
+				%\item \footnotesize Sampling edges by \scriptsize$w(e)\er(e)$\footnotesize\,\ leads to an
+					%\scriptsize$\widetilde{O}(n)$\footnotesize-edge \scriptsize$\LL_H \approx_\eps \LL_G$\footnotesize\,\ % since
 %					\scriptsize\vspace{-8pt}
 %					\[
 %						\vspace{-8pt}
 %						\sum\nolimits_{e\in E} w(e)\er(e) = n - 1
 %					\]
 %					\footnotesize
-			\vspace{-5pt}
-			\end{itemize}
+			%\vspace{-5pt}
+			%\end{itemize}
 		\item \footnotesize Approximate Gaussian elimination [KS16]%\footnote[frame]{R. Kyng and S. Sachdeva `16.}
 			\begin{itemize}
 				\vspace{-2.5pt}
@@ -997,16 +999,18 @@
 }
 		\vspace{5pt}
 		\begin{enumerate}
-			\item Let \small $\AA$\,\normalsize\ be a PSD and \small $\zz$\,\normalsize\ be a random \small$\pm 1$\,\normalsize\ vector
-			\item \small$\expec{}{\zz^T \AA \zz} = \expec{}{\sum_{u,v}\AA_{[u,v]} \zz_{[u]} \zz_{[v]}} = \trace{\AA}$\,\normalsize\ since\vspace{4pt}
+			\item Let \small
+				%$\AA$\,\normalsize\ be a PSD and
+				\small $\zz$\,\normalsize\ be a random \small$\pm 1$\,\normalsize\ vector
+			\item \small$\expec{}{\zz^T \LL^\dag \zz} = \expec{}{\sum_{u,v}\LL^\dag_{[u,v]} \zz_{[u]} \zz_{[v]}} = \trace{\LL^\dag}$\,\normalsize\ since\vspace{4pt}
 			\begin{itemize}
-				\item \scriptsize$\expec{}{\AA_{[u,v]} \zz_{[u]} \zz_{[v]}} = 0$\,\footnotesize\ for \scriptsize$u\neq v$
+				\item \scriptsize$\expec{}{\LL^\dag_{[u,v]} \zz_{[u]} \zz_{[v]}} = 0$\,\footnotesize\ for \scriptsize$u\neq v$
 				\vspace{6pt}
-				\item \scriptsize$\expec{}{\AA_{[u,u]} \zz_{[u]}^2} = \AA_{[u,u]}$\,\footnotesize\ for \scriptsize$u = v$
+				\item \scriptsize$\expec{}{\LL^\dag_{[u,u]} \zz_{[u]}^2} = \LL^\dag_{[u,u]}$\,\footnotesize\ for \scriptsize$u = v$
 			\end{itemize}
 			\item Let \small$\zz_1, \ldots, \zz_M$\,\normalsize\ be \small$M$\,\normalsize\ independent \small$\pm 1$\,\normalsize\ vectors
-			\item \small$\frac{1}{M}\sum\nolimits_{i=1}^M \zz_i^T \AA \zz_i$\,\normalsize\ 
-				should be close to \small$\trace{\AA}$\,\normalsize\ when \small$M$\,\normalsize\ is large
+			\item \small$\frac{1}{M}\sum\nolimits_{i=1}^M \zz_i^T \LL^\dag \zz_i$\,\normalsize\ 
+				should be close to \small$\trace{\LL^\dag}$\,\normalsize\ when \small$M$\,\normalsize\ is large
 			%\begin{itemize}
 				\item \small$\Omega(\log n/\eps^2)$\,\normalsize\ samples are enough to get an	\small$\eps$\normalsize-approximation
 				[AT11]
@@ -1041,7 +1045,7 @@
 	\end{itemize}
 }
 
-\frame{
+\frame<0 | handout:0>{
 	\frametitle{Partial Cholesky Factorization}
 	\vspace{20pt}
 	\begin{itemize}
@@ -1105,7 +1109,7 @@
 
 \frame{
 	\frametitle{Approximating \large$\zz^T(\LL\bsk e)^\dag\zz$\Large\,\ for all \large$e\in E$\Large\ by Recursion}
-	\begin{block}{\small$\textsc{QuadEst}\footnotesize(\LL, \zz, E_Q = E)$: \small Estimate\ \footnotesize$\zz^T(\LL\bsk e)^\dag\zz$\hspace{4pt}\small for all \footnotesize$e\in E_Q$\small\ \,[DKP+17]}
+	\begin{block}{\small$\textsc{QuadEst}\footnotesize(\LL, \zz, E_Q = E)$: \small Estimate\ \footnotesize$\zz^T(\LL\bsk e)^\dag\zz$\hspace{4pt}\small for all \footnotesize$e\in E_Q$\small\ \,[DKPRS17]}
 		\begin{enumerate}
 			\footnotesize
 			\item Divide edges in \scriptsize$E_Q$\footnotesize\ into \scriptsize$E^{(1)}, E^{(2)}$\footnotesize\ with equal sizes \vspace{-5pt}
@@ -1182,7 +1186,8 @@
 \frame{\frametitle{Outline} \tableofcontents[currentsection,currentsubsection]}
 
 \frame{
-	\frametitle{Solving \large$\LL\xx = \bb$\,\Large\ in \large$\widetilde{O}(m\log(1/\eps))$\,\Large\ Time [KS16]}
+	%\frametitle{Solving \large$\LL\xx = \bb$\,\Large\ in \large$\widetilde{O}(m\log(1/\eps))$\,\Large\ Time [KS16]}
+	\frametitle{Laplacian Solvers [KS16]}
 	\begin{block}{Solving \small$\LL\xx = \bb$\,\normalsize\ by Iterative Refinement}
 		\small
 		\begin{enumerate}
@@ -1358,7 +1363,7 @@
 		\vspace{-5pt}
 		\[
 			\vspace{-5pt}
-			\zz_i^T \LL^\dag \BB_{E(v)}^T \kh{\II - (1 - \theta)\BB_{E(v)}\LL^\dag \BB_{E(v)}^T}^{-1} \BB_{E(v)}\LL^\dag \zz_i
+			\zz_i^T \LL^\dag \BB_{E(v)}^T \kh{{\color{red} \II - (1 - \theta)\BB_{E(v)}\LL^\dag \BB_{E(v)}^T}}^{-1} \BB_{E(v)}\LL^\dag \zz_i
 		\]
 		\footnotesize
 		where \scriptsize$\LL^\dag \zz_i$\,\footnotesize\ can be computed by solving \scriptsize$\LL\xx = \zz_i$\,\footnotesize\ 
@@ -1371,6 +1376,7 @@
 			\vspace{-5pt}
 			\[
 				\vspace{-5pt}
+				\hspace{5pt}
 				\kh{{\color{red} \II - (1 - \theta)\BB_{E(v)}\LL^\dag \BB_{E(v)}^T}}^{-1}
 			\]
 			\footnotesize
@@ -1381,13 +1387,14 @@
 	\frametitle{Approximating Quadratic Forms}
 	\vspace{5pt}
 	\begin{itemize}
-		\item \footnotesize \scriptsize$\II - (1 - \theta)\BB_{E(v)}\LL^\dag \BB_{E(v)}^T \defeq \II - \AA$\,\footnotesize\ 
+		\item \footnotesize \scriptsize${\color{red} \II - (1 - \theta)\BB_{E(v)}\LL^\dag \BB_{E(v)}^T} \defeq \II - \AA$\,\footnotesize\ 
 			\vspace{2.5pt}
 			\begin{itemize}
 				\item \scriptsize$\lambda_{\mathrm{max}}(\AA) \leq 1 - \theta \quad \Rightarrow \quad \lambda_{\mathrm{min}}(\II - \AA) \geq \theta$\footnotesize
 			\end{itemize}
-		\item \footnotesize First-order richardson: solving \scriptsize$(\II - \AA)\xx = \zz_i$\,\footnotesize\ %in
-			%\scriptsize$O(1/\theta \log(1/\eps))$\,\footnotesize\ iterations
+		\item \footnotesize First-order richardson: solving \scriptsize$(\II - \AA)\xx = \zz_i$\,\footnotesize\
+		 in
+			\scriptsize$O(1/\theta \log(1/\eps))$\,\footnotesize\ iterations
 		\begin{itemize}
 			\item \footnotesize Taylor expansion: \scriptsize$(\II - \AA)^{-1} = \II + \AA + \AA^2 + \cdots$\footnotesize
 			\item Let \scriptsize$\hat{\xx} = (\II + \AA + \cdots + \AA^k)\zz_i,\ k = \Omega(1 / \theta \log 1/\eps)$\footnotesize, then
@@ -1415,7 +1422,7 @@
 \end{frame}
 
 \begin{frame}
-	\frametitle{Div-conquer}
+	\frametitle{Offline Div-conquer}
 	\vspace{20pt}
 	\begin{itemize}
 		\item \footnotesize Observation:
@@ -1442,7 +1449,7 @@
 					\ \Rightarrow \ \II - (1 - \theta)\BB_{E(v)}(\hat{\SS})^\dag \BB_{E(v)}^T \approx_{3\eps/\theta} \II - \AA$\,\footnotesize\ 
 			\end{itemize}
 		\item Approximating \scriptsize$\mathrm{SC}(\LL,N[v])$\,\footnotesize\ for all 
-			\scriptsize$v \in V$\,\footnotesize\ by div-conquer
+			\scriptsize$v \in V$\,\footnotesize\ by offline div-conquer
 			\begin{itemize}
 				\item If\, \scriptsize$\exists u$\,\footnotesize\ with at least \scriptsize$\frac{1}{4}$\,\footnotesize\  total degree,
 					divide \scriptsize$V$\,\footnotesize\ into \scriptsize$\setof{u}$\,\footnotesize\ and
@@ -1470,8 +1477,11 @@
 			\begin{itemize}
 				%\item \footnotesize Reducing\, \scriptsize$O(\log n)$\,\footnotesize\ and\, \scriptsize$\mathrm{poly}(\eps, \theta)$\,\footnotesize\ factors
 				%\item \footnotesize Implementing the algorithms and doing experiments on larger networks
-				\item \footnotesize Reducing logarithmic
-					factors in the running times
+				\item \footnotesize
+					Improve the dependency on $\eps$
+					and $\theta$ in the running time
+				%Reducing logarithmic
+				%	factors in the running times
 				\item Finding \scriptsize$k$\,\footnotesize\ edges with maximum centrality
 				\item Theoretically modeling advantages/disadvantages of centrality measures
 			\end{itemize}
