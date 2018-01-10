@@ -417,8 +417,9 @@
 \frame{
 	\frametitle{Common Used Edge Centrality Measures}
 	\begin{itemize}
-		\item Comparing to vertex centrality, edge centrality measures are much less, due to computational challenge
+		\item %Comparing to vertex centrality, edge centrality measures are much less, due to computational challenge
 		%\item Common used edge centrality for an edge \small $e \in E$ \normalsize
+			Commonly used edge centrality measures
 			\footnotesize
 			\begin{table}
 				\centering
@@ -697,10 +698,7 @@
 
 \section{Nearly Linear Time Algorithms}
 
-\subsection{Approximating\, \footnotesize$%\mathcal{C}_{\theta}(e) \defeq
-	\mathcal{K}(G\bsk e)$\,\small\ for
-	all \footnotesize$e \in E$\,\small\  in\,\ 
-	\footnotesize$\widetilde{O}(m)$\,\small\ time}
+\subsection{Background and Techniques}
 
 \frame{\frametitle{Outline} \tableofcontents[currentsection,currentsubsection]}
 
@@ -981,7 +979,7 @@
 %\footnote[frame]{\label{KS16}R. Kyng and S. Sachdeva. \textbf{FOCS`16}.}
 
 \frame{
-	\frametitle{Estimating Trace of an Implicit Matrix}
+	\frametitle{Estimating \large$\trace{\LL^\dag}$\,\Large\ }
 %	\begin{block}{Lemma (Hutchinson's Monte-Carlo Trace Estimation)}
 %		\scriptsize
 %		Let $\AA$ be a $n\times n$ positive semidefinite matrix.
@@ -1023,8 +1021,18 @@
 	\end{block}
 }
 
+\subsection{Approximating\, \footnotesize$%\mathcal{C}_{\theta}(e) \defeq
+	\mathcal{K}(G\bsk e)$\,\small\ for
+	all \footnotesize$e \in E$\,\small\  in\,\ 
+	\footnotesize$\widetilde{O}(m)$\,\small\ time}
+
+\frame{\frametitle{Outline} \tableofcontents[currentsection,currentsubsection]}
+
 \frame{
-	\frametitle{Approximating \large$\mathcal{K}(G)$\,\Large\ in Nearly Linear Time}
+	%\frametitle{Approximating \large$\mathcal{K}(G)$\,\Large\ in Nearly Linear Time}
+	%\frametitle{Maintaining \large$\mathcal{K}(G)$\Large\ Under Offline Updates}
+	\frametitle{Generalizing the Problem
+		to Maintaining \large$\trace{\LL^\dag}$\Large}
 	\begin{itemize}
 		\item Approximating \,\small$\mathcal{K}(G) = n\trace{\LL^\dag}$\normalsize\ \,in \,\footnotesize$\widetilde{O}(m/\eps^4)$\,\normalsize\ time
 		\begin{enumerate}
@@ -1037,7 +1045,8 @@
 		\vspace{4pt}
 		\item Estimating\, \small$\mathcal{C}_\theta(e) \defeq \mathcal{K}(G\bsk e)$\,\normalsize\ for all \small$e\in E$
 			\begin{itemize}
-				\item Maintaining \footnotesize$\mathcal{K}(G)$\,\small\ 
+				\item Maintaining \footnotesize$\trace{\LL^\dag}$%\mathcal{K}(G)$
+				\,\small\ 
 					under \footnotesize$O(m)$\,\small\ edge updates
 				\item All updates are given beforehand
 				\item Processing queries offline: {\color{blue} offline div-conquer}
@@ -1108,7 +1117,8 @@
 }
 
 \frame{
-	\frametitle{Approximating \large$\zz^T(\LL\bsk e)^\dag\zz$\Large\,\ for all \large$e\in E$\Large\ by Recursion}
+	%\frametitle{Approximating \large$\zz^T(\LL\bsk e)^\dag\zz$\Large\,\ for all \large$e\in E$\Large\ by Recursion}
+	\frametitle{Maintaining \large$\zz^T(\LL\bsk e)^\dag\zz$\Large\,\ Under Updates}
 	\begin{block}{\small$\textsc{QuadEst}\footnotesize(\LL, \zz, E_Q = E)$: \small Estimate\ \footnotesize$\zz^T(\LL\bsk e)^\dag\zz$\hspace{4pt}\small for all \footnotesize$e\in E_Q$\small\ \,[DKPRS17]}
 		\begin{enumerate}
 			\footnotesize
@@ -1277,8 +1287,8 @@
 \frame{
 	\only<1-1>{\frametitle{Sherman-Morrison}}
 	\only<2-2>{\frametitle{Sherman-Morrison (Cont.)}}
-	\only<1-1>{\vspace{-2.2pt}}
-	\only<2-2>{\vspace{10pt}}
+	\only<1-1>{\vspace{10pt}}
+	\only<2-2>{\vspace{-10pt}}
 	\begin{itemize}
 		\item \footnotesize By Sherman-Morrison formula
 		\vspace{-5pt}\scriptsize
@@ -1289,7 +1299,7 @@
 		\]
 		\footnotesize
 		\only<1-1>{
-		\item Approximating the numerator
+		\item Approximating trace of the numerator
 		\vspace{-5pt}
 		\scriptsize
 		\[
@@ -1325,15 +1335,15 @@
 			\vspace{5pt}
 			\item Approximating \scriptsize$\er(e)$\,\footnotesize\ for all \scriptsize$e \in E$\,\footnotesize\ in
 				\scriptsize$\widetilde{O}(m/\eps^2)$\,\footnotesize\ time [SS11]
-				\vspace{-5pt}
-				\scriptsize
-				\begin{align*}
-					\er(e) &= \bb_e^T \LL^\dag \bb_e = \bb_e^T \LL^\dag \LL \LL^\dag \bb_e = \bb_e \LL^\dag \BB^T \BB \LL^\dag \bb_e
-					\\ &= \trace{\BB\LL^\dag \bb_e \bb_e^T \LL^\dag \BB^T}
-					\approx_{\eps} \sum\limits_{i=1}^{M} \zz_i^T \BB\LL^\dag \bb_e \bb_e^T \LL^\dag \BB^T \zz_i
-				\end{align*}
+				%\vspace{-5pt}
+				%\scriptsize
+				%\begin{align*}
+				%	\er(e) &= \bb_e^T \LL^\dag \bb_e = \bb_e^T \LL^\dag \LL \LL^\dag \bb_e = \bb_e \LL^\dag \BB^T \BB \LL^\dag \bb_e
+				%	\\ &= \trace{\BB\LL^\dag \bb_e \bb_e^T \LL^\dag \BB^T}
+				%	\approx_{\eps} \sum\limits_{i=1}^{M} \zz_i^T \BB\LL^\dag \bb_e \bb_e^T \LL^\dag \BB^T \zz_i
+				%\end{align*}
 				\footnotesize
-				\vspace{-20pt}
+				%\vspace{-20pt}
 			\item Overall running time \, \scriptsize$\widetilde{O}\kh{m/\kh{\eps^2\theta^2}}$\footnotesize
 		}
 	\end{itemize}
@@ -1405,13 +1415,13 @@
 				\norm{\hat{\xx} - (\II - \AA)^{-1}\zz_i} \leq \eps \norm{(\II - \AA)^{-1} \zz_i}
 			\]
 			\footnotesize
-			and
-			\scriptsize
-			\vspace{-5pt}
-			\[
-				\vspace{-5pt}
-				\langle \hat{\xx}, \zz_i \rangle \approx_{\eps} \zz_i^T (\II - \AA)^{-1} \zz_i
-			\]
+			%and
+			%\scriptsize
+			%\vspace{-5pt}
+			%\[
+			%	\vspace{-5pt}
+			%	\langle \hat{\xx}, \zz_i \rangle \approx_{\eps} \zz_i^T (\II - \AA)^{-1} \zz_i
+			%\]
 			\footnotesize
 			\item \scriptsize$\hat{\xx}$\,\footnotesize\ can be computed by \scriptsize$\xx^{(i+1)} = \AA \xx^{(i)} + \zz_i$\,\footnotesize\ by Laplacian solvers
 		\end{itemize}
@@ -1479,7 +1489,7 @@
 				%\item \footnotesize Implementing the algorithms and doing experiments on larger networks
 				\item \footnotesize
 					Improve the dependency on $\eps$
-					and $\theta$ in the running time
+					and $\theta$ in the running times
 				%Reducing logarithmic
 				%	factors in the running times
 				\item Finding \scriptsize$k$\,\footnotesize\ edges with maximum centrality
